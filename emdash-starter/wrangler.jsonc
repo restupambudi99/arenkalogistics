@@ -1,19 +1,27 @@
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "my-emdash-site",
+	"name": "arenka-logistics",
 	"main": "./src/worker.ts",
 	"compatibility_date": "2026-02-24",
 	"compatibility_flags": ["nodejs_compat"],
+	"vars": {
+		"EMDASH_SITE_URL": "https://arenkalogistics.com",
+		"INDEXING_ENABLED": "false",
+	},
+	"routes": [
+		{ "pattern": "arenkalogistics.com", "custom_domain": true },
+		{ "pattern": "www.arenkalogistics.com", "custom_domain": true },
+	],
 	"d1_databases": [
 		{
 			"binding": "DB",
-			"database_name": "my-emdash-site",
+			"database_name": "arenka-logistics",
 		},
 	],
 	"r2_buckets": [
 		{
 			"binding": "MEDIA",
-			"bucket_name": "my-emdash-media",
+			"bucket_name": "arenka-logistics-media",
 		},
 	],
 	// Sandboxed plugins require Worker Loader, available on Workers paid plans. Uncomment to enable:
