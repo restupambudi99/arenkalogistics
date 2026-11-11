@@ -6,7 +6,7 @@
 	"compatibility_flags": ["nodejs_compat"],
 	"vars": {
 		"EMDASH_SITE_URL": "https://arenkalogistics.com",
-		"INDEXING_ENABLED": "false",
+		"INDEXING_ENABLED": "true",
 	},
 	"routes": [
 		{ "pattern": "arenkalogistics.com", "custom_domain": true },
