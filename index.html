@@ -293,7 +293,7 @@ h4{font-size:19px;letter-spacing:-.02em}
 .feature{display:grid;grid-template-columns:1.1fr 1fr;border-radius:20px;overflow:hidden;background:var(--heritage-deep);margin-bottom:24px}
 .feature>*{min-width:0}
 .feature-art{position:relative;min-height:330px}
-.feature-art svg{position:absolute;inset:0;width:100%;height:100%}
+.feature-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .feature-copy{display:grid;align-content:center;gap:20px;padding:clamp(28px,4vw,52px)}
 .feature-copy p:not(.eyebrow){color:var(--white);font-size:clamp(24px,2.3vw,32px);font-weight:500;line-height:1.3;letter-spacing:-.025em}
 .feature-copy p b{color:var(--lime);font-weight:700}
@@ -1052,21 +1052,9 @@ html.paused *,html.paused *::before,html.paused *::after{animation-play-state:pa
       </div>
       <div class="feature reveal">
         <div class="feature-art">
-          <svg viewBox="0 0 600 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-            <rect width="600" height="400" fill="#e9eff7"/>
-            <rect y="300" width="600" height="100" fill="#d6e1ef"/>
-            <g fill="#9fb4cf"><rect x="40" y="40" width="8" height="260"/><rect x="290" y="40" width="8" height="260"/><rect x="40" y="110" width="258" height="7"/><rect x="40" y="190" width="258" height="7"/><rect x="40" y="270" width="258" height="7"/></g>
-            <use href="#s-box" x="56" y="54" width="62" height="56"/><use href="#s-box" x="124" y="54" width="62" height="56"/><use href="#s-box" x="214" y="54" width="62" height="56"/>
-            <use href="#s-box" x="56" y="134" width="62" height="56"/><use href="#s-box" x="150" y="134" width="62" height="56"/>
-            <use href="#s-box" x="96" y="214" width="62" height="56"/><use href="#s-box" x="200" y="214" width="62" height="56"/>
-            <rect x="330" y="214" width="250" height="16" rx="4" fill="#0b4589"/>
-            <rect x="350" y="230" width="10" height="90" fill="#0b4589"/><rect x="550" y="230" width="10" height="90" fill="#0b4589"/>
-            <rect x="380" y="124" width="140" height="90" rx="8" fill="#0c1a2c"/><rect x="387" y="131" width="126" height="76" rx="4" fill="#ffffff"/>
-            <rect x="398" y="142" width="60" height="8" rx="3" fill="#002e62"/><g fill="#c9d6e6"><rect x="398" y="158" width="100" height="6" rx="3"/><rect x="398" y="171" width="80" height="6" rx="3"/></g>
-            <rect x="398" y="186" width="44" height="12" rx="4" fill="#d0f600"/>
-            <use href="#s-box" x="330" y="296" width="110" height="99"/><use href="#s-box" x="430" y="320" width="90" height="81"/>
-            <circle cx="548" cy="150" r="28" fill="#d0f600"/><path d="M536 150l9 9 16-18" fill="none" stroke="#002e62" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+          <!-- Foto: "Stacked Boxes in a Warehouse" oleh Ihsan Adityawarman, Pexels (lisensi Pexels, bebas dipakai)
+               https://www.pexels.com/photo/stacked-boxes-in-a-warehouse-10834810/ -->
+          <img src="assets/img/feature-gudang-1400.webp" srcset="assets/img/feature-gudang-800.webp 800w, assets/img/feature-gudang-1400.webp 1400w" sizes="(max-width: 1023px) 100vw, 50vw" width="1400" height="1050" alt="Tumpukan karton di dalam gudang" loading="lazy" decoding="async">
         </div>
         <div class="feature-copy">
           <p class="eyebrow">Lebih dari sekadar paket</p>

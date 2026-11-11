@@ -1,7 +1,7 @@
 # Instruksi untuk agent AI
 
 Repo ini berisi website Arenka Logistics dalam satu file: `index.html` (HTML, CSS dan JavaScript inline,
-ilustrasi SVG inline). Baca `README.md` dulu.
+ilustrasi SVG inline), plus foto di `assets/img/` (sumbernya dicatat di `README.md`). Baca `README.md` dulu.
 
 ## Aturan dari pemilik (Restu)
 

@@ -6,7 +6,14 @@ Landing page satu file untuk **Arenka Logistics**, jasa import China ke Indonesi
 ## Cara melihat
 
 Buka `index.html` di browser. Tidak ada build step dan tidak ada dependensi selain font dari Google Fonts.
-Semua CSS, JavaScript, ikon dan ilustrasi (SVG) ada di dalam file itu.
+Semua CSS, JavaScript, ikon dan ilustrasi (SVG) ada di dalam file itu. Foto ada di `assets/img/`;
+salin folder itu bersama `index.html` saat memindahkan atau meng-hosting situs.
+
+## Foto
+
+| File | Dipakai di | Sumber |
+|---|---|---|
+| `assets/img/feature-gudang-800.webp`, `-1400.webp` | Kartu "Lebih dari sekadar paket" di section Testimoni | [Stacked Boxes in a Warehouse](https://www.pexels.com/photo/stacked-boxes-in-a-warehouse-10834810/) oleh Ihsan Adityawarman, Pexels (lisensi Pexels, bebas dipakai) |
 
 ## Asal desain
 
