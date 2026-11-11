@@ -1,8 +1,9 @@
 ---
 import homeSource from "../home.html?raw";
+import { env } from "cloudflare:workers";
 const siteUrl = "https://arenkalogistics.com/";
 const description = "Arenka membantu pembelian dan pengiriman barang dari China ke Indonesia: Titip Beli, Titip Kirim, OEM/ODM, dan Pengadaan, via laut (LCL/FCL) atau udara.";
-const enabled = Astro.locals.runtime?.env?.INDEXING_ENABLED === "true";
+const enabled = env.INDEXING_ENABLED === "true";
 const seoHead = `<link rel="canonical" href="${siteUrl}"><meta name="robots" content="${enabled ? "index,follow" : "noindex"}"><meta property="og:type" content="website"><meta property="og:locale" content="id_ID"><meta property="og:site_name" content="Arenka Logistics"><meta property="og:title" content="Arenka Logistics"><meta property="og:description" content="${description}"><meta property="og:url" content="${siteUrl}"><meta name="twitter:card" content="summary_large_image"><meta name="theme-color" content="#002e62">`;
 const homeHtml = homeSource.replace("</head>", `${seoHead}</head>`);
 ---
