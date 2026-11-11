@@ -1,0 +1,1546 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}[hidden]{display:none!important}</style>
+<title>Arenka Logistics</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Arenka membantu pembelian dan pengiriman barang dari China ke Indonesia: Titip Beli, Titip Kirim, OEM/ODM, dan Pengadaan, via laut (LCL/FCL) atau udara.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400..800&display=swap">
+<style>
+/* Layout: same skeleton as the reference — sticky header, photo-led hero, alternating soft/white bands,
+   two colored bands (lime) and one dark band (heritage) — rebuilt with Arenka's two brand colors. */
+:root{
+  --heritage:#002e62;      /* Heritage Blue: headings, dark bands, primary buttons */
+  --heritage-2:#0b4589;    /* lighter step for illustration depth */
+  --heritage-deep:#001b3a; /* footer, dark panels */
+  --lime:#d0f600;          /* Lime: accent fills, highlights, CTA buttons */
+  --lime-edge:#a9c700;     /* lime edge on white */
+  --ink:#17294a;           /* running text */
+  --muted:#5a6b86;         /* secondary text */
+  --soft:#eef3f9;          /* soft band */
+  --soft-2:#e2eaf5;
+  --line:#d4deeb;
+  --white:#ffffff;
+  --wa:#1fb866;
+  --on-dark:#c3d0e2;
+  --font:"Inter","Segoe UI",Arial,sans-serif;
+  --radius:18px;
+  --header-h:75px;
+  --shadow:0 10px 36px rgba(0,27,58,.07);
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--header-h) + 12px)}
+body{margin:0;font:400 16px/1.7 var(--font);color:var(--ink);background:var(--white);-webkit-font-smoothing:antialiased;overflow-x:clip}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--white)}
+img,svg{max-width:100%}
+a{color:inherit}
+button{font:inherit;color:inherit}
+h1,h2,h3,h4,p,figure,dl,dd{margin:0}
+h1,h2,h3,h4{font-weight:760;line-height:1.1;letter-spacing:-.045em;color:var(--heritage);text-wrap:balance}
+h1{font-size:clamp(40px,5.9vw,88px)}
+h2{font-size:clamp(32px,3.7vw,52px)}
+h3{font-size:clamp(22px,1.8vw,26px);letter-spacing:-.03em}
+h4{font-size:19px;letter-spacing:-.02em}
+:focus-visible{outline:3px solid var(--lime);outline-offset:3px;box-shadow:0 0 0 6px var(--heritage)}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.sprite{position:absolute;width:0;height:0;overflow:hidden}
+.container{max-width:1416px;margin-inline:auto;padding-left:max(clamp(20px,4vw,48px),env(safe-area-inset-left,0px));padding-right:max(clamp(20px,4vw,48px),env(safe-area-inset-right,0px))}
+.ic{width:1.15em;height:1.15em;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+/* placeholders: values only Arenka can supply */
+.ph{background:rgba(208,246,0,.42);outline:1.5px dashed var(--heritage);outline-offset:1px;border-radius:5px;padding:0 .28em;font-style:normal;white-space:nowrap}
+.on-dark .ph{background:rgba(208,246,0,.16);outline-color:var(--lime);color:var(--white)}
+.on-dark .quote .ph{background:rgba(208,246,0,.42);outline-color:var(--heritage);color:var(--ink)}
+.ph-block{display:block;white-space:normal}
+
+/* text accents */
+.hl{background:linear-gradient(180deg,transparent 58%,var(--lime) 58%,var(--lime) 90%,transparent 90%);-webkit-box-decoration-break:clone;box-decoration-break:clone;padding-inline:.04em}
+.on-dark .hl{background:none;color:var(--lime);padding:0}
+.eyebrow{display:flex;align-items:center;gap:10px;color:var(--heritage);font-size:12px;font-weight:750;line-height:1.5;letter-spacing:.12em;text-transform:uppercase}
+.eyebrow::before{content:"";width:24px;height:4px;border-radius:3px;background:var(--lime);box-shadow:0 0 0 1px rgba(0,46,98,.12)}
+.on-dark .eyebrow{color:var(--lime)}
+.on-dark .eyebrow::before{box-shadow:none}
+.on-lime .eyebrow{color:var(--heritage)}
+.on-lime .eyebrow::before{background:var(--heritage)}
+.center{text-align:center}
+.center .eyebrow{justify-content:center}
+.lead{color:var(--muted);font-size:16px;line-height:1.75;max-width:62ch}
+.center .lead{margin-inline:auto}
+
+/* buttons */
+.btn{position:relative;isolation:isolate;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:54px;max-width:100%;padding:14px 25px;border:1px solid transparent;border-radius:9px;font-size:14px;font-weight:750;line-height:1.4;text-decoration:none;cursor:pointer;transition:background .2s,box-shadow .2s,translate .2s,border-color .2s}
+.btn:hover{translate:0 -2px;box-shadow:0 12px 26px rgba(0,27,58,.16)}
+.btn .ic{width:19px;height:19px}
+.btn-lime{background:var(--lime);color:var(--heritage);border-color:var(--lime-edge);box-shadow:0 8px 22px rgba(169,199,0,.32)}
+.btn-lime::after{content:"";position:absolute;inset:0 auto 0 -60%;width:45%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.65),transparent);transform:skewX(-18deg);animation:shine 5.5s ease-in-out infinite;z-index:-1}
+.btn-blue{background:var(--heritage);color:var(--white)}
+.btn-blue:hover{background:var(--heritage-2)}
+.btn-ghost{background:rgba(255,255,255,.72);color:var(--heritage);border-color:#b9c8dc;backdrop-filter:blur(4px)}
+.btn-ghost:hover{border-color:var(--heritage)}
+.btn-block{width:100%;justify-content:space-between}
+.btn-sm{min-height:44px;padding:10px 18px;font-size:13px}
+.link-arrow{display:inline-flex;align-items:center;gap:10px;color:var(--heritage);font-size:14px;font-weight:750;text-decoration:none}
+.link-arrow .ic{transition:translate .2s}
+.link-arrow:hover .ic{translate:3px 0}
+.on-dark .link-arrow{color:var(--lime)}
+@keyframes shine{0%,62%{left:-60%}100%{left:130%}}
+
+/* header */
+.site-header{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--white)}
+.header-row{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;height:72px}
+.brand{display:inline-flex;align-items:center;width:fit-content;text-decoration:none}
+.logo{height:38px;width:auto;--logo-ink:var(--heritage);--logo-sub:var(--muted)}
+.logo-light{--logo-ink:#ffffff;--logo-sub:var(--on-dark)}
+.main-nav{display:flex;align-items:center;gap:28px;font-size:13px;font-weight:650}
+.main-nav>a,.dd>summary{display:inline-flex;align-items:center;gap:6px;padding:8px 0;color:var(--heritage);text-decoration:none;cursor:pointer;list-style:none}
+.dd>summary::-webkit-details-marker{display:none}
+.main-nav>a:hover,.dd>summary:hover{color:var(--heritage-2)}
+.dd{position:relative}
+.dd>summary .ic{width:15px;height:15px;transition:rotate .2s}
+.dd[open]>summary .ic{rotate:180deg}
+.dd-panel{position:absolute;left:50%;top:calc(100% + 14px);translate:-50% 0;min-width:240px;padding:12px;border:1px solid var(--line);border-radius:16px;background:var(--white);box-shadow:0 24px 60px rgba(0,27,58,.16);animation:dropdown-in .18s ease-out}
+.dd-wide{width:min(560px,90vw)}
+.dd-label{padding:4px 10px 10px;color:var(--muted);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.dd-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.dd-item{display:flex;gap:12px;align-items:flex-start;padding:12px;border-radius:12px;text-decoration:none;color:var(--heritage)}
+.dd-item:hover{background:var(--soft)}
+.dd-item b{display:block;font-size:14px}
+.dd-item small{display:block;color:var(--muted);font-size:12px;font-weight:500;line-height:1.45;margin-top:2px}
+.dd-ic{display:grid;place-items:center;width:36px;height:36px;border-radius:10px;background:var(--lime);color:var(--heritage);flex:none}
+.dd-list{display:grid;gap:2px}
+.dd-list a{padding:10px 12px;border-radius:10px;text-decoration:none;color:var(--heritage);font-weight:650}
+.dd-list a:hover{background:var(--soft)}
+@keyframes dropdown-in{from{opacity:0;translate:-50% -6px}}
+.header-actions{justify-self:end;display:flex;align-items:center;gap:14px}
+.kurs{display:grid;padding:6px 12px;border-radius:9px;background:var(--soft);line-height:1.35}
+.kurs span{color:var(--muted);font-size:11px;font-weight:600}
+.kurs b{color:var(--heritage);font-size:14px;font-weight:750;font-variant-numeric:tabular-nums;white-space:nowrap}
+.burger{display:none;place-items:center;width:44px;height:44px;border:0;border-radius:10px;background:transparent;color:var(--heritage);cursor:pointer}
+.burger .ic{width:24px;height:24px}
+.header-line{height:3px;background:linear-gradient(90deg,var(--heritage) 0 70%,var(--lime) 70% 100%)}
+.skip{position:fixed;left:12px;top:8px;z-index:100;translate:0 -200%;padding:10px 18px;border-radius:8px;background:var(--heritage);color:var(--white);font-weight:700;text-decoration:none}
+.skip:focus{translate:0 0}
+
+/* drawer */
+.drawer{margin:0 0 0 auto;width:min(380px,100%);height:100%;max-height:none;padding:0;border:0;background:var(--white);color:var(--ink)}
+.drawer[open]{display:flex;flex-direction:column;animation:drawer-in .22s ease-out}
+.drawer::backdrop{background:rgba(0,20,45,.55);backdrop-filter:blur(3px)}
+@keyframes drawer-in{from{translate:30px 0;opacity:0}}
+.drawer-head{display:flex;align-items:center;justify-content:space-between;padding:calc(16px + env(safe-area-inset-top,0px)) 20px 16px;border-bottom:1px solid var(--line)}
+.drawer-body{flex:1;overflow:auto;padding:12px 20px 24px}
+.drawer-body p{margin:14px 0 6px;color:var(--muted);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.drawer-body a{display:flex;justify-content:space-between;align-items:center;padding:13px 4px;border-bottom:1px solid var(--soft-2);color:var(--heritage);font-weight:650;text-decoration:none}
+.drawer-foot{display:grid;gap:10px;padding:16px 20px calc(16px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line)}
+.icon-btn{display:grid;place-items:center;width:42px;height:42px;border:1px solid var(--line);border-radius:50%;background:var(--white);color:var(--heritage);cursor:pointer}
+
+/* hero */
+.hero{position:relative;isolation:isolate;overflow:hidden;background:#dfeaf7;padding-block:52px 34px}
+.hero-art{position:absolute;inset:0;width:100%;height:100%;z-index:-3;animation:hero-drift 18s ease-in-out infinite alternate}
+.hero::before{content:"";position:absolute;inset:0;z-index:-2;background:linear-gradient(90deg,rgba(245,249,253,.95) 0%,rgba(245,249,253,.84) 36%,rgba(245,249,253,.32) 60%,rgba(245,249,253,0) 100%),linear-gradient(0deg,rgba(230,240,250,.55),transparent 45%)}
+@keyframes hero-drift{from{transform:scale(1.02)}to{transform:scale(1.07) translate(-1%,0)}}
+.hero-inner{display:grid;gap:22px}
+.route{display:flex;align-items:center;gap:14px;color:var(--heritage);font-size:12px;font-weight:750;letter-spacing:.16em}
+.route .dot{width:9px;height:9px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 2px var(--heritage);animation:halo 2.4s ease-out infinite}
+.route-line{width:56px;height:2px;background:linear-gradient(90deg,var(--heritage),var(--lime));position:relative}
+.route-line::after{content:"";position:absolute;right:-2px;top:-3px;border:4px solid transparent;border-left:6px solid var(--lime)}
+@keyframes halo{0%{box-shadow:0 0 0 2px var(--heritage),0 0 0 0 rgba(208,246,0,.8)}100%{box-shadow:0 0 0 2px var(--heritage),0 0 0 12px rgba(208,246,0,0)}}
+.hero h1{line-height:1.02}
+.hero-sub{min-height:1.5em;font-size:clamp(19px,1.6vw,23px);font-weight:700;letter-spacing:-.02em;color:var(--heritage)}
+.rot{display:inline-block}
+.rot.in{animation:copy-in .5s ease-out}
+@keyframes copy-in{from{opacity:0;translate:0 10px}}
+.hero-lead{max-width:56ch;color:#3d5172;font-size:17px;line-height:1.75}
+.hero-cta{display:flex;flex-wrap:wrap;gap:14px}
+.hero-cta .btn{min-width:200px}
+.hero-note{display:flex;align-items:center;gap:9px;color:#3d5172;font-size:13px;font-weight:500}
+.hero-note .ic{color:var(--heritage)}
+.hero-bottom{display:flex;flex-wrap:wrap;align-items:center;gap:24px 40px;margin-top:34px}
+.hero-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;min-width:0;padding:18px 26px;border:1px solid rgba(255,255,255,.8);border-radius:16px;background:rgba(255,255,255,.55);box-shadow:0 12px 30px rgba(10,50,100,.1);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.hero-stats>div{display:flex;flex-direction:column;gap:6px;min-width:0}
+.hero-stats>div+div{padding-left:28px;border-left:1px solid rgba(0,46,98,.16)}
+.num{color:var(--heritage);font-size:clamp(28px,2.6vw,38px);font-weight:780;letter-spacing:-.04em;line-height:1;font-variant-numeric:tabular-nums}
+.num .ph{font-size:.62em;letter-spacing:0;vertical-align:middle}
+.hero-stats span.lbl{color:#3d5172;font-size:12px;font-weight:600}
+.hero-find{display:inline-flex;align-items:center;gap:12px;color:var(--heritage);font-size:13px;font-weight:700;line-height:1.35;text-decoration:none}
+.hero-find .ic{display:grid;width:38px;height:38px;padding:9px;border-radius:50%;background:var(--lime);color:var(--heritage);animation:nudge 2s ease-in-out infinite}
+@keyframes nudge{50%{translate:0 4px}}
+
+/* sections */
+.section{padding-block:96px}
+.section-head{display:grid;gap:16px;margin-bottom:44px}
+.band-soft{background:var(--soft)}
+.band-white{background:var(--white)}
+
+/* services */
+.service-card{display:grid;grid-template-columns:.92fr 1.08fr;border:1px solid #e1e8f3;border-radius:20px;background:var(--white);overflow:hidden;box-shadow:var(--shadow)}
+.service-card+.service-card{margin-top:28px}
+.service-card.flip{grid-template-columns:1.08fr .92fr}
+.service-card.flip .svc-media{order:2}
+.service-card>*{min-width:0}
+.svc-media{position:relative;min-height:420px;background:var(--heritage-deep);overflow:hidden}
+.svc-media svg{position:absolute;inset:0;width:100%;height:100%}
+.svc-media::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,22,48,.9) 0%,rgba(0,22,48,.35) 38%,transparent 62%)}
+.svc-caption{position:absolute;left:30px;right:30px;bottom:28px;z-index:1;display:grid;gap:12px;justify-items:start}
+.tag{display:inline-block;padding:5px 10px;border-radius:4px;background:var(--lime);color:var(--heritage);font-size:11px;font-weight:800;letter-spacing:.12em}
+.svc-caption strong{color:var(--white);font-size:clamp(22px,2vw,28px);font-weight:760;letter-spacing:-.03em;line-height:1.2}
+.svc-body{display:grid;align-content:start;gap:18px;padding:clamp(28px,3.4vw,44px)}
+.svc-body h3{font-size:clamp(38px,3.4vw,50px);letter-spacing:-.05em;line-height:1}
+.svc-body h4{font-size:clamp(19px,1.5vw,22px);line-height:1.25}
+.svc-body>p{color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border:1px solid var(--line);border-radius:7px;background:var(--soft);color:var(--heritage);font-size:12px;font-weight:650}
+.chip-lg{padding:9px 15px;font-size:13px}
+.sub-tiles{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.sub-tile{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--lime-edge);border-radius:11px;background:#fbffe9;color:var(--heritage);text-decoration:none;transition:background .2s,translate .2s}
+.sub-tile:hover{background:#f3fcc2;translate:0 -2px}
+.sub-tile b{display:block;font-size:14px;line-height:1.3}
+.sub-tile small{display:block;color:var(--muted);font-size:12px;line-height:1.35}
+.sub-tile>.ic:last-child{margin-left:auto}
+.checks{display:grid;gap:9px;padding:0;margin:0;list-style:none;color:#3d5172;font-size:14px}
+.checks li{display:flex;gap:10px;align-items:flex-start;line-height:1.55}
+.checks .ic{margin-top:2px;color:var(--heritage);stroke-width:2.4}
+.svc-actions{display:grid;gap:14px;justify-items:start}
+.svc-actions .btn{width:100%}
+.svc-note{display:flex;gap:8px;align-items:center;color:var(--muted);font-size:13px}
+
+/* shipping modes */
+.modes{margin-top:84px}
+.modes-head{display:grid;gap:16px;margin-bottom:36px}
+.modes-head .row{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:16px 40px}
+.mode-card{display:flex;flex-direction:column;border-radius:16px;background:var(--white);overflow:hidden;box-shadow:var(--shadow);min-width:0}
+.mode-media{position:relative;aspect-ratio:16/8.4;max-width:100%;overflow:hidden;background:var(--heritage-deep)}
+.mode-media svg{position:absolute;inset:0;width:100%;height:100%}
+.mode-media::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,22,48,.88),rgba(0,22,48,.15) 60%,transparent)}
+.mode-label{position:absolute;left:22px;bottom:16px;z-index:1;display:grid;gap:4px}
+.mode-label small{color:var(--lime);font-size:11px;font-weight:750;letter-spacing:.12em}
+.mode-label b{color:var(--white);font-size:30px;font-weight:780;letter-spacing:-.04em;line-height:1}
+.mode-badge{position:absolute;top:16px;right:16px;z-index:1;display:grid;place-items:center;width:42px;height:42px;border-radius:10px;background:var(--lime);color:var(--heritage)}
+.mode-body{display:grid;gap:16px;padding:22px 24px 24px;flex:1}
+.mode-body p{color:#3d5172;font-size:15px;line-height:1.65}
+.mode-body small{padding-top:14px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+
+/* generic slider */
+.slider-track{display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - 48px)/3);gap:24px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-bottom:4px}
+.slider-track::-webkit-scrollbar{display:none}
+.slider-track>*{scroll-snap-align:start}
+.slider-nav{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:22px}
+.slider-btns{display:flex;gap:8px}
+.slider-btn{display:grid;place-items:center;width:44px;height:44px;border:1px solid var(--line);border-radius:10px;background:var(--white);color:var(--heritage);cursor:pointer}
+.slider-btn:disabled{opacity:.4;cursor:default}
+.slider-status{color:var(--muted);font-size:13px;font-weight:600;font-variant-numeric:tabular-nums}
+.static-lg .slider-nav{display:none}
+
+/* USP strip */
+.usp{background:var(--heritage);color:var(--white)}
+.usp-inner{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;padding-block:28px}
+.usp-item{display:flex;gap:14px;align-items:flex-start}
+.usp-item .ic{width:26px;height:26px;color:var(--lime)}
+.usp-item b{display:block;font-size:15px;line-height:1.3}
+.usp-item small{display:block;color:var(--on-dark);font-size:13px;line-height:1.45;margin-top:3px}
+
+/* social proof */
+.proof{background:var(--lime);color:var(--heritage)}
+.proof-inner{display:grid;grid-template-columns:1.35fr repeat(4,minmax(0,1fr)) 1.1fr;gap:24px;align-items:center;padding-block:30px}
+.proof-intro{font-size:13px;line-height:1.6}
+.proof-intro b{display:block}
+.proof .num{font-size:clamp(28px,2.5vw,36px)}
+.proof .lbl{display:block;margin-top:8px;font-size:13px;font-weight:600}
+.proof-reach{display:flex;gap:10px;align-items:flex-start;padding-left:22px;border-left:1px solid rgba(0,46,98,.3);font-size:13px;line-height:1.5}
+.proof-reach .ic{width:22px;height:22px;margin-top:1px}
+
+/* benefits */
+.benefit-track{grid-auto-columns:calc((100% - 88px)/3);gap:40px 44px}
+.static-lg .benefit-track{grid-auto-flow:row;grid-template-columns:repeat(3,minmax(0,1fr));overflow:visible}
+.benefit{display:grid;align-content:start;gap:14px;padding-top:26px;border-top:1px solid #bfcde3;min-width:0}
+.bubble{display:grid;place-items:center;width:52px;height:52px;border-radius:50%;background:var(--lime);color:var(--heritage)}
+.bubble .ic{width:24px;height:24px}
+.benefit h3{font-size:clamp(20px,1.6vw,23px)}
+.benefit p{color:var(--muted);font-size:15px;line-height:1.7}
+
+/* process */
+.tabs{display:flex;width:max-content;max-width:100%;margin:0 auto 42px;padding:5px;border-radius:12px;background:var(--soft)}
+.tabs button{min-width:140px;padding:11px 20px;border:0;border-radius:9px;background:transparent;color:var(--muted);font-size:14px;font-weight:700;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--heritage);color:var(--white);box-shadow:0 6px 16px rgba(0,46,98,.25)}
+.steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:20px;padding:0;margin:0;list-style:none}
+.step{display:grid;align-content:start;gap:12px;min-width:0}
+.step-media{position:relative;border-radius:12px;overflow:hidden;aspect-ratio:16/10.6;max-width:100%;background:var(--soft-2)}
+.step-media svg{position:absolute;inset:0;width:100%;height:100%}
+.step-no{position:absolute;left:10px;bottom:10px;display:grid;place-items:center;min-width:34px;height:30px;padding:0 8px;border-radius:7px;background:var(--lime);color:var(--heritage);font-size:13px;font-weight:800;font-variant-numeric:tabular-nums}
+.step small{color:var(--heritage-2);font-size:11px;font-weight:750;letter-spacing:.08em;text-transform:uppercase}
+.step h3{font-size:clamp(17px,1.3vw,19px);line-height:1.25;letter-spacing:-.02em}
+.step p{color:var(--muted);font-size:14px;line-height:1.65}
+.steps-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;margin-top:30px;padding-top:24px;border-top:1px solid var(--line)}
+.steps-foot p{display:flex;gap:10px;align-items:center;color:var(--muted);font-size:14px}
+.steps-foot p .ic{color:var(--heritage)}
+.steps.swap{animation:reveal .4s ease-out}
+
+/* mid CTA */
+.mid-cta{background:var(--lime);padding-block:64px}
+.mid-inner{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:52px;align-items:center}
+.mid-inner h2{margin-top:16px;font-size:clamp(30px,3.2vw,46px)}
+.mid-actions{display:grid;gap:16px;justify-items:center}
+.mid-actions .btn{min-width:230px}
+
+/* testimonials */
+.testi{background:var(--heritage);color:var(--white)}
+.testi h2{color:var(--white)}
+.testi .lead{color:var(--on-dark)}
+.feature{display:grid;grid-template-columns:1.1fr 1fr;border-radius:20px;overflow:hidden;background:var(--heritage-deep);margin-bottom:24px}
+.feature>*{min-width:0}
+.feature-art{position:relative;min-height:330px}
+.feature-art svg{position:absolute;inset:0;width:100%;height:100%}
+.feature-copy{display:grid;align-content:center;gap:20px;padding:clamp(28px,4vw,52px)}
+.feature-copy p:not(.eyebrow){color:var(--white);font-size:clamp(24px,2.3vw,32px);font-weight:500;line-height:1.3;letter-spacing:-.025em}
+.feature-copy p b{color:var(--lime);font-weight:700}
+.quote{display:flex;flex-direction:column;gap:22px;padding:26px 24px;border-radius:16px;background:var(--white);color:var(--ink);min-width:0}
+.quote-mark{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--lime);color:var(--heritage);font-size:30px;font-weight:800;line-height:1;padding-top:12px}
+.quote blockquote{margin:0;flex:1;color:#3d5172;font-size:15px;line-height:1.75}
+.quote figcaption{display:flex;align-items:center;gap:12px}
+.avatar{display:grid;place-items:center;width:46px;height:46px;border-radius:50%;background:var(--soft-2);color:var(--heritage);font-weight:800;font-size:14px;flex:none}
+.quote figcaption b{display:block;color:var(--heritage);font-size:14px}
+.quote figcaption small{display:block;color:var(--muted);font-size:12px}
+.testi .slider-btn{background:transparent;border-color:rgba(255,255,255,.35);color:var(--white)}
+.testi .slider-status,.testi .src{color:var(--on-dark);font-size:12px}
+.testi-nav{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;margin-top:22px}
+.testi-nav .slider-status{justify-self:end}
+
+/* FAQ */
+.faq-grid{display:grid;grid-template-columns:.82fr 1.18fr;gap:80px;align-items:start}
+.faq-intro{position:sticky;top:calc(var(--header-h) + 28px);display:grid;gap:18px;justify-items:start}
+.faq-intro .btn{margin-top:10px}
+.faq-list{border-top:1px solid var(--line)}
+.faq-list details{border-bottom:1px solid var(--line)}
+.faq-list summary{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:20px 0;color:var(--heritage);font-size:16px;font-weight:700;line-height:1.4;cursor:pointer;list-style:none}
+.faq-list summary::-webkit-details-marker{display:none}
+.faq-list summary .pm{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--soft);flex:none;transition:rotate .2s,background .2s}
+.faq-list details[open] summary .pm{rotate:45deg;background:var(--lime)}
+.faq-list details p{padding:0 50px 22px 0;color:var(--muted);font-size:15px;line-height:1.75}
+
+/* final CTA */
+.final{padding-block:76px;overflow:hidden}
+.final-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center}
+.final-grid>*{min-width:0}
+.final-copy{display:grid;gap:20px;justify-items:start}
+.final-copy h2{font-size:clamp(32px,3.4vw,48px)}
+.final-copy p{color:var(--muted);max-width:52ch}
+.final-actions{display:flex;flex-wrap:wrap;align-items:center;gap:24px;margin-top:6px}
+.final-art{max-width:100%}
+.final-art svg{display:block;width:100%;height:auto}
+
+/* contact */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:86px;align-items:start}
+.contact-grid>*{min-width:0}
+.contact-copy{display:grid;gap:20px}
+.contact-list{display:grid;gap:22px;padding:0;margin:14px 0 0;list-style:none}
+.contact-list li{display:flex;gap:16px;align-items:flex-start}
+.contact-list .ic{width:22px;height:22px;margin-top:2px;color:var(--heritage)}
+.contact-list small{display:block;color:var(--muted);font-size:12px;font-weight:600}
+.contact-list b,.contact-list a{color:var(--heritage);font-size:15px;font-weight:700;text-decoration:none;overflow-wrap:anywhere}
+.contact-list a:hover{text-decoration:underline}
+.form-card{padding:clamp(24px,3vw,36px);border-radius:18px;background:var(--white);box-shadow:0 18px 50px rgba(0,27,58,.09);border-top:4px solid var(--lime)}
+.form-card h3{font-size:clamp(21px,1.7vw,24px)}
+.form-card>p,.form-step>p{margin-top:6px;color:var(--muted);font-size:14px}
+.form-grid{display:grid;gap:18px;margin-top:24px}
+.field{display:grid;gap:7px}
+.field label{color:var(--heritage);font-size:13px;font-weight:700}
+.field label span{color:var(--muted);font-weight:500}
+.field input,.field select,.field textarea{width:100%;padding:13px 14px;border:1px solid #c6d3e4;border-radius:10px;background:var(--white);color:var(--ink);font:500 15px/1.5 var(--font)}
+.field textarea{min-height:110px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--heritage);box-shadow:0 0 0 3px rgba(208,246,0,.75)}
+.field .err{color:#b42318;font-size:12px;font-weight:600}
+.fine{display:flex;gap:8px;align-items:center;color:var(--muted);font-size:12px}
+.form-step textarea{min-height:170px}
+.form-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.btn-text{border:0;background:none;color:var(--heritage);font-weight:700;font-size:14px;cursor:pointer;padding:10px 4px}
+.notice{padding:12px 14px;border-radius:10px;background:#fff8db;color:#6b4e00;font-size:13px;line-height:1.5}
+
+/* footer */
+.site-footer{background:var(--heritage-deep);color:var(--on-dark);padding-block:56px 0}
+.footer-grid{display:grid;grid-template-columns:1.4fr repeat(4,minmax(0,1fr));gap:32px}
+.footer-brand{display:grid;gap:16px;justify-items:start}
+.footer-brand p{font-size:14px;line-height:1.65}
+.site-footer h3{color:var(--lime);font-size:14px;letter-spacing:0;margin-bottom:16px}
+.site-footer ul{display:grid;gap:12px;padding:0;margin:0;list-style:none;font-size:14px}
+.site-footer ul a{color:var(--on-dark);text-decoration:none}
+.site-footer ul a:hover{color:var(--white)}
+.footer-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;margin-top:44px;padding-block:22px calc(22px + env(safe-area-inset-bottom,0px));border-top:1px solid rgba(255,255,255,.12);font-size:13px}
+.motion-toggle{display:inline-flex;align-items:center;gap:8px;border:0;background:none;color:var(--white);font-size:13px;font-weight:650;cursor:pointer}
+
+/* floating launcher + help dialog */
+.launcher{position:fixed;right:calc(22px + env(safe-area-inset-right,0px));bottom:calc(22px + env(safe-area-inset-bottom,0px));z-index:45;display:flex;align-items:center;gap:12px;padding:8px 22px 8px 8px;border:2px solid var(--lime);border-radius:999px;background:var(--heritage);color:var(--white);text-align:left;cursor:pointer;box-shadow:0 16px 36px rgba(0,27,58,.35)}
+.launcher::before,.launcher::after{content:"";position:absolute;inset:-6px;border:2px solid var(--lime);border-radius:inherit;pointer-events:none;animation:ripple 2.6s ease-out infinite;z-index:-1}
+.launcher::after{animation-delay:1.3s}
+@keyframes ripple{from{opacity:.8;transform:scale(1)}to{opacity:0;transform:scale(1.18)}}
+.wa-dot{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--wa);color:var(--white);animation:wiggle 4s ease-in-out infinite}
+.wa-dot .ic{width:24px;height:24px}
+@keyframes wiggle{0%,86%,100%{rotate:0}89%{rotate:-12deg}92%{rotate:12deg}95%{rotate:-6deg}}
+.launcher b{display:block;font-size:15px;line-height:1.2}
+.launcher small{display:flex;align-items:center;gap:6px;color:var(--lime);font-size:12px;font-weight:650}
+.help{width:min(480px,calc(100% - 32px));max-height:calc(100dvh - 48px);padding:0;border:0;border-radius:24px;background:var(--white);color:var(--ink);box-shadow:0 28px 100px rgba(1,24,52,.4);overflow:hidden}
+.help[open]{display:flex;flex-direction:column;animation:dialog-in .25s ease-out}
+.help::backdrop{background:rgba(7,21,43,.6);backdrop-filter:blur(5px)}
+@keyframes dialog-in{from{opacity:0;translate:0 14px}}
+.help-head{display:flex;align-items:center;gap:14px;padding:18px 20px;background:var(--heritage);color:var(--white);border-bottom:4px solid var(--lime)}
+.help-head .avatar{width:52px;height:52px;background:var(--lime);color:var(--heritage);font-size:16px;box-shadow:0 0 0 3px rgba(255,255,255,.9)}
+.help-head h2{color:var(--white);font-size:20px;letter-spacing:-.02em}
+.help-head p{color:var(--on-dark);font-size:12px}
+.help-head .icon-btn{margin-left:auto;background:transparent;border-color:var(--lime);color:var(--white)}
+.help-body{flex:1;overflow:auto;display:grid;gap:10px;align-content:start;padding:16px 18px;background:#f2f5fa}
+.help-body .day{justify-self:center;color:var(--muted);font-size:11px;font-weight:700;letter-spacing:.08em}
+.bubble-msg{max-width:92%;padding:12px 14px;border-radius:4px 14px 14px 14px;background:var(--white);font-size:14px;line-height:1.6;box-shadow:0 2px 6px rgba(0,27,58,.06)}
+.quick{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.quick button{padding:7px 12px;border:1px solid var(--heritage);border-radius:999px;background:var(--white);color:var(--heritage);font-size:12px;font-weight:700;cursor:pointer}
+.quick button:hover{background:var(--lime)}
+.help-foot{display:grid;gap:8px;padding:14px 18px calc(14px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line)}
+.help-input{display:flex;gap:10px;align-items:flex-end}
+.help-input textarea{flex:1;min-height:52px;max-height:140px;padding:12px;border:1px solid transparent;border-radius:12px;background:var(--soft);font:500 14px/1.5 var(--font);resize:none;color:var(--ink)}
+.help-input textarea:focus{outline:none;border-color:var(--heritage)}
+.send{display:grid;place-items:center;width:46px;height:46px;border-radius:50%;background:var(--wa);color:var(--white);text-decoration:none;flex:none}
+.send[aria-disabled="true"]{background:#9aa9bd;pointer-events:none}
+
+/* reveal: content is visible at rest; entering the viewport only adds a short lift */
+.reveal.is-in{animation:reveal .6s ease-out both}
+@keyframes reveal{from{opacity:.35;translate:0 16px}}
+
+/* motion off */
+html.paused *,html.paused *::before,html.paused *::after{animation-play-state:paused!important}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}
+
+/* responsive */
+@media (width < 1200px){
+  .steps{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:minmax(230px,1fr);overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px}
+  .steps>*{scroll-snap-align:start}
+  .proof-inner{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .proof-intro,.proof-reach{grid-column:span 2}
+  .proof-reach{padding-left:0;border-left:0}
+}
+@media (width < 1024px){
+  :root{--header-h:67px}
+  .header-row{grid-template-columns:1fr auto;height:64px}
+  .main-nav{display:none}
+  .burger{display:grid}
+  .service-card,.service-card.flip{grid-template-columns:minmax(0,1fr)}
+  .service-card.flip .svc-media{order:0}
+  .svc-media{min-height:340px}
+  .usp-inner{grid-template-columns:1fr 1fr}
+  .static-lg .benefit-track{grid-template-columns:1fr 1fr}
+  .faq-grid,.contact-grid,.final-grid{grid-template-columns:minmax(0,1fr);gap:44px}
+  .faq-intro{position:static}
+  .feature{grid-template-columns:minmax(0,1fr)}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .footer-brand{grid-column:1/-1}
+  .mid-inner{grid-template-columns:minmax(0,1fr);gap:28px}
+  .mid-actions{justify-items:start}
+  .slider-track{grid-auto-columns:calc((100% - 24px)/2)}
+}
+@media (width < 768px){
+  .section{padding-block:68px}
+  .hero{padding-block:34px 26px}
+  .hero::before{background:linear-gradient(180deg,rgba(245,249,253,.97) 0%,rgba(245,249,253,.9) 52%,rgba(245,249,253,.35) 100%)}
+  .hero-cta .btn{flex:1 1 200px}
+  .hero-stats{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;padding:14px 16px;width:100%}
+  .hero-stats>div+div{padding-left:12px}
+  .num{font-size:24px}
+  .hero-stats span.lbl{font-size:11px}
+  .kurs{display:none}
+  .sub-tiles{grid-template-columns:minmax(0,1fr)}
+  .svc-media{min-height:280px}
+  .slider-track,.benefit-track{grid-auto-columns:86%}
+  .static-lg .slider-nav{display:flex}
+  .static-lg .benefit-track{grid-auto-flow:column;grid-template-columns:none;overflow-x:auto}
+  .usp-inner{grid-template-columns:minmax(0,1fr);gap:18px}
+  .proof-inner{grid-template-columns:1fr 1fr;gap:22px}
+  .proof-intro,.proof-reach{grid-column:1/-1}
+  .tabs button{min-width:0;flex:1}
+  .tabs{width:100%}
+  .faq-list details p{padding-right:0}
+  .testi-nav{grid-template-columns:auto 1fr;}
+  .testi-nav .src{grid-column:1/-1;order:3}
+  .launcher{padding:6px;border-width:2px}
+  .launcher .l-text{display:none}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:28px 20px}
+}
+@media (width < 360px){
+  .hero-stats{grid-template-columns:minmax(0,1fr)}
+  .hero-stats>div+div{padding-left:0;border-left:0}
+}
+@media (width >= 768px){
+  .static-lg .slider-track{grid-auto-flow:row;grid-template-columns:repeat(3,minmax(0,1fr));overflow:visible}
+}
+@media (768px <= width < 1024px){
+  .static-lg .benefit-track{grid-template-columns:1fr 1fr}
+}
+</style>
+
+</head>
+<body>
+<!-- Icon + illustration sprite (kept rendered at 0×0 so gradients resolve) -->
+<svg class="sprite" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="g-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c7dbf1"/><stop offset=".7" stop-color="#eef4fb"/></linearGradient>
+    <radialGradient id="g-glow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#ffffff" stop-opacity=".95"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></radialGradient>
+    <linearGradient id="g-sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9fbbdb"/><stop offset="1" stop-color="#6f93bf"/></linearGradient>
+    <linearGradient id="g-deep" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0b4589"/><stop offset="1" stop-color="#001b3a"/></linearGradient>
+    <linearGradient id="g-dusk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#062a57"/><stop offset=".58" stop-color="#3a6aa3"/><stop offset=".78" stop-color="#cfe6a0"/></linearGradient>
+    <linearGradient id="g-day" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8fb4dd"/><stop offset="1" stop-color="#e8f0f9"/></linearGradient>
+    <radialGradient id="g-globe" cx=".38" cy=".32" r=".75"><stop offset="0" stop-color="#2a68b3"/><stop offset=".6" stop-color="#0b4589"/><stop offset="1" stop-color="#002e62"/></radialGradient>
+  </defs>
+
+  <!-- icons (24×24, stroke) -->
+  <symbol id="i-arrow-ur" viewBox="0 0 24 24"><path d="M7 17L17 7M8.5 7H17v8.5"/></symbol>
+  <symbol id="i-arrow-r" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-arrow-l" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+  <symbol id="i-arrow-d" viewBox="0 0 24 24"><path d="M12 5v14M6 13l6 6 6-6"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-check-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.8 2.8 5.2-5.6"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 6v12M6 12h12"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.5-3.4 8.2-8 9-4.6-.8-8-4.5-8-9V6l8-3z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></symbol>
+  <symbol id="i-boxes" viewBox="0 0 24 24"><path d="M12 2.8l4.2 2.4v4.6L12 12.2 7.8 9.8V5.2L12 2.8z"/><path d="M7.8 12.4l4.2 2.4v4.6l-4.2 2.4-4.2-2.4v-4.6l4.2-2.4zM16.2 12.4l4.2 2.4v4.6l-4.2 2.4L12 19.4"/></symbol>
+  <symbol id="i-truck" viewBox="0 0 24 24"><path d="M2.5 6h11.5v10H2.5zM14 9.5h4.2l3.3 3.6V16H14"/><circle cx="6.5" cy="17.5" r="1.9"/><circle cx="17.5" cy="17.5" r="1.9"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9.5L4 20V5z"/><path d="M8 9.5h8M8 12.5h5"/></symbol>
+  <symbol id="i-layout" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 9v11"/></symbol>
+  <symbol id="i-receipt" viewBox="0 0 24 24"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2V3z"/><path d="M9 8h6M9 12h6M9 16h3"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-11.5a7 7 0 00-14 0C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
+  <symbol id="i-headset" viewBox="0 0 24 24"><path d="M4 14v-2a8 8 0 0116 0v2"/><rect x="3" y="13" width="4" height="6" rx="1.5"/><rect x="17" y="13" width="4" height="6" rx="1.5"/><path d="M19 19c0 1.6-2 2.5-5 2.5"/></symbol>
+  <symbol id="i-clip" viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 3h6v3H9zM8.5 13l2.5 2.5 4.5-5"/></symbol>
+  <symbol id="i-ship" viewBox="0 0 24 24"><path d="M3 14.5l2 5.5h14l2-5.5H3z"/><path d="M6 14.5V9h12v5.5M9.5 9V5h5v4"/></symbol>
+  <symbol id="i-plane" viewBox="0 0 24 24"><path d="M21 12.2c0-.9-.8-1.4-1.6-1.4H15L10 3.5H8l2.4 7.3H5.6L3.9 8.6H2.5l1 3.6-1 3.6h1.4l1.7-2.2h4.8L8 20.5h2l5-7.3h4.4c.8 0 1.6-.5 1.6-1z"/></symbol>
+  <symbol id="i-container" viewBox="0 0 24 24"><rect x="2.5" y="6" width="19" height="12" rx="1"/><path d="M6.5 9v6M10 9v6M13.5 9v6M17 9v6"/></symbol>
+  <symbol id="i-cart" viewBox="0 0 24 24"><path d="M3 4h2l2.4 11h10.2L20 8H6.2"/><circle cx="9" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5L12 13l8.5-6.5"/></symbol>
+  <symbol id="i-ig" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".6"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7.8v.4"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24"><path d="M4 12l16-8-6 16-2.6-6.4L4 12z"/><path d="M11.4 13.6L20 4"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="i-pause" viewBox="0 0 24 24"><path d="M9 6v12M15 6v12"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5l10.5 6.5L8 18.5v-13z"/></symbol>
+  <symbol id="i-factory" viewBox="0 0 24 24"><path d="M3 20V10l5 3v-3l5 3V5h4.5L19 20H3z"/><path d="M7 17h2M11 17h2"/></symbol>
+  <symbol id="i-building" viewBox="0 0 24 24"><path d="M4 21V5l8-2v18M12 8h8v13M3 21h18"/><path d="M7 8h2M7 12h2M7 16h2M15 12h2M15 16h2"/></symbol>
+  <symbol id="i-wa" viewBox="0 0 24 24"><path d="M4.4 19.6l1.1-3.8A8.3 8.3 0 1112 20.3a8.2 8.2 0 01-3.8-.9l-3.8 1.2z"/><path d="M9.1 8.3c.2-.5.6-.6 1-.6l.7 1.6-.6.9c.5 1.1 1.3 1.9 2.4 2.5l.9-.6 1.6.7c0 .5-.3 1-.8 1.2-1.7.6-5.9-2.9-5.2-5.7z"/></symbol>
+
+  <!-- illustration parts -->
+  <symbol id="s-cont" viewBox="0 0 100 40">
+    <rect width="100" height="40" rx="1.5" fill="currentColor"/>
+    <path d="M8 5v30M16 5v30M24 5v30M32 5v30M40 5v30M48 5v30M56 5v30M64 5v30M72 5v30M80 5v30M88 5v30" fill="none" stroke="#001b3a" stroke-opacity=".2" stroke-width="1.6"/>
+    <rect width="100" height="3" fill="#001b3a" fill-opacity=".16"/><rect y="37" width="100" height="3" fill="#001b3a" fill-opacity=".24"/>
+  </symbol>
+  <symbol id="s-box" viewBox="0 0 60 54">
+    <path d="M4 16L30 6l26 10-26 10z" fill="#e8cc9f"/>
+    <path d="M4 16l26 10v26L4 42z" fill="#d1aa75"/>
+    <path d="M56 16L30 26v26l26-10z" fill="#bb915c"/>
+    <path d="M17 11l26 10" stroke="#002e62" stroke-width="4" stroke-opacity=".75"/>
+    <path d="M9 29l13 5v7L9 36z" fill="#ffffff"/>
+    <path d="M11 32l9 3.4" stroke="#002e62" stroke-width="1.4"/>
+  </symbol>
+  <symbol id="s-plane" viewBox="0 0 240 90">
+    <path d="M30 34L17 6h18l28 28z" fill="#002e62"/>
+    <path d="M110 40L96 18h12l34 22z" fill="#b9c9dd"/>
+    <path d="M20 46c0-10 20-14 50-14h120c22 0 38 8 44 14-6 6-22 12-44 12H70c-30 0-50-2-50-12z" fill="#ffffff"/>
+    <path d="M60 50h140c10 0 20-2 26-4l2 2c-8 4-18 6-28 6H60z" fill="#d0f600"/>
+    <path d="M22 48L6 61h17l23-11z" fill="#002e62"/>
+    <path d="M206 38c8 0 16 4 20 7h-16z" fill="#002e62"/>
+    <g fill="#002e62" fill-opacity=".7"><circle cx="78" cy="41" r="2.2"/><circle cx="88" cy="41" r="2.2"/><circle cx="98" cy="41" r="2.2"/><circle cx="170" cy="41" r="2.2"/><circle cx="180" cy="41" r="2.2"/><circle cx="190" cy="41" r="2.2"/></g>
+    <text x="114" y="45" font-family="Inter,Arial,sans-serif" font-size="11" font-weight="800" fill="#002e62" letter-spacing=".5">ARENKA</text>
+    <path d="M100 52L72 84h18l50-32z" fill="#dfe7f1"/>
+    <rect x="112" y="56" width="32" height="12" rx="6" fill="#b9c9dd"/>
+  </symbol>
+  <symbol id="s-truck" viewBox="0 0 260 110">
+    <rect x="6" y="12" width="172" height="68" rx="3" fill="#002e62"/>
+    <path d="M18 18v56M30 18v56M150 18v56M162 18v56" stroke="#ffffff" stroke-opacity=".12" stroke-width="2"/>
+    <path d="M40 36h14l-6 24H34z" fill="#d0f600"/>
+    <text x="60" y="58" font-family="Inter,Arial,sans-serif" font-size="23" font-weight="800" fill="#ffffff" letter-spacing="-.5">ARENKA</text>
+    <rect x="4" y="80" width="240" height="8" rx="2" fill="#24364d"/>
+    <path d="M184 28h36l25 28v30h-61z" fill="#ffffff"/>
+    <path d="M194 36h24l15 18h-39z" fill="#9fbadb"/>
+    <rect x="184" y="64" width="61" height="6" fill="#d0f600"/>
+    <g fill="#18263a"><circle cx="40" cy="92" r="12"/><circle cx="70" cy="92" r="12"/><circle cx="150" cy="92" r="12"/><circle cx="214" cy="92" r="12"/></g>
+    <g fill="#8a9bb1"><circle cx="40" cy="92" r="4.5"/><circle cx="70" cy="92" r="4.5"/><circle cx="150" cy="92" r="4.5"/><circle cx="214" cy="92" r="4.5"/></g>
+  </symbol>
+  <symbol id="s-ship" viewBox="0 0 520 170">
+    <g id="ship-stacks"></g>
+    <path d="M8 104h494l-30 56H44z" fill="#002e62"/>
+    <path d="M30 142h452l-10 18H44z" fill="#001b3a"/>
+    <path d="M16 115h480l-4 7H20z" fill="#d0f600"/>
+    <rect x="30" y="36" width="60" height="68" fill="#ffffff"/>
+    <g fill="#002e62"><rect x="36" y="44" width="48" height="5"/><rect x="36" y="56" width="48" height="5"/><rect x="36" y="68" width="48" height="5"/></g>
+    <rect x="46" y="16" width="22" height="22" fill="#002e62"/><rect x="46" y="22" width="22" height="5" fill="#d0f600"/>
+    <text x="400" y="138" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="800" fill="#ffffff" letter-spacing="1">ARENKA</text>
+  </symbol>
+  <symbol id="s-crane" viewBox="0 0 260 380">
+    <g fill="none" stroke="currentColor" stroke-linecap="square">
+      <path d="M170 120v260M240 120v260" stroke-width="12"/>
+      <path d="M170 190l70 60M240 190l-70 60M170 280l70 60M240 280l-70 60" stroke-width="5"/>
+      <path d="M156 378h96" stroke-width="8"/>
+      <path d="M0 112h260" stroke-width="10"/>
+      <path d="M180 92l25-62 25 62" stroke-width="7"/>
+      <path d="M205 32L18 108M205 32l52 76" stroke-width="3"/>
+      <path d="M46 118v84M58 118v84" stroke-width="2"/>
+      <path d="M36 204h32" stroke-width="5"/>
+    </g>
+    <rect x="160" y="88" width="90" height="26" rx="2" fill="currentColor"/>
+    <rect x="38" y="112" width="28" height="10" fill="#d0f600"/>
+  </symbol>
+  <symbol id="s-forklift" viewBox="0 0 130 100">
+    <path d="M36 42V14h36l12 28" fill="none" stroke="#24364d" stroke-width="4"/>
+    <rect x="26" y="40" width="66" height="38" rx="7" fill="#d0f600"/>
+    <rect x="94" y="8" width="7" height="76" fill="#24364d"/>
+    <path d="M101 80h26" stroke="#24364d" stroke-width="5"/>
+    <g fill="#18263a"><circle cx="42" cy="82" r="11"/><circle cx="82" cy="82" r="11"/></g>
+    <g fill="#8a9bb1"><circle cx="42" cy="82" r="4"/><circle cx="82" cy="82" r="4"/></g>
+  </symbol>
+  <symbol id="s-phone" viewBox="0 0 160 300">
+    <rect x="3" y="3" width="154" height="294" rx="24" fill="#0c1a2c"/>
+    <rect x="11" y="15" width="138" height="270" rx="16" fill="#f3f6fb"/>
+    <rect x="11" y="15" width="138" height="40" rx="16" fill="#002e62"/>
+    <rect x="11" y="40" width="138" height="15" fill="#002e62"/>
+    <rect x="22" y="27" width="70" height="10" rx="5" fill="#ffffff" fill-opacity=".85"/>
+    <circle cx="134" cy="32" r="7" fill="#d0f600"/>
+    <g>
+      <rect x="20" y="64" width="57" height="78" rx="8" fill="#ffffff"/><rect x="83" y="64" width="57" height="78" rx="8" fill="#ffffff"/>
+      <rect x="20" y="150" width="57" height="78" rx="8" fill="#ffffff"/><rect x="83" y="150" width="57" height="78" rx="8" fill="#ffffff"/>
+      <rect x="25" y="69" width="47" height="40" rx="5" fill="#c9d8ea"/><rect x="88" y="69" width="47" height="40" rx="5" fill="#dfe8c0"/>
+      <rect x="25" y="155" width="47" height="40" rx="5" fill="#e3d6c4"/><rect x="88" y="155" width="47" height="40" rx="5" fill="#c9d8ea"/>
+      <g fill="#002e62" fill-opacity=".55"><rect x="25" y="115" width="40" height="5" rx="2"/><rect x="88" y="115" width="34" height="5" rx="2"/><rect x="25" y="201" width="36" height="5" rx="2"/><rect x="88" y="201" width="42" height="5" rx="2"/></g>
+      <g fill="#002e62"><rect x="25" y="125" width="24" height="7" rx="2"/><rect x="88" y="125" width="28" height="7" rx="2"/><rect x="25" y="211" width="26" height="7" rx="2"/><rect x="88" y="211" width="22" height="7" rx="2"/></g>
+    </g>
+    <rect x="20" y="240" width="120" height="32" rx="9" fill="#d0f600"/>
+    <rect x="52" y="252" width="56" height="8" rx="4" fill="#002e62"/>
+  </symbol>
+
+  <!-- process vignettes (320×200) -->
+  <symbol id="v-marking" viewBox="0 0 320 200">
+    <rect width="320" height="200" fill="#e3ecf7"/><rect y="150" width="320" height="50" fill="#d3e0f0"/>
+    <use href="#s-box" x="70" y="34" width="170" height="153"/>
+    <rect x="96" y="112" width="58" height="22" rx="2" fill="#ffffff" transform="skewY(20)" transform-origin="96 112"/>
+    <text x="101" y="128" font-family="Inter,Arial,sans-serif" font-size="11" font-weight="800" fill="#002e62" transform="skewY(20)" transform-origin="96 112">AR-0217</text>
+    <rect x="232" y="64" width="12" height="70" rx="3" fill="#002e62" transform="rotate(28 238 99)"/>
+    <path d="M224 124l8 14 6-4z" fill="#d0f600"/>
+  </symbol>
+  <symbol id="v-warehouse" viewBox="0 0 320 200">
+    <rect width="320" height="200" fill="#e3ecf7"/>
+    <g fill="#9fb4cf"><rect x="20" y="30" width="6" height="160"/><rect x="150" y="30" width="6" height="160"/><rect x="20" y="78" width="136" height="5"/><rect x="20" y="130" width="136" height="5"/><rect x="20" y="182" width="136" height="5"/></g>
+    <use href="#s-box" x="30" y="40" width="44" height="40"/><use href="#s-box" x="78" y="40" width="44" height="40"/>
+    <use href="#s-box" x="30" y="92" width="44" height="40"/><use href="#s-box" x="78" y="92" width="44" height="40"/><use href="#s-box" x="110" y="92" width="44" height="40"/>
+    <use href="#s-box" x="40" y="144" width="44" height="40"/>
+    <rect x="186" y="36" width="104" height="136" rx="10" fill="#ffffff"/>
+    <rect x="216" y="28" width="44" height="16" rx="5" fill="#002e62"/>
+    <g fill="none" stroke="#002e62" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M202 72l8 8 14-14M202 108l8 8 14-14M202 144l8 8 14-14"/></g>
+    <g fill="#c9d6e6"><rect x="234" y="70" width="42" height="7" rx="3"/><rect x="234" y="106" width="36" height="7" rx="3"/><rect x="234" y="142" width="40" height="7" rx="3"/></g>
+    <circle cx="282" cy="166" r="16" fill="#d0f600"/>
+    <path d="M275 166l5 5 9-10" fill="none" stroke="#002e62" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <symbol id="v-quote" viewBox="0 0 320 200">
+    <rect width="320" height="200" fill="#e3ecf7"/>
+    <rect x="58" y="30" width="204" height="128" rx="10" fill="#0c1a2c"/>
+    <rect x="66" y="38" width="188" height="112" rx="5" fill="#ffffff"/>
+    <path d="M40 158h240l-14 18H54z" fill="#b5c5da"/>
+    <rect x="80" y="52" width="70" height="9" rx="3" fill="#002e62"/>
+    <g fill="#c9d6e6"><rect x="80" y="72" width="120" height="6" rx="3"/><rect x="80" y="86" width="100" height="6" rx="3"/><rect x="80" y="100" width="110" height="6" rx="3"/></g>
+    <rect x="80" y="118" width="160" height="22" rx="5" fill="#f3fcc2"/>
+    <text x="88" y="134" font-family="Inter,Arial,sans-serif" font-size="11" font-weight="800" fill="#002e62">TOTAL</text>
+    <rect x="176" y="125" width="56" height="8" rx="3" fill="#002e62"/>
+    <circle cx="246" cy="52" r="15" fill="#d0f600"/>
+    <path d="M239 52l5 5 9-10" fill="none" stroke="#002e62" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <symbol id="v-transit" viewBox="0 0 320 200">
+    <rect width="320" height="200" fill="url(#g-day)"/>
+    <rect y="128" width="320" height="72" fill="#7fa2c9"/>
+    <path d="M20 150h50M120 170h70M230 152h60" stroke="#ffffff" stroke-opacity=".4" stroke-width="3" stroke-linecap="round"/>
+    <use href="#s-ship" x="18" y="64" width="210" height="69"/>
+    <use href="#s-plane" x="150" y="12" width="150" height="56"/>
+    <g transform="rotate(-12 268 150)"><circle cx="268" cy="150" r="30" fill="none" stroke="#d0f600" stroke-width="4" stroke-dasharray="6 4"/><text x="268" y="146" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="9" font-weight="800" fill="#ffffff">BEA</text><text x="268" y="158" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="9" font-weight="800" fill="#ffffff">CUKAI</text></g>
+  </symbol>
+  <symbol id="v-door" viewBox="0 0 320 200">
+    <rect width="320" height="200" fill="#e3ecf7"/>
+    <rect x="70" y="40" width="180" height="140" fill="#ffffff"/>
+    <path d="M58 46L160 8l102 38z" fill="#002e62"/>
+    <rect x="136" y="92" width="48" height="88" rx="3" fill="#0b4589"/>
+    <circle cx="174" cy="138" r="3" fill="#d0f600"/>
+    <rect x="88" y="70" width="34" height="30" rx="2" fill="#c9d8ea"/><rect x="198" y="70" width="34" height="30" rx="2" fill="#c9d8ea"/>
+    <rect y="178" width="320" height="22" fill="#cfdcec"/>
+    <use href="#s-box" x="184" y="134" width="58" height="52"/>
+    <circle cx="96" cy="150" r="17" fill="#d0f600"/>
+    <path d="M88 150l6 6 10-11" fill="none" stroke="#002e62" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <symbol id="v-link" viewBox="0 0 320 200">
+    <rect width="320" height="200" fill="#e3ecf7"/>
+    <use href="#s-phone" x="34" y="16" width="96" height="180"/>
+    <rect x="150" y="40" width="146" height="40" rx="12" fill="#ffffff"/>
+    <rect x="166" y="54" width="18" height="12" rx="6" fill="none" stroke="#002e62" stroke-width="3"/><rect x="178" y="54" width="18" height="12" rx="6" fill="none" stroke="#002e62" stroke-width="3"/>
+    <rect x="208" y="56" width="74" height="8" rx="4" fill="#9fb4cf"/>
+    <rect x="150" y="92" width="120" height="40" rx="12" fill="#002e62"/>
+    <rect x="166" y="106" width="64" height="7" rx="3" fill="#d0f600"/><rect x="166" y="118" width="40" height="5" rx="2" fill="#ffffff" fill-opacity=".6"/>
+    <rect x="150" y="144" width="96" height="34" rx="12" fill="#ffffff"/>
+    <rect x="164" y="157" width="56" height="7" rx="3" fill="#c9d6e6"/>
+  </symbol>
+</svg>
+
+<a class="skip" href="#main">Langsung ke konten</a>
+
+<header class="site-header" id="top">
+  <div class="container header-row">
+    <a class="brand" href="#top" aria-label="Arenka, kembali ke atas">
+      <svg class="logo" viewBox="0 0 172 40" role="img" aria-label="Arenka Logistics">
+        <path d="M3 35L16.5 5h7.4L37.4 35h-7.6L20.2 13.4 10.6 35z" fill="var(--logo-ink)"/>
+        <path d="M9.5 24.5h24.8l4.7 3.6-4.7 3.6H6.4z" fill="#d0f600"/>
+        <text x="46" y="24" font-family="Inter,Arial,sans-serif" font-size="21" font-weight="800" letter-spacing="-.4" fill="var(--logo-ink)">ARENKA</text>
+        <text x="47" y="35.5" font-family="Inter,Arial,sans-serif" font-size="7.4" font-weight="650" letter-spacing="2.9" fill="var(--logo-sub)">LOGISTICS</text>
+      </svg>
+    </a>
+    <nav class="main-nav" aria-label="Navigasi utama">
+      <details class="dd">
+        <summary>Layanan Kami <svg class="ic"><use href="#i-chev"/></svg></summary>
+        <div class="dd-panel dd-wide">
+          <p class="dd-label">Layanan Arenka</p>
+          <div class="dd-grid">
+            <a class="dd-item" href="#titip-beli"><span class="dd-ic"><svg class="ic"><use href="#i-cart"/></svg></span><span><b>Titip Beli</b><small>Belum punya supplier? Kami yang belikan.</small></span></a>
+            <a class="dd-item" href="#titip-kirim"><span class="dd-ic"><svg class="ic"><use href="#i-ship"/></svg></span><span><b>Titip Kirim</b><small>Supplier sudah ada? Kami urus kirimnya.</small></span></a>
+            <a class="dd-item" href="#titip-beli"><span class="dd-ic"><svg class="ic"><use href="#i-factory"/></svg></span><span><b>OEM / ODM</b><small>Produk dengan merek Anda sendiri.</small></span></a>
+            <a class="dd-item" href="#titip-beli"><span class="dd-ic"><svg class="ic"><use href="#i-building"/></svg></span><span><b>Pengadaan</b><small>Pembelian volume besar untuk proyek.</small></span></a>
+          </div>
+        </div>
+      </details>
+      <details class="dd">
+        <summary>Tentang <svg class="ic"><use href="#i-chev"/></svg></summary>
+        <div class="dd-panel">
+          <div class="dd-list">
+            <a href="#kenapa">Kenapa Arenka</a>
+            <a href="#testimoni">Cerita Pelanggan</a>
+            <a href="#faq">Pertanyaan Umum</a>
+          </div>
+        </div>
+      </details>
+      <a href="#cara-kerja">Cara Kerja</a>
+      <a href="#kontak">Hubungi Kami</a>
+    </nav>
+    <div class="header-actions">
+      <div class="kurs">
+        <span>Kurs hari ini</span>
+        <b>¥1 = Rp <span class="ph" data-key="kurs">isi kurs</span></b>
+      </div>
+      <a class="btn btn-blue btn-sm" href="#kontak" data-login>MASUK <svg class="ic"><use href="#i-arrow-ur"/></svg></a>
+      <button class="burger" type="button" aria-label="Buka menu" data-open-drawer><svg class="ic"><use href="#i-menu"/></svg></button>
+    </div>
+  </div>
+  <div class="header-line"></div>
+</header>
+
+<dialog class="drawer" id="drawer" aria-label="Menu">
+  <div class="drawer-head">
+    <svg class="logo" viewBox="0 0 172 40" role="img" aria-label="Arenka Logistics">
+      <path d="M3 35L16.5 5h7.4L37.4 35h-7.6L20.2 13.4 10.6 35z" fill="var(--logo-ink)"/>
+      <path d="M9.5 24.5h24.8l4.7 3.6-4.7 3.6H6.4z" fill="#d0f600"/>
+      <text x="46" y="24" font-family="Inter,Arial,sans-serif" font-size="21" font-weight="800" letter-spacing="-.4" fill="var(--logo-ink)">ARENKA</text>
+      <text x="47" y="35.5" font-family="Inter,Arial,sans-serif" font-size="7.4" font-weight="650" letter-spacing="2.9" fill="var(--logo-sub)">LOGISTICS</text>
+    </svg>
+    <button class="icon-btn" type="button" aria-label="Tutup menu" data-close-dialog><svg class="ic"><use href="#i-x"/></svg></button>
+  </div>
+  <div class="drawer-body">
+    <p>Layanan Kami</p>
+    <a href="#titip-beli">Titip Beli <svg class="ic"><use href="#i-arrow-r"/></svg></a>
+    <a href="#titip-kirim">Titip Kirim <svg class="ic"><use href="#i-arrow-r"/></svg></a>
+    <a href="#titip-beli">OEM / ODM <svg class="ic"><use href="#i-arrow-r"/></svg></a>
+    <a href="#titip-beli">Pengadaan <svg class="ic"><use href="#i-arrow-r"/></svg></a>
+    <p>Arenka</p>
+    <a href="#kenapa">Kenapa Arenka <svg class="ic"><use href="#i-arrow-r"/></svg></a>
+    <a href="#cara-kerja">Cara Kerja <svg class="ic"><use href="#i-arrow-r"/></svg></a>
+    <a href="#testimoni">Cerita Pelanggan <svg class="ic"><use href="#i-arrow-r"/></svg></a>
+    <a href="#faq">Pertanyaan Umum <svg class="ic"><use href="#i-arrow-r"/></svg></a>
+    <a href="#kontak">Hubungi Kami <svg class="ic"><use href="#i-arrow-r"/></svg></a>
+  </div>
+  <div class="drawer-foot">
+    <a class="btn btn-lime" href="#kontak" data-login>Mulai Import <svg class="ic"><use href="#i-arrow-ur"/></svg></a>
+  </div>
+</dialog>
+
+<main id="main">
+
+  <!-- HERO -->
+  <section class="hero" aria-labelledby="hero-title">
+    <svg class="hero-art" viewBox="0 0 1440 820" preserveAspectRatio="xMaxYMax slice" aria-hidden="true">
+      <rect width="1440" height="820" fill="url(#g-sky)"/>
+      <circle cx="1020" cy="240" r="300" fill="url(#g-glow)"/>
+      <g fill="#9cb3d0" opacity=".42">
+        <rect x="300" y="548" width="34" height="52"/><rect x="340" y="520" width="26" height="80"/><rect x="372" y="560" width="40" height="40"/><rect x="420" y="500" width="22" height="100"/><rect x="448" y="536" width="36" height="64"/><rect x="492" y="556" width="28" height="44"/><rect x="528" y="512" width="20" height="88"/><rect x="556" y="544" width="44" height="56"/><rect x="610" y="568" width="30" height="32"/><rect x="648" y="530" width="24" height="70"/><rect x="680" y="558" width="38" height="42"/>
+      </g>
+      <rect y="598" width="1440" height="222" fill="url(#g-sea)"/>
+      <path d="M60 650h120M300 692h180M520 642h90M700 724h160M240 764h140M900 770h120" stroke="#ffffff" stroke-opacity=".35" stroke-width="3" stroke-linecap="round"/>
+      <use href="#s-ship" x="540" y="470" width="640" height="209"/>
+      <use href="#s-crane" x="1000" y="250" width="301" height="440" style="color:#28497a"/>
+      <use href="#s-crane" x="1190" y="200" width="331" height="484" style="color:#1b3a63"/>
+      <path d="M970 690L1440 676V820H900z" fill="#3f5878"/>
+      <path d="M970 690L1440 676" stroke="#9fb4cf" stroke-width="3"/>
+      <use href="#s-cont" x="1230" y="634" width="110" height="44" style="color:#d0f600"/>
+      <use href="#s-cont" x="1346" y="628" width="110" height="44" style="color:#ffffff"/>
+      <use href="#s-cont" x="1288" y="588" width="110" height="44" style="color:#0b4589"/>
+    </svg>
+    <div class="container hero-inner">
+      <p class="route"><span class="dot" aria-hidden="true"></span>CHINA<span class="route-line" aria-hidden="true"></span>INDONESIA</p>
+      <h1 id="hero-title">Import dari China,<br><span class="hl">sampai alamat Anda.</span></h1>
+      <p class="hero-sub"><span class="rot" id="hero-rot">Sudah punya supplier? Kami urus pengirimannya.</span></p>
+      <p class="hero-lead">Tim Arenka menangani pembelian, pengecekan barang, pengiriman, dan bea cukai. Anda tinggal memantau prosesnya dari satu akun.</p>
+      <div class="hero-cta">
+        <a class="btn btn-lime" href="#kontak" data-wa="Halo Arenka, saya mau konsultasi soal import dari China.">Konsultasi Gratis <svg class="ic"><use href="#i-arrow-ur"/></svg></a>
+        <a class="btn btn-ghost" href="#cara-kerja">Lihat Cara Kerja <svg class="ic"><use href="#i-arrow-d"/></svg></a>
+      </div>
+      <p class="hero-note"><svg class="ic"><use href="#i-check-circle"/></svg>Pesanan dibuat dan dipantau lewat akun Arenka.</p>
+      <div class="hero-bottom">
+        <div class="hero-stats">
+          <div><b class="num" data-count><span class="ph" data-key="stats.orders">angka</span></b><span class="lbl">Pesanan diproses</span></div>
+          <div><b class="num" data-count><span class="ph" data-key="stats.shipments">angka</span></b><span class="lbl">Kiriman sampai tujuan</span></div>
+          <div><b class="num" data-count><span class="ph" data-key="stats.cities">angka</span></b><span class="lbl">Kota tujuan</span></div>
+        </div>
+        <a class="hero-find" href="#layanan"><svg class="ic"><use href="#i-arrow-d"/></svg><span>Temukan layanan<br>yang cocok untuk Anda</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="section band-soft" id="layanan" aria-labelledby="layanan-title">
+    <div class="container">
+      <div class="section-head center reveal">
+        <p class="eyebrow">Dua cara untuk mulai</p>
+        <h2 id="layanan-title">Supplier sudah di tangan,<br><span class="hl">atau masih mencari?</span></h2>
+        <p class="lead">Pilih titik awal Anda. Bagian yang belum Anda pegang, kami lanjutkan.</p>
+      </div>
+
+      <article class="service-card reveal" id="titip-beli">
+        <div class="svc-media">
+          <svg viewBox="0 0 560 560" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <rect width="560" height="560" fill="url(#g-deep)"/>
+            <g fill="#0f4a8f" opacity=".75"><rect x="0" y="120" width="560" height="10"/><rect x="0" y="260" width="560" height="10"/><rect x="0" y="400" width="560" height="10"/></g>
+            <use href="#s-box" x="20" y="64" width="62" height="56"/><use href="#s-box" x="86" y="64" width="62" height="56"/><use href="#s-box" x="420" y="64" width="62" height="56"/><use href="#s-box" x="486" y="64" width="62" height="56"/>
+            <use href="#s-box" x="430" y="204" width="62" height="56"/><use href="#s-box" x="40" y="204" width="62" height="56"/>
+            <use href="#s-phone" x="186" y="78" width="200" height="375"/>
+            <g transform="translate(372 150)"><rect width="92" height="38" rx="19" fill="#d0f600"/><text x="46" y="25" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="16" font-weight="800" fill="#002e62">1688</text></g>
+            <g transform="translate(392 204)"><rect width="104" height="34" rx="17" fill="#ffffff"/><text x="52" y="22" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="700" fill="#002e62">Taobao</text></g>
+            <g transform="translate(98 150)"><circle cx="34" cy="34" r="34" fill="#d0f600"/><path d="M16 22h5l5 22h20l4-15H23" fill="none" stroke="#002e62" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="30" cy="50" r="3" fill="#002e62"/><circle cx="44" cy="50" r="3" fill="#002e62"/></g>
+            <use href="#s-box" x="380" y="330" width="120" height="108"/><use href="#s-box" x="440" y="384" width="100" height="90"/>
+          </svg>
+          <div class="svc-caption"><span class="tag">TITIP BELI</span><strong>Anda pilih barangnya.<br>Kami yang membelikan.</strong></div>
+        </div>
+        <div class="svc-body">
+          <p class="eyebrow">01 / Belum punya supplier</p>
+          <h3>Titip Beli.</h3>
+          <h4>Sudah ada barang incaran?<br>Kirim saja linknya.</h4>
+          <p>Kami menghubungi penjual, membayar dalam Yuan, mengecek barang, lalu mengirimnya ke Indonesia.</p>
+          <div class="chips"><span class="chip">1688</span><span class="chip">Alibaba</span><span class="chip">Taobao</span><span class="chip">Produk custom</span></div>
+          <div class="sub-tiles">
+            <a class="sub-tile" href="#kontak" data-wa="Halo Arenka, saya tertarik layanan OEM/ODM untuk produk dengan merek sendiri."><svg class="ic"><use href="#i-factory"/></svg><span><b>OEM / ODM</b><small>Produk dengan merek Anda</small></span><svg class="ic"><use href="#i-arrow-r"/></svg></a>
+            <a class="sub-tile" href="#kontak" data-wa="Halo Arenka, saya butuh pengadaan barang volume besar untuk proyek."><svg class="ic"><use href="#i-building"/></svg><span><b>Pengadaan</b><small>Volume besar untuk proyek</small></span><svg class="ic"><use href="#i-arrow-r"/></svg></a>
+          </div>
+          <ul class="checks">
+            <li><svg class="ic"><use href="#i-check"/></svg>Negosiasi dan pembayaran ke penjual di China</li>
+            <li><svg class="ic"><use href="#i-check"/></svg>Pemeriksaan barang di gudang sebelum dikirim</li>
+            <li><svg class="ic"><use href="#i-check"/></svg>Pengurusan bea cukai sampai alamat tujuan</li>
+          </ul>
+          <div class="svc-actions">
+            <a class="btn btn-lime btn-block" href="#kontak" data-wa="Halo Arenka, saya mau Titip Beli. Ini link produknya: ">Kirim link produk lewat WhatsApp <svg class="ic"><use href="#i-arrow-ur"/></svg></a>
+            <a class="link-arrow" href="#kontak">Belum punya link? Konsultasikan dulu <svg class="ic"><use href="#i-arrow-r"/></svg></a>
+          </div>
+        </div>
+      </article>
+
+      <article class="service-card flip reveal" id="titip-kirim">
+        <div class="svc-media">
+          <svg viewBox="0 0 560 560" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <rect width="560" height="560" fill="url(#g-deep)"/>
+            <rect y="430" width="560" height="130" fill="#062649"/>
+            <path d="M200 120h330v300H200z" fill="#06213f"/>
+            <path d="M200 120h330v300H200z" fill="none" stroke="#2a5c99" stroke-width="10"/>
+            <path d="M200 120l-60 30v290l60-20z" fill="#0b4589"/>
+            <path d="M152 170v220M170 160v236M186 152v252" stroke="#001b3a" stroke-opacity=".35" stroke-width="3"/>
+            <use href="#s-box" x="230" y="150" width="90" height="81"/><use href="#s-box" x="320" y="150" width="90" height="81"/><use href="#s-box" x="410" y="150" width="90" height="81"/>
+            <use href="#s-box" x="230" y="236" width="90" height="81"/><use href="#s-box" x="320" y="236" width="90" height="81"/><use href="#s-box" x="410" y="236" width="90" height="81"/>
+            <use href="#s-box" x="320" y="322" width="90" height="81"/><use href="#s-box" x="410" y="322" width="90" height="81"/>
+            <use href="#s-forklift" x="20" y="330" width="190" height="146"/>
+            <use href="#s-box" x="134" y="300" width="70" height="63"/>
+          </svg>
+          <div class="svc-caption"><span class="tag">TITIP KIRIM</span><strong>Supplier sudah siap.<br>Arahkan ke gudang kami.</strong></div>
+        </div>
+        <div class="svc-body">
+          <p class="eyebrow">02 / Sudah punya supplier</p>
+          <h3>Titip Kirim.</h3>
+          <h4>Belanja tetap di tangan Anda.<br>Perjalanannya urusan kami.</h4>
+          <p>Minta supplier mengirim ke gudang Arenka di China. Dari sana kami bawa sampai alamat tujuan.</p>
+          <div class="chips">
+            <span class="chip chip-lg"><svg class="ic"><use href="#i-boxes"/></svg>LCL</span>
+            <span class="chip chip-lg"><svg class="ic"><use href="#i-container"/></svg>FCL</span>
+            <span class="chip chip-lg"><svg class="ic"><use href="#i-plane"/></svg>Udara</span>
+          </div>
+          <ul class="checks">
+            <li><svg class="ic"><use href="#i-check"/></svg>Alamat gudang dan kode marking khusus untuk Anda</li>
+            <li><svg class="ic"><use href="#i-check"/></svg>Berat dan volume ditimbang ulang sebelum biaya dikonfirmasi</li>
+            <li><svg class="ic"><use href="#i-check"/></svg>Bea cukai dan pengantaran ke alamat Anda</li>
+          </ul>
+          <div class="svc-actions">
+            <a class="btn btn-blue btn-block" href="#kontak" data-login>Mulai Titip Kirim <svg class="ic"><use href="#i-arrow-ur"/></svg></a>
+            <p class="svc-note"><svg class="ic"><use href="#i-info"/></svg><span>Waktu pembayaran ongkos kirim: <span class="ph" data-key="policy.payment">isi ketentuan</span></span></p>
+          </div>
+        </div>
+      </article>
+
+      <div class="modes">
+        <div class="modes-head reveal">
+          <p class="eyebrow">Pilih jalur kirim</p>
+          <div class="row">
+            <div style="display:grid;gap:14px">
+              <h3 style="font-size:clamp(28px,2.6vw,38px)">Beberapa karton saja,<br>atau satu kontainer penuh?</h3>
+              <p class="lead">Sesuaikan jalur dengan volume barang dan tenggat Anda.</p>
+            </div>
+            <a class="link-arrow" href="#kontak" data-wa="Halo Arenka, saya butuh saran memilih jalur kirim (LCL, FCL, atau udara).">Bantu saya memilih <svg class="ic"><use href="#i-arrow-ur"/></svg></a>
+          </div>
+        </div>
+        <div class="slider static-lg" data-slider>
+          <div class="slider-track">
+            <article class="mode-card">
+              <div class="mode-media">
+                <svg viewBox="0 0 400 210" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                  <rect width="400" height="210" fill="url(#g-dusk)"/>
+                  <circle cx="300" cy="128" r="30" fill="#d0f600" fill-opacity=".9"/>
+                  <rect y="140" width="400" height="70" fill="#0b3466"/>
+                  <use href="#s-ship" x="40" y="74" width="300" height="98"/>
+                  <use href="#s-crane" x="300" y="40" width="96" height="140" style="color:#06213f"/>
+                </svg>
+                <span class="mode-badge"><svg class="ic"><use href="#i-boxes"/></svg></span>
+                <div class="mode-label"><small>LAUT · BERBAGI KONTAINER</small><b>LCL</b></div>
+              </div>
+              <div class="mode-body"><p>Volume masih kecil? Barang Anda digabung dengan kiriman lain dalam satu kontainer.</p><small>Cocok untuk tes pasar dan stok awal.</small></div>
+            </article>
+            <article class="mode-card">
+              <div class="mode-media">
+                <svg viewBox="0 0 400 210" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                  <rect width="400" height="210" fill="url(#g-day)"/>
+                  <g fill="#b7c9e0"><rect x="10" y="90" width="80" height="60"/><rect x="96" y="70" width="60" height="80"/><rect x="300" y="84" width="90" height="66"/></g>
+                  <rect y="150" width="400" height="60" fill="#5d7392"/>
+                  <path d="M0 176h60M100 176h60M200 176h60M300 176h60" stroke="#d0f600" stroke-width="4"/>
+                  <use href="#s-truck" x="70" y="60" width="270" height="114"/>
+                </svg>
+                <span class="mode-badge"><svg class="ic"><use href="#i-container"/></svg></span>
+                <div class="mode-label"><small>LAUT · KONTAINER PENUH</small><b>FCL</b></div>
+              </div>
+              <div class="mode-body"><p>Satu kontainer khusus untuk barang Anda, dari gudang di China sampai tujuan.</p><small>Cocok untuk volume besar yang rutin.</small></div>
+            </article>
+            <article class="mode-card">
+              <div class="mode-media">
+                <svg viewBox="0 0 400 210" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                  <rect width="400" height="210" fill="url(#g-day)"/>
+                  <g fill="#ffffff" fill-opacity=".9"><ellipse cx="80" cy="150" rx="70" ry="22"/><ellipse cx="140" cy="140" rx="50" ry="20"/><ellipse cx="320" cy="160" rx="90" ry="24"/><ellipse cx="300" cy="62" rx="44" ry="14"/></g>
+                  <use href="#s-plane" x="70" y="40" width="270" height="101" transform="rotate(-8 205 90)"/>
+                </svg>
+                <span class="mode-badge"><svg class="ic"><use href="#i-plane"/></svg></span>
+                <div class="mode-label"><small>JALUR UDARA</small><b>Air Freight</b></div>
+              </div>
+              <div class="mode-body"><p>Butuh barang lebih cepat? Diskusikan opsi kargo udara dengan tim kami.</p><small>Jadwal dan tarif mengikuti jenis barang.</small></div>
+            </article>
+          </div>
+          <div class="slider-nav">
+            <span class="slider-status" data-status></span>
+            <div class="slider-btns">
+              <button class="slider-btn" type="button" data-prev aria-label="Sebelumnya"><svg class="ic"><use href="#i-arrow-l"/></svg></button>
+              <button class="slider-btn" type="button" data-next aria-label="Berikutnya"><svg class="ic"><use href="#i-arrow-r"/></svg></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- USP STRIP -->
+  <section class="usp on-dark" aria-label="Keunggulan layanan">
+    <div class="container usp-inner">
+      <div class="usp-item"><svg class="ic"><use href="#i-shield"/></svg><div><b>Proses jelas</b><small>Setiap tahap ada kabarnya</small></div></div>
+      <div class="usp-item"><svg class="ic"><use href="#i-boxes"/></svg><div><b>Satu pintu</b><small>Beli, kirim, sampai tujuan</small></div></div>
+      <div class="usp-item"><svg class="ic"><use href="#i-truck"/></svg><div><b>Antar ke alamat</b><small>Rumah, toko, atau gudang</small></div></div>
+      <div class="usp-item"><svg class="ic"><use href="#i-chat"/></svg><div><b>Tim siap bantu</b><small>Mulai dari pertanyaan pertama</small></div></div>
+    </div>
+  </section>
+
+  <!-- SOCIAL PROOF -->
+  <section class="proof on-lime" aria-label="Arenka dalam angka">
+    <div class="container proof-inner">
+      <p class="proof-intro">Mulai dari satu kiriman.<b>Lanjutkan sesuai kebutuhan usaha Anda.</b></p>
+      <div><b class="num" data-count><span class="ph" data-key="stats.packages">angka</span></b><span class="lbl">Paket terkirim</span></div>
+      <div><b class="num" data-count><span class="ph" data-key="stats.customers">angka</span></b><span class="lbl">Pelanggan</span></div>
+      <div><b class="num" data-count><span class="ph" data-key="stats.ontime">angka</span></b><span class="lbl">Tepat waktu</span></div>
+      <div><b class="num" data-count><span class="ph" data-key="stats.satisfaction">angka</span></b><span class="lbl">Kepuasan pelanggan</span></div>
+      <p class="proof-reach"><svg class="ic"><use href="#i-pin"/></svg><span>Jangkauan pengantaran<br><span class="ph" data-key="coverage">isi area</span></span></p>
+    </div>
+  </section>
+
+  <!-- BENEFITS -->
+  <section class="section band-soft" id="kenapa" aria-labelledby="kenapa-title">
+    <div class="container">
+      <div class="section-head center reveal">
+        <p class="eyebrow">Kenapa Arenka</p>
+        <h2 id="kenapa-title">Urusan import lebih ringan.<br><span class="hl">Fokus Anda tetap di bisnis.</span></h2>
+      </div>
+      <div class="slider static-lg" data-slider>
+        <div class="slider-track benefit-track">
+          <article class="benefit"><span class="bubble"><svg class="ic"><use href="#i-layout"/></svg></span><h3>Semua pesanan di satu akun</h3><p>Status pembelian, gudang, dan pengiriman bisa dicek kapan saja dari akun Anda.</p><a class="link-arrow" href="#kontak" data-login>Masuk ke akun <svg class="ic"><use href="#i-arrow-ur"/></svg></a></article>
+          <article class="benefit"><span class="bubble"><svg class="ic"><use href="#i-truck"/></svg></span><h3>Diantar sampai alamat</h3><p>Tidak perlu mengambil barang di pelabuhan. Kiriman dibawa ke rumah, toko, atau gudang Anda.</p></article>
+          <article class="benefit"><span class="bubble"><svg class="ic"><use href="#i-receipt"/></svg></span><h3>Biaya all-in di awal</h3><p>Rincian biaya disampaikan sebelum Anda setuju, jadi anggaran bisa disiapkan sejak awal.</p></article>
+          <article class="benefit"><span class="bubble"><svg class="ic"><use href="#i-headset"/></svg></span><h3>Koordinasi di dua sisi</h3><p>Kami berkomunikasi dengan supplier di China dan mengabari Anda di Indonesia.</p></article>
+          <article class="benefit"><span class="bubble"><svg class="ic"><use href="#i-clip"/></svg></span><h3>Barang dicek di gudang</h3><p>Setiap kiriman diterima, dihitung, dan diperiksa sebelum masuk jalur pengiriman.</p></article>
+          <article class="benefit"><span class="bubble"><svg class="ic"><use href="#i-chat"/></svg></span><h3>Konsultasi tanpa biaya</h3><p>Masih bingung memulai? Ceritakan rencana Anda, kami bantu memilih langkah yang tepat.</p></article>
+        </div>
+        <div class="slider-nav">
+          <span class="slider-status" data-status></span>
+          <div class="slider-btns">
+            <button class="slider-btn" type="button" data-prev aria-label="Sebelumnya"><svg class="ic"><use href="#i-arrow-l"/></svg></button>
+            <button class="slider-btn" type="button" data-next aria-label="Berikutnya"><svg class="ic"><use href="#i-arrow-r"/></svg></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="section band-white" id="cara-kerja" aria-labelledby="proses-title">
+    <div class="container">
+      <div class="section-head center reveal">
+        <p class="eyebrow">Cara kerja Arenka</p>
+        <h2 id="proses-title">Dari gudang di China,<br><span class="hl">sampai di tangan Anda.</span></h2>
+        <p class="lead">Pilih layanan Anda, lalu ikuti lima langkahnya.</p>
+      </div>
+      <div class="tabs" role="tablist" aria-label="Pilih layanan">
+        <button type="button" role="tab" id="tab-kirim" aria-selected="true" aria-controls="steps-panel" data-process="kirim">Titip Kirim</button>
+        <button type="button" role="tab" id="tab-beli" aria-selected="false" aria-controls="steps-panel" data-process="beli" tabindex="-1">Titip Beli</button>
+      </div>
+      <div id="steps-panel" role="tabpanel" aria-labelledby="tab-kirim">
+        <ol class="steps" id="steps"></ol>
+      </div>
+      <div class="steps-foot">
+        <p><svg class="ic"><use href="#i-check-circle"/></svg>Butuh perkiraan ongkos? Tim kami bisa menghitungkan sebelum Anda mulai.</p>
+        <a class="link-arrow" href="#kontak" data-login>Mulai Import <svg class="ic"><use href="#i-arrow-r"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- MID CTA -->
+  <section class="mid-cta on-lime" id="langkah-berikutnya" aria-labelledby="mid-title">
+    <div class="container mid-inner">
+      <div>
+        <p class="eyebrow">Siap untuk mulai?</p>
+        <h2 id="mid-title">Rencananya sudah ada?<br>Ayo kirim yang pertama.</h2>
+      </div>
+      <div class="mid-actions">
+        <a class="btn btn-blue" href="#kontak" data-login>Mulai Import <svg class="ic"><use href="#i-arrow-ur"/></svg></a>
+        <a class="link-arrow" href="#kontak">Minta hitungan ongkos <svg class="ic"><use href="#i-arrow-d"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="section testi on-dark" id="testimoni" aria-labelledby="testi-title">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Cerita pelanggan</p>
+        <h2 id="testi-title">Kata mereka,<br><span class="hl">setelah kirim lewat Arenka.</span></h2>
+        <p class="lead">Pengalaman pelanggan Arenka, dari kiriman pertama sampai yang sudah rutin.</p>
+      </div>
+      <div class="feature reveal">
+        <div class="feature-art">
+          <svg viewBox="0 0 600 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <rect width="600" height="400" fill="#e9eff7"/>
+            <rect y="300" width="600" height="100" fill="#d6e1ef"/>
+            <g fill="#9fb4cf"><rect x="40" y="40" width="8" height="260"/><rect x="290" y="40" width="8" height="260"/><rect x="40" y="110" width="258" height="7"/><rect x="40" y="190" width="258" height="7"/><rect x="40" y="270" width="258" height="7"/></g>
+            <use href="#s-box" x="56" y="54" width="62" height="56"/><use href="#s-box" x="124" y="54" width="62" height="56"/><use href="#s-box" x="214" y="54" width="62" height="56"/>
+            <use href="#s-box" x="56" y="134" width="62" height="56"/><use href="#s-box" x="150" y="134" width="62" height="56"/>
+            <use href="#s-box" x="96" y="214" width="62" height="56"/><use href="#s-box" x="200" y="214" width="62" height="56"/>
+            <rect x="330" y="214" width="250" height="16" rx="4" fill="#0b4589"/>
+            <rect x="350" y="230" width="10" height="90" fill="#0b4589"/><rect x="550" y="230" width="10" height="90" fill="#0b4589"/>
+            <rect x="380" y="124" width="140" height="90" rx="8" fill="#0c1a2c"/><rect x="387" y="131" width="126" height="76" rx="4" fill="#ffffff"/>
+            <rect x="398" y="142" width="60" height="8" rx="3" fill="#002e62"/><g fill="#c9d6e6"><rect x="398" y="158" width="100" height="6" rx="3"/><rect x="398" y="171" width="80" height="6" rx="3"/></g>
+            <rect x="398" y="186" width="44" height="12" rx="4" fill="#d0f600"/>
+            <use href="#s-box" x="330" y="296" width="110" height="99"/><use href="#s-box" x="430" y="320" width="90" height="81"/>
+            <circle cx="548" cy="150" r="28" fill="#d0f600"/><path d="M536 150l9 9 16-18" fill="none" stroke="#002e62" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="feature-copy">
+          <p class="eyebrow">Lebih dari sekadar paket</p>
+          <p>Setiap karton yang kami bawa adalah bagian dari usaha yang sedang <b>Anda bangun.</b></p>
+        </div>
+      </div>
+      <div class="slider" data-slider data-autoplay>
+        <div class="slider-track" id="testi-track">
+          <figure class="quote"><span class="quote-mark" aria-hidden="true">“</span><blockquote><span class="ph ph-block">Tempel ulasan asli pelanggan #1 di sini.</span></blockquote><figcaption><span class="avatar">–</span><span><b><span class="ph">Nama pelanggan</span></b><small>Kota</small></span></figcaption></figure>
+          <figure class="quote"><span class="quote-mark" aria-hidden="true">“</span><blockquote><span class="ph ph-block">Tempel ulasan asli pelanggan #2 di sini.</span></blockquote><figcaption><span class="avatar">–</span><span><b><span class="ph">Nama pelanggan</span></b><small>Kota</small></span></figcaption></figure>
+          <figure class="quote"><span class="quote-mark" aria-hidden="true">“</span><blockquote><span class="ph ph-block">Tempel ulasan asli pelanggan #3 di sini.</span></blockquote><figcaption><span class="avatar">–</span><span><b><span class="ph">Nama pelanggan</span></b><small>Kota</small></span></figcaption></figure>
+          <figure class="quote"><span class="quote-mark" aria-hidden="true">“</span><blockquote><span class="ph ph-block">Tempel ulasan asli pelanggan #4 di sini.</span></blockquote><figcaption><span class="avatar">–</span><span><b><span class="ph">Nama pelanggan</span></b><small>Kota</small></span></figcaption></figure>
+          <figure class="quote"><span class="quote-mark" aria-hidden="true">“</span><blockquote><span class="ph ph-block">Tempel ulasan asli pelanggan #5 di sini.</span></blockquote><figcaption><span class="avatar">–</span><span><b><span class="ph">Nama pelanggan</span></b><small>Kota</small></span></figcaption></figure>
+        </div>
+        <div class="testi-nav">
+          <span class="src">Sumber ulasan: <span class="ph" data-key="reviewSource">isi tautan sumber</span></span>
+          <div class="slider-btns">
+            <button class="slider-btn" type="button" data-prev aria-label="Ulasan sebelumnya"><svg class="ic"><use href="#i-arrow-l"/></svg></button>
+            <button class="slider-btn" type="button" data-next aria-label="Ulasan berikutnya"><svg class="ic"><use href="#i-arrow-r"/></svg></button>
+            <button class="slider-btn" type="button" data-pause aria-label="Jeda putar otomatis" aria-pressed="false"><svg class="ic"><use href="#i-pause"/></svg></button>
+          </div>
+          <span class="slider-status" data-status></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section band-white" id="faq" aria-labelledby="faq-title">
+    <div class="container faq-grid">
+      <div class="faq-intro reveal">
+        <p class="eyebrow">Sebelum mulai</p>
+        <h2 id="faq-title">Pertanyaan yang<br><span class="hl">sering kami terima.</span></h2>
+        <p class="lead">Belum terjawab di sini? Tanyakan langsung ke tim kami.</p>
+        <a class="btn btn-ghost" href="#kontak" data-wa="Halo Arenka, saya punya pertanyaan soal import.">Konsultasi Gratis <svg class="ic"><use href="#i-arrow-ur"/></svg></a>
+      </div>
+      <div class="faq-list">
+        <details open><summary>Apa itu Arenka?<span class="pm"><svg class="ic"><use href="#i-plus"/></svg></span></summary><p>Arenka membantu pembelian dan pengiriman barang dari China ke Indonesia, untuk kebutuhan pribadi maupun usaha. Semua pesanan bisa dipantau dari akun Arenka.</p></details>
+        <details><summary>Apa beda Titip Beli dan Titip Kirim?<span class="pm"><svg class="ic"><use href="#i-plus"/></svg></span></summary><p>Titip Beli untuk Anda yang belum punya supplier: kami yang membeli barangnya. Titip Kirim untuk Anda yang sudah membeli sendiri: supplier mengirim ke gudang kami di China, lalu kami bawa ke Indonesia.</p></details>
+        <details><summary>Bagaimana cara mulai?<span class="pm"><svg class="ic"><use href="#i-plus"/></svg></span></summary><p>Hubungi tim kami lewat WhatsApp atau isi formulir di bagian Kontak. Kami bantu menentukan layanan, lalu memandu pembuatan akun dan pesanan pertama Anda.</p></details>
+        <details><summary>Berapa minimum pembelian untuk Titip Beli?<span class="pm"><svg class="ic"><use href="#i-plus"/></svg></span></summary><p>Minimum pembelian: <span class="ph" data-key="policy.minBuy">isi ketentuan</span>. Untuk kebutuhan di luar ketentuan ini, hubungi admin.</p></details>
+        <details><summary>Berapa minimum pengiriman untuk Titip Kirim?<span class="pm"><svg class="ic"><use href="#i-plus"/></svg></span></summary><p>Minimum berat atau volume bergantung pada jalur dan jenis barang: <span class="ph" data-key="policy.minShip">isi ketentuan</span>.</p></details>
+        <details><summary>Bagaimana biaya import dihitung?<span class="pm"><svg class="ic"><use href="#i-plus"/></svg></span></summary><p>Biaya terdiri dari harga barang (untuk Titip Beli), ongkos kirim berdasarkan berat atau volume, serta bea masuk dan pajak. Rinciannya kami sampaikan sebelum Anda menyetujui.</p></details>
+        <details><summary>Apa itu kode marking?<span class="pm"><svg class="ic"><use href="#i-plus"/></svg></span></summary><p>Kode marking adalah tanda unik di setiap karton, supaya gudang tahu barang itu milik Anda. Karton tanpa marking bisa tertunda saat diterima di gudang.</p></details>
+        <details><summary>Berapa lama pengiriman dari China?<span class="pm"><svg class="ic"><use href="#i-plus"/></svg></span></summary><p>Jalur udara lebih cepat daripada laut. Estimasi Arenka: udara <span class="ph" data-key="policy.etaAir">isi estimasi</span>, laut <span class="ph" data-key="policy.etaSea">isi estimasi</span>, dihitung sejak barang berangkat dari gudang.</p></details>
+        <details><summary>Apakah semua jenis barang bisa diimport?<span class="pm"><svg class="ic"><use href="#i-plus"/></svg></span></summary><p>Tidak. Barang terlarang, barang yang memerlukan izin khusus tanpa dokumen lengkap, dan beberapa kategori lain tidak bisa dikirim. Tanyakan ke tim kami sebelum membeli.</p></details>
+        <details><summary>Bagaimana cara memantau pesanan?<span class="pm"><svg class="ic"><use href="#i-plus"/></svg></span></summary><p>Status pesanan dan pengiriman bisa dicek dari akun Arenka. Tim kami juga mengabari setiap kali ada perubahan penting.</p></details>
+        <details><summary>Bagaimana jika barang rusak atau tidak sesuai?<span class="pm"><svg class="ic"><use href="#i-plus"/></svg></span></summary><p>Laporkan ke admin dengan foto dan nomor pesanan. Kebijakan klaim dan pengembalian: <span class="ph" data-key="policy.claim">isi kebijakan</span>.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final band-white" id="mulai-import" aria-labelledby="final-title">
+    <div class="container final-grid">
+      <div class="final-copy reveal">
+        <p class="eyebrow">Dari rencana ke pengiriman</p>
+        <h2 id="final-title">Barangnya Anda yang pilih.<br><span class="hl">Perjalanannya kami yang urus.</span></h2>
+        <p>Untuk pesanan pertama maupun kiriman rutin, mulai bersama Arenka.</p>
+        <div class="final-actions">
+          <a class="btn btn-lime" href="#kontak" data-login>Mulai Import <svg class="ic"><use href="#i-arrow-ur"/></svg></a>
+          <a class="link-arrow" href="#kontak" data-wa="Halo Arenka, saya mau konsultasi gratis.">Konsultasi Gratis <svg class="ic"><use href="#i-arrow-ur"/></svg></a>
+        </div>
+      </div>
+      <div class="final-art reveal">
+        <svg viewBox="0 0 600 430" aria-hidden="true">
+          <circle cx="380" cy="190" r="150" fill="url(#g-globe)"/>
+          <g fill="none" stroke="#ffffff" stroke-opacity=".18" stroke-width="2"><ellipse cx="380" cy="190" rx="150" ry="52"/><ellipse cx="380" cy="190" rx="150" ry="104"/><ellipse cx="380" cy="190" rx="54" ry="150"/><ellipse cx="380" cy="190" rx="108" ry="150"/><path d="M230 190h300M380 40v300"/></g>
+          <path d="M300 120C350 70 440 80 470 150" fill="none" stroke="#d0f600" stroke-width="4" stroke-dasharray="8 8" stroke-linecap="round"/>
+          <circle cx="300" cy="120" r="8" fill="#d0f600"/>
+          <path d="M470 136c-8 0-14 6-14 14 0 10 14 24 14 24s14-14 14-24c0-8-6-14-14-14z" fill="#d0f600"/><circle cx="470" cy="150" r="5" fill="#002e62"/>
+          <use href="#s-plane" x="70" y="20" width="300" height="112" transform="rotate(-10 220 76)"/>
+          <use href="#s-ship" x="300" y="248" width="300" height="98"/>
+          <use href="#s-truck" x="20" y="250" width="300" height="127"/>
+          <use href="#s-box" x="250" y="346" width="78" height="70"/><use href="#s-box" x="318" y="356" width="70" height="63"/><use href="#s-box" x="284" y="318" width="64" height="58"/>
+          <ellipse cx="300" cy="420" rx="260" ry="8" fill="#002e62" fill-opacity=".08"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section band-soft" id="kontak" aria-labelledby="kontak-title">
+    <div class="container contact-grid">
+      <div class="contact-copy reveal">
+        <p class="eyebrow">Ceritakan kebutuhan Anda</p>
+        <h2 id="kontak-title">Punya rencana import?<br><span class="hl">Kita bahas dari sini.</span></h2>
+        <p class="lead">Mau tanya produk, ongkos, atau masih menimbang? Tulis saja, tim kami bantu jelaskan.</p>
+        <ul class="contact-list">
+          <li><svg class="ic"><use href="#i-wa"/></svg><div><small>WhatsApp konsultasi</small><b id="c-wa"><span class="ph">isi nomor WhatsApp</span></b></div></li>
+          <li><svg class="ic"><use href="#i-mail"/></svg><div><small>Email</small><b id="c-email"><span class="ph">isi email</span></b></div></li>
+          <li><svg class="ic"><use href="#i-ig"/></svg><div><small>Instagram</small><b id="c-ig"><span class="ph">isi akun Instagram</span></b></div></li>
+          <li><svg class="ic"><use href="#i-pin"/></svg><div><small>Alamat</small><b><span class="ph" data-key="address">isi alamat kantor</span></b></div></li>
+          <li><svg class="ic"><use href="#i-clock"/></svg><div><small>Jam layanan</small><b><span class="ph" data-key="hours">isi jam layanan</span></b></div></li>
+        </ul>
+      </div>
+      <div class="form-card reveal">
+        <form id="contact-form" novalidate>
+          <h3>Apa yang mau Anda import?</h3>
+          <p>Isi singkat saja. Pesannya bisa Anda cek dulu sebelum dikirim lewat WhatsApp.</p>
+          <div class="form-grid">
+            <div class="field"><label for="f-name">Nama Anda</label><input id="f-name" name="name" type="text" autocomplete="name" placeholder="Nama lengkap" required><span class="err" id="e-name" hidden></span></div>
+            <div class="field"><label for="f-intent">Saya membutuhkan</label>
+              <select id="f-intent" name="intent">
+                <option>Titip Beli</option><option>Titip Kirim</option><option>OEM / ODM</option><option>Pengadaan</option><option>Masih bingung, butuh saran</option>
+              </select>
+            </div>
+            <div class="field"><label for="f-need">Ceritakan kebutuhan Anda</label><textarea id="f-need" name="need" placeholder="Jenis produk, jumlah, link produk, atau rencana pengiriman" required></textarea><span class="err" id="e-need" hidden></span></div>
+            <div class="field"><label for="f-city">Kota tujuan <span>(opsional)</span></label><input id="f-city" name="city" type="text" autocomplete="address-level2" placeholder="Contoh: Makassar"></div>
+            <button class="btn btn-blue" type="submit">Siapkan Pesan WhatsApp <svg class="ic"><use href="#i-arrow-r"/></svg></button>
+            <p class="fine"><svg class="ic"><use href="#i-lock"/></svg>Pesan baru terkirim setelah Anda menekan kirim di WhatsApp.</p>
+          </div>
+        </form>
+        <div class="form-step" id="form-step" hidden>
+          <h3 tabindex="-1" id="step-title">Pesan Anda siap.</h3>
+          <p>Periksa ringkasannya. Anda masih bisa mengubah teksnya di bawah.</p>
+          <div class="form-grid">
+            <div class="field"><label for="f-message">Isi pesan</label><textarea id="f-message"></textarea></div>
+            <p class="notice" id="wa-missing" hidden>Nomor WhatsApp Arenka belum diisi di pengaturan halaman, jadi tombol di bawah belum aktif.</p>
+            <div class="form-actions">
+              <a class="btn btn-lime" id="wa-go" href="#kontak" target="_blank" rel="noopener">Lanjut ke WhatsApp <svg class="ic"><use href="#i-arrow-ur"/></svg></a>
+              <button class="btn-text" type="button" id="form-back">Ubah kebutuhan</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer on-dark">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <svg class="logo logo-light" viewBox="0 0 172 40" role="img" aria-label="Arenka Logistics">
+          <path d="M3 35L16.5 5h7.4L37.4 35h-7.6L20.2 13.4 10.6 35z" fill="var(--logo-ink)"/>
+          <path d="M9.5 24.5h24.8l4.7 3.6-4.7 3.6H6.4z" fill="#d0f600"/>
+          <text x="46" y="24" font-family="Inter,Arial,sans-serif" font-size="21" font-weight="800" letter-spacing="-.4" fill="var(--logo-ink)">ARENKA</text>
+          <text x="47" y="35.5" font-family="Inter,Arial,sans-serif" font-size="7.4" font-weight="650" letter-spacing="2.9" fill="var(--logo-sub)">LOGISTICS</text>
+        </svg>
+        <p>Mitra perjalanan import<br>untuk usaha Anda.</p>
+        <a class="link-arrow" href="#kontak" data-login>Masuk ke dashboard <svg class="ic"><use href="#i-arrow-ur"/></svg></a>
+      </div>
+      <div><h3>Layanan</h3><ul><li><a href="#titip-beli">Titip Beli</a></li><li><a href="#titip-kirim">Titip Kirim</a></li><li><a href="#titip-beli">OEM / ODM</a></li><li><a href="#titip-beli">Pengadaan</a></li></ul></div>
+      <div><h3>Perusahaan</h3><ul><li><a href="#kenapa">Kenapa Arenka</a></li><li><a href="#testimoni">Cerita Pelanggan</a></li><li><a href="#kontak">Hubungi Kami</a></li></ul></div>
+      <div><h3>Bantuan</h3><ul><li><a href="#cara-kerja">Cara Kerja</a></li><li><a href="#faq">Pertanyaan Umum</a></li><li><a href="#kontak" data-wa="Halo Arenka, saya mau konsultasi gratis.">Konsultasi Gratis</a></li></ul></div>
+      <div><h3>Legal &amp; Kontak</h3><ul><li><a href="#kontak">Syarat &amp; Ketentuan</a></li><li><a href="#kontak">Kebijakan Privasi</a></li><li><a href="#kontak">Refund &amp; Retur</a></li><li id="f-email"><span class="ph">isi email</span></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Arenka. Semua hak dilindungi.</span>
+      <button class="motion-toggle" type="button" id="motion-toggle" aria-pressed="false"><svg class="ic"><use href="#i-pause"/></svg><span>Jeda animasi</span></button>
+    </div>
+  </div>
+</footer>
+
+<button class="launcher" type="button" id="help-launcher" aria-haspopup="dialog" aria-controls="help">
+  <span class="wa-dot"><svg class="ic"><use href="#i-wa"/></svg></span>
+  <span class="l-text"><b>Konsultasi gratis</b><small>Sekarang <svg class="ic"><use href="#i-arrow-ur"/></svg></small></span>
+  <span class="sr-only">Buka obrolan konsultasi</span>
+</button>
+
+<dialog class="help" id="help" aria-labelledby="help-title">
+  <div class="help-head">
+    <span class="avatar" aria-hidden="true">AR</span>
+    <div><h2 id="help-title">Tim Arenka</h2><p>Konsultasi import · Gratis</p></div>
+    <button class="icon-btn" type="button" aria-label="Tutup obrolan" data-close-dialog><svg class="ic"><use href="#i-x"/></svg></button>
+  </div>
+  <div class="help-body">
+    <span class="day">MULAI OBROLAN</span>
+    <p class="bubble-msg">Halo! 👋 Sedang cari info soal <b>import dari China?</b></p>
+    <p class="bubble-msg">Ceritakan barang yang Anda cari atau supplier yang sudah Anda punya. Kami bantu tentukan langkah berikutnya.</p>
+    <p class="bubble-msg">Tulis pertanyaan di bawah, lalu kita lanjutkan di <b>WhatsApp</b>.</p>
+    <div class="quick">
+      <button type="button" data-quick="Halo Arenka, saya mau Titip Beli.">Mau titip beli</button>
+      <button type="button" data-quick="Halo Arenka, saya sudah punya supplier dan butuh pengiriman ke Indonesia.">Sudah punya supplier</button>
+      <button type="button" data-quick="Halo Arenka, saya mau tanya perkiraan ongkos kirim dari China.">Tanya ongkos</button>
+    </div>
+  </div>
+  <div class="help-foot">
+    <div class="help-input">
+      <label class="sr-only" for="help-need">Pertanyaan Anda</label>
+      <textarea id="help-need" placeholder="Tulis pertanyaan Anda"></textarea>
+      <a class="send" id="help-send" href="#kontak" target="_blank" rel="noopener" aria-label="Lanjut ke WhatsApp"><svg class="ic"><use href="#i-send"/></svg></a>
+    </div>
+    <p class="fine" id="help-fine"><svg class="ic"><use href="#i-lock"/></svg>Lanjut ke WhatsApp. Pesan terkirim setelah Anda menekan kirim.</p>
+  </div>
+</dialog>
+
+<script>
+/* ============================================================
+   PENGATURAN ARENKA — isi nilai di bawah ini, semua placeholder
+   bertanda garis putus-putus di halaman akan terganti otomatis.
+   ============================================================ */
+const ARENKA = {
+  whatsapp: '',      // format internasional tanpa +, contoh '6281234567890'
+  email: '',         // contoh 'halo@arenka.co.id'
+  instagram: '',     // tanpa @, contoh 'arenka.id'
+  address: '',
+  hours: '',         // contoh 'Senin–Sabtu, 08.00–17.00 WIB'
+  kurs: '',          // contoh '2.350'
+  loginUrl: '',      // tautan dashboard/login; kosong = arahkan ke bagian Kontak
+  coverage: '',      // contoh 'seluruh Indonesia'
+  reviewSource: '',  // contoh 'Google Maps'
+  stats: { orders: '', shipments: '', cities: '', packages: '', customers: '', ontime: '', satisfaction: '' },
+  policy: { minBuy: '', minShip: '', etaAir: '', etaSea: '', payment: '', claim: '' },
+  testimonials: []   // { quote: '...', name: '...', city: '...' } — hanya ulasan asli
+};
+
+(() => {
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const store = {
+    get(k, area = 'localStorage') { try { return window[area].getItem(k); } catch { return null; } },
+    set(k, v, area = 'localStorage') { try { window[area].setItem(k, v); } catch {} }
+  };
+  const get = path => path.split('.').reduce((o, k) => (o == null ? o : o[k]), ARENKA);
+  const waNumber = String(ARENKA.whatsapp || '').replace(/\D/g, '');
+  const waUrl = text => waNumber ? `https://wa.me/${waNumber}?text=${encodeURIComponent(text)}` : '';
+
+  /* ---------- fill config values ---------- */
+  $$('[data-key]').forEach(el => {
+    const v = get(el.dataset.key);
+    if (v) { el.textContent = v; el.classList.remove('ph'); }
+  });
+  if (waNumber) {
+    const d = waNumber.replace(/^62(\d{3})(\d{4})(\d+)$/, '+62 $1-$2-$3');
+    $('#c-wa').innerHTML = `<a href="${waUrl('Halo Arenka')}" target="_blank" rel="noopener">${d} ↗</a>`;
+  }
+  if (ARENKA.email) { $('#c-email').textContent = ARENKA.email; $('#f-email').textContent = ARENKA.email; }
+  if (ARENKA.instagram) {
+    const ig = ARENKA.instagram.replace(/^@/, '');
+    $('#c-ig').innerHTML = `<a href="https://www.instagram.com/${encodeURIComponent(ig)}/" target="_blank" rel="noopener">@${ig} ↗</a>`;
+  }
+  $$('[data-wa]').forEach(a => {
+    const url = waUrl(a.dataset.wa);
+    if (url) { a.href = url; a.target = '_blank'; a.rel = 'noopener'; }
+  });
+  if (ARENKA.loginUrl) $$('[data-login]').forEach(a => { a.href = ARENKA.loginUrl; });
+  if (Array.isArray(ARENKA.testimonials) && ARENKA.testimonials.length) {
+    const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+    $('#testi-track').innerHTML = ARENKA.testimonials.map(t => {
+      const init = String(t.name || '?').split(/\s+/).map(w => w[0]).join('').slice(0, 2).toUpperCase();
+      return `<figure class="quote"><span class="quote-mark" aria-hidden="true">“</span><blockquote>${esc(t.quote)}</blockquote><figcaption><span class="avatar">${esc(init)}</span><span><b>${esc(t.name)}</b><small>${esc(t.city || '')}</small></span></figcaption></figure>`;
+    }).join('');
+  }
+
+  /* ---------- ship container stacks (one symbol, reused) ---------- */
+  const palette = ['#0b4589', '#ffffff', '#d0f600', '#8ea4c0', '#1d5fa8', '#e6edf6'];
+  let stacks = '';
+  for (let tier = 0; tier < 3; tier++) {
+    for (let col = 0; col < 9; col++) {
+      if (tier === 2 && (col === 0 || col === 8)) continue;
+      const c = palette[(col * 2 + tier * 3) % palette.length];
+      stacks += `<use href="#s-cont" x="${100 + col * 44}" y="${86 - tier * 18}" width="42" height="18" style="color:${c}"/>`;
+    }
+  }
+  $('#ship-stacks').innerHTML = stacks;
+
+  /* ---------- motion pause ---------- */
+  const root = document.documentElement;
+  const motionBtn = $('#motion-toggle');
+  const setPaused = on => {
+    root.classList.toggle('paused', on);
+    motionBtn.setAttribute('aria-pressed', String(on));
+    motionBtn.querySelector('use').setAttribute('href', on ? '#i-play' : '#i-pause');
+    motionBtn.querySelector('span').textContent = on ? 'Putar animasi' : 'Jeda animasi';
+  };
+  setPaused(store.get('arenka-paused') === '1');
+  motionBtn.addEventListener('click', () => { const on = !root.classList.contains('paused'); setPaused(on); store.set('arenka-paused', on ? '1' : '0'); });
+  const motionOff = () => reduceMotion || root.classList.contains('paused');
+
+  /* ---------- hero rotating line ---------- */
+  const lines = [
+    'Sudah punya supplier? Kami urus pengirimannya.',
+    'Belum ketemu supplier? Kami bantu carikan.',
+    'Kiriman pertama atau rutin, alurnya tetap jelas.'
+  ];
+  const rot = $('#hero-rot');
+  let li = 0;
+  setInterval(() => {
+    if (motionOff() || document.hidden) return;
+    li = (li + 1) % lines.length;
+    rot.classList.remove('in'); void rot.offsetWidth;
+    rot.textContent = lines[li]; rot.classList.add('in');
+  }, 4800);
+
+  /* ---------- dropdowns ---------- */
+  const dds = $$('.dd');
+  dds.forEach(d => d.addEventListener('toggle', () => { if (d.open) dds.forEach(o => o !== d && (o.open = false)); }));
+  document.addEventListener('click', e => { dds.forEach(d => { if (d.open && !d.contains(e.target)) d.open = false; }); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') dds.forEach(d => { if (d.open) { d.open = false; d.querySelector('summary').focus(); } }); });
+  $$('.dd a').forEach(a => a.addEventListener('click', () => dds.forEach(d => (d.open = false))));
+
+  /* ---------- dialogs (drawer + help) ---------- */
+  const drawer = $('#drawer');
+  $('[data-open-drawer]').addEventListener('click', () => drawer.showModal());
+  $$('#drawer a').forEach(a => a.addEventListener('click', () => drawer.close()));
+  $$('[data-close-dialog]').forEach(b => b.addEventListener('click', () => b.closest('dialog').close()));
+  $$('dialog').forEach(dlg => dlg.addEventListener('click', e => { if (e.target === dlg) dlg.close(); }));
+
+  const help = $('#help');
+  const helpNeed = $('#help-need');
+  const helpSend = $('#help-send');
+  const syncHelp = () => {
+    const text = helpNeed.value.trim() || 'Halo Arenka, saya mau konsultasi soal import.';
+    const url = waUrl(text);
+    if (url) { helpSend.href = url; helpSend.removeAttribute('aria-disabled'); }
+    else { helpSend.href = '#kontak'; helpSend.setAttribute('aria-disabled', 'true'); }
+  };
+  if (!waNumber) $('#help-fine').lastChild.textContent = 'Nomor WhatsApp Arenka belum diisi di pengaturan halaman.';
+  helpNeed.addEventListener('input', syncHelp);
+  $$('[data-quick]').forEach(b => b.addEventListener('click', () => { helpNeed.value = b.dataset.quick; syncHelp(); helpNeed.focus(); }));
+  syncHelp();
+  const openHelp = () => { store.set('arenka-help-seen', '1', 'sessionStorage'); help.showModal(); };
+  $('#help-launcher').addEventListener('click', openHelp);
+  // offer help once per session, only after the visitor has read a while
+  let scrolled = false;
+  addEventListener('scroll', () => { if (scrollY > 700) scrolled = true; }, { passive: true });
+  setTimeout(function offer() {
+    if (store.get('arenka-help-seen', 'sessionStorage') || help.open || drawer.open) return;
+    if (document.hidden || !scrolled) { setTimeout(offer, 8000); return; }
+    openHelp();
+  }, 25000);
+
+  /* ---------- sliders ---------- */
+  const sliders = $$('[data-slider]').map(rootEl => {
+    const track = $('.slider-track', rootEl);
+    const prev = $('[data-prev]', rootEl), next = $('[data-next]', rootEl), status = $('[data-status]', rootEl);
+    const items = () => [...track.children];
+    const stride = () => { const it = items(); return it.length > 1 ? it[1].offsetLeft - it[0].offsetLeft : track.clientWidth; };
+    const scrollable = () => track.scrollWidth > track.clientWidth + 4;
+    const atEnd = () => track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
+    const update = () => {
+      const n = items().length, s = stride() || 1;
+      const i = Math.round(track.scrollLeft / s);
+      const vis = Math.max(1, Math.round(track.clientWidth / s));
+      if (status) status.textContent = scrollable() ? (vis > 1 ? `${i + 1}–${Math.min(n, i + vis)} / ${n}` : `${i + 1} / ${n}`) : '';
+      if (prev) prev.disabled = !scrollable() || track.scrollLeft <= 4;
+      if (next) next.disabled = !scrollable() || atEnd();
+    };
+    const move = dir => track.scrollBy({ left: dir * stride(), behavior: reduceMotion ? 'auto' : 'smooth' });
+    prev && prev.addEventListener('click', () => move(-1));
+    next && next.addEventListener('click', () => move(1));
+    track.addEventListener('scroll', () => requestAnimationFrame(update), { passive: true });
+    addEventListener('resize', update);
+    update();
+    return { rootEl, track, move, atEnd, update, scrollable };
+  });
+
+  // testimonials autoplay
+  const auto = sliders.find(s => s.rootEl.hasAttribute('data-autoplay'));
+  if (auto) {
+    const pauseBtn = $('[data-pause]', auto.rootEl);
+    let userPaused = false, hover = false;
+    pauseBtn.addEventListener('click', () => {
+      userPaused = !userPaused;
+      pauseBtn.setAttribute('aria-pressed', String(userPaused));
+      pauseBtn.setAttribute('aria-label', userPaused ? 'Putar otomatis' : 'Jeda putar otomatis');
+      pauseBtn.querySelector('use').setAttribute('href', userPaused ? '#i-play' : '#i-pause');
+    });
+    ['mouseenter', 'focusin'].forEach(ev => auto.rootEl.addEventListener(ev, () => (hover = true)));
+    ['mouseleave', 'focusout'].forEach(ev => auto.rootEl.addEventListener(ev, () => (hover = false)));
+    setInterval(() => {
+      if (userPaused || hover || motionOff() || document.hidden || !auto.scrollable()) return;
+      if (auto.atEnd()) auto.track.scrollTo({ left: 0, behavior: 'smooth' }); else auto.move(1);
+    }, 5200);
+  }
+
+  /* ---------- process tabs ---------- */
+  const steps = {
+    kirim: [
+      ['v-marking', 'Marking · Gudang China', 'Supplier kirim ke gudang kami', 'Pastikan setiap karton diberi kode marking Anda sebelum dikirim.'],
+      ['v-warehouse', 'Penerimaan · Pemeriksaan', 'Diterima dan diperiksa', 'Barang dihitung, dicek kondisinya, lalu digabung jadi satu kiriman.'],
+      ['v-quote', 'Timbang · Konfirmasi', 'Biaya dikonfirmasi', 'Ongkos dihitung dari berat dan volume aktual, lalu menunggu persetujuan Anda.'],
+      ['v-transit', 'Laut / Udara · Bea cukai', 'Berangkat ke Indonesia', 'Barang dikirim lewat jalur pilihan. Proses bea cukai kami tangani.'],
+      ['v-door', 'Pembayaran · Pengantaran', 'Lunasi dan terima', 'Selesaikan pembayaran, lalu barang diantar ke alamat Anda.']
+    ],
+    beli: [
+      ['v-link', 'Link · Kebutuhan', 'Kirim link atau spesifikasi', 'Bagikan link produk, jumlah, dan varian yang Anda inginkan.'],
+      ['v-quote', 'Penawaran · Persetujuan', 'Terima penawaran', 'Kami cek harga dan stok ke penjual, lalu kirim rincian biayanya.'],
+      ['v-warehouse', 'Pembelian · Pemeriksaan', 'Kami belikan dan cek', 'Pesanan dibayar ke penjual, lalu diperiksa saat tiba di gudang.'],
+      ['v-transit', 'Laut / Udara · Bea cukai', 'Berangkat ke Indonesia', 'Barang dikirim sesuai jalur pilihan, termasuk pengurusan bea cukai.'],
+      ['v-door', 'Pengantaran', 'Barang sampai', 'Kiriman diantar ke alamat Anda, statusnya bisa dicek dari akun.']
+    ]
+  };
+  const stepsEl = $('#steps');
+  const panel = $('#steps-panel');
+  const renderSteps = kind => {
+    stepsEl.innerHTML = steps[kind].map(([art, meta, title, text], i) => `
+      <li class="step">
+        <div class="step-media"><svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><use href="#${art}"/></svg><span class="step-no">0${i + 1}</span></div>
+        <small>${meta}</small><h3>${title}</h3><p>${text}</p>
+      </li>`).join('');
+    stepsEl.classList.remove('swap'); void stepsEl.offsetWidth; stepsEl.classList.add('swap');
+  };
+  const tabs = $$('[data-process]');
+  const selectTab = (btn, focus) => {
+    tabs.forEach(t => { const on = t === btn; t.setAttribute('aria-selected', String(on)); t.tabIndex = on ? 0 : -1; });
+    panel.setAttribute('aria-labelledby', btn.id);
+    renderSteps(btn.dataset.process);
+    if (focus) btn.focus();
+  };
+  tabs.forEach((t, i) => {
+    t.addEventListener('click', () => selectTab(t));
+    t.addEventListener('keydown', e => {
+      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+      e.preventDefault();
+      selectTab(tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length], true);
+    });
+  });
+  renderSteps('kirim');
+
+  /* ---------- count-up + reveal ---------- */
+  const countUp = el => {
+    const raw = el.textContent.trim();
+    const m = raw.match(/^([^\d]*)([\d.,]+)(.*)$/);
+    if (!m || el.querySelector('.ph') || motionOff()) return;
+    const [, pre, numStr, post] = m;
+    const target = parseFloat(numStr.replace(/\./g, '').replace(',', '.'));
+    if (!isFinite(target)) return;
+    const decimals = (numStr.split(',')[1] || '').length;
+    const fmt = v => pre + v.toLocaleString('id-ID', { minimumFractionDigits: decimals, maximumFractionDigits: decimals }) + post;
+    const t0 = performance.now(), dur = 1200;
+    const step = now => { const p = Math.min(1, (now - t0) / dur); el.textContent = fmt(target * (1 - Math.pow(1 - p, 3))); if (p < 1) requestAnimationFrame(step); else el.textContent = raw; };
+    requestAnimationFrame(step);
+  };
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(entries => entries.forEach(en => {
+      if (!en.isIntersecting) return;
+      const el = en.target;
+      if (el.hasAttribute('data-count')) countUp(el); else if (!motionOff()) el.classList.add('is-in');
+      io.unobserve(el);
+    }), { threshold: .2 });
+    const fold = innerHeight;
+    $$('.reveal').forEach(el => { if (el.getBoundingClientRect().top > fold) io.observe(el); });
+    $$('[data-count]').forEach(el => io.observe(el));
+  }
+
+  /* ---------- contact form → WhatsApp ---------- */
+  const form = $('#contact-form'), stepBox = $('#form-step'), msg = $('#f-message'), go = $('#wa-go');
+  const requireTrimmed = (input, errEl, text) => {
+    const ok = input.value.trim().length > 0;
+    errEl.hidden = ok; errEl.textContent = ok ? '' : text;
+    input.setAttribute('aria-invalid', String(!ok));
+    if (!ok) input.setAttribute('aria-describedby', errEl.id); else input.removeAttribute('aria-describedby');
+    return ok;
+  };
+  const syncGo = () => {
+    const url = waUrl(msg.value);
+    $('#wa-missing').hidden = !!url;
+    if (url) { go.href = url; go.removeAttribute('aria-disabled'); go.style.pointerEvents = ''; go.style.opacity = ''; }
+    else { go.href = '#kontak'; go.setAttribute('aria-disabled', 'true'); go.style.pointerEvents = 'none'; go.style.opacity = '.5'; }
+  };
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const okName = requireTrimmed($('#f-name'), $('#e-name'), 'Tulis nama Anda dulu.');
+    const okNeed = requireTrimmed($('#f-need'), $('#e-need'), 'Ceritakan singkat barang atau rencana Anda.');
+    if (!okName) { $('#f-name').focus(); return; }
+    if (!okNeed) { $('#f-need').focus(); return; }
+    const city = $('#f-city').value.trim();
+    msg.value = [
+      `Halo Arenka, saya ${$('#f-name').value.trim()}.`,
+      `Saya membutuhkan: ${$('#f-intent').value}.`,
+      `Kebutuhan: ${$('#f-need').value.trim()}`,
+      city ? `Kota tujuan: ${city}` : ''
+    ].filter(Boolean).join('\n');
+    syncGo();
+    form.hidden = true; stepBox.hidden = false; $('#step-title').focus();
+  });
+  msg.addEventListener('input', syncGo);
+  $('#form-back').addEventListener('click', () => { stepBox.hidden = true; form.hidden = false; $('#f-need').focus(); });
+})();
+</script>
+
+</body>
+</html>
