@@ -30,6 +30,9 @@ Memindahkan website Arenka Logistics ke Astro + EmDash CMS di Cloudflare Workers
 - Backup D1 pra-migrasi ada di `%TEMP%\arenka-before-migrations-20261111.sql` (mesin lokal, bukan di repo).
 - `INDEXING_ENABLED=true` di `wrangler.jsonc` agar halaman indexable (robots index,follow + `X-Robots-Tag` dilepas untuk produksi).
 - Perbaikan 404: `src/middleware.ts` dan `src/pages/index.astro` semula memakai `Astro.locals.runtime.env` yang sudah dihapus di Astro v6+, menyebabkan semua route render error lalu 404. Diganti ke `import { env } from "cloudflare:workers"` lalu di-deploy ulang (Version ID `86cc7a52-631c-4f14-babb-d0d171c7278a`).
+- Setup Wizard EmDash SELESAI (2026-11-12): `emdash:setup_complete` dan `emdash:seed_complete` = true. Admin dibuat (`restupambudi1991@gmail.com`, role 50). Site title/tagline/logo tersimpan; logo terunggah ke R2 (upload media terverifikasi). Cron scheduler berjalan.
+- Verifikasi live (HTTPS 200): homepage render penuh, `www` 301 ke apex, `/_emdash/admin/` 302 ke `/login` (butuh login), `robots.txt` & `sitemap.xml` 200. Situs TERBIT di https://arenkalogistics.com.
+- Catatan: EmDash 1.5.0 sudah rilis (project memakai 1.4.0). Upgrade opsional via `emdash` + deploy ulang.
 
 ## Menjalankan migrasi EmDash (untuk agen berikutnya)
 
@@ -47,9 +50,9 @@ Target fingerprint: `6801293a482d45cc936fde5d9128a429eaf87b2ef959c59339a019fa857
 
 ## Langkah berikutnya (TODO)
 
-1. Verifikasi HTTPS akhir setelah deploy perbaikan env: pastikan `https://arenkalogistics.com/` (homepage) dan `https://arenkalogistics.com/_emdash/admin/` tidak lagi 404. Pemeriksaan terakhir terputus oleh limit; perlu diulang. Catatan: koneksi HTTPS dari shell Windows sesi ini sempat gagal (Schannel `SEC_E_NO_CREDENTIALS`) — gunakan `node -e "fetch(...)"` atau browser.
-2. Selesaikan Setup Wizard EmDash di `/_emdash/admin` untuk membuat akun admin pertama + passkey (database saat ini 0 user). Setelah migrasi, error "Database migrations are required" sudah hilang.
-3. Lanjutkan penyesuaian struktur untuk SEO/GEO/AEO sesuai dokumentasi Google (schema/structured data, sitemap, metadata) tanpa mengubah tampilan.
+1. (SELESAI) Verifikasi HTTPS: homepage & admin tidak lagi 404; situs live. Catatan: HTTPS dari shell Windows sesi ini bisa gagal (Schannel `SEC_E_NO_CREDENTIALS`) — pakai `node -e "fetch(...)"` atau browser.
+2. (SELESAI) Setup Wizard EmDash: admin & seed selesai, situs terbit.
+3. Lanjutkan penyesuaian struktur untuk SEO/GEO/AEO tanpa mengubah tampilan: structured data JSON-LD (Organization/LocalBusiness + WebSite) di homepage, lengkapi Open Graph/Twitter, isi sitemap setelah ada artikel.
 
 ## Catatan paket gratis
 
