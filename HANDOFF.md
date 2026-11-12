@@ -57,3 +57,10 @@ Target fingerprint: `6801293a482d45cc936fde5d9128a429eaf87b2ef959c59339a019fa857
 ## Catatan paket gratis
 
 - D1 free: 5 GB total, 5 juta baris baca/hari, 100k tulis/hari. R2 free: 10 GB-bulan, 1M Class A, 10M Class B/bulan. KV free untuk sesi. Semua masuk free plan. R2 sudah diaktifkan oleh pemilik akun.
+
+## Perekaman lead form ke Google Sheet
+
+- Spreadsheet `Form Arenkalogistics` id `1c_k05AK0fuHD85tj388Y74ue4IEiXQ5wlqUZxOBOkOE`, tab `Sheet1`. Header kolom A–K: Waktu, Lead ID, Status, Nama, Layanan, Kebutuhan, Kota tujuan, Pesan WhatsApp, Halaman, Referrer, User Agent.
+- Form homepage (`src/home.html`) mengirim snapshot ke `ARENKA.leadSheetUrl` (Apps Script Web App). Perekaman bertahap: status `mengisi` (debounce input), `ditinggalkan` (sendBeacon saat tab ditutup), `siap-wa` (submit), `lanjut-wa` (klik tombol WhatsApp). Upsert berdasarkan Lead ID → satu baris per pengunjung yang terus diperbarui, jadi pengisian belum selesai tetap terekam.
+- Skrip penerima: `emdash-starter/apps-script-lead-form.gs`. Pemilik Google deploy sekali sebagai Web App (Execute as Me, Who has access: Anyone), lalu URL `/exec` dimasukkan ke `ARENKA.leadSheetUrl` di `src/home.html` dan deploy ulang.
+- Status saat ini: kolom + logika frontend sudah live (Version `6dcd7040`). Menunggu URL Apps Script dari pemilik untuk mengaktifkan penulisan ke Sheet. Saat `leadSheetUrl` kosong, perekaman mati otomatis (form WhatsApp tetap jalan).

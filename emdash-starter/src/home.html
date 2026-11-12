@@ -1256,6 +1256,7 @@ const ARENKA = {
   hours: '08.00–16.00',         // contoh 'Senin–Sabtu, 08.00–17.00 WIB'
   kurs: '',          // contoh '2.350'
   loginUrl: '',      // tautan dashboard/login; kosong = arahkan ke bagian Kontak
+  leadSheetUrl: '', // URL Web App Apps Script Google Sheet (kosong = rekam lead dimatikan)
   coverage: '',      // contoh 'seluruh Indonesia'
   reviewSource: '',  // contoh 'Google Maps'
   stats: { orders: '', shipments: '', cities: '', packages: '', customers: '', ontime: '', satisfaction: '' },
@@ -1495,6 +1496,29 @@ const ARENKA = {
 
   /* ---------- contact form → WhatsApp ---------- */
   const form = $('#contact-form'), stepBox = $('#form-step'), msg = $('#f-message'), go = $('#wa-go');
+  const leadUrl = ARENKA.leadSheetUrl || '';
+  let leadId = '';
+  try { leadId = sessionStorage.getItem('arenka-lead-id') || ''; } catch {}
+  if (!leadId) { leadId = (crypto.randomUUID ? crypto.randomUUID() : 'lead-' + Date.now().toString(36) + Math.random().toString(36).slice(2)); try { sessionStorage.setItem('arenka-lead-id', leadId); } catch {} }
+  let leadSubmitted = false;
+  const leadSnapshot = status => ({ leadId, status, name: ($('#f-name').value || '').trim(), intent: $('#f-intent').value || '', need: ($('#f-need').value || '').trim(), city: ($('#f-city').value || '').trim(), message: (msg.value || '').trim(), page: location.href, referrer: document.referrer || '', ua: navigator.userAgent || '' });
+  const leadHasContent = s => s.name.length > 0 || s.need.length > 0 || s.city.length > 0 || s.message.length > 0;
+  const sendLead = (status, beacon) => {
+    if (!leadUrl) return;
+    const snap = leadSnapshot(status);
+    if (!leadHasContent(snap)) return;
+    const body = JSON.stringify(snap);
+    try {
+      if (beacon && navigator.sendBeacon) { navigator.sendBeacon(leadUrl, new Blob([body], { type: 'text/plain;charset=UTF-8' })); return; }
+      fetch(leadUrl, { method: 'POST', mode: 'no-cors', keepalive: true, headers: { 'Content-Type': 'text/plain;charset=UTF-8' }, body: body });
+    } catch {}
+  };
+  let leadTimer = 0;
+  const queueLead = () => { clearTimeout(leadTimer); leadTimer = setTimeout(() => sendLead('mengisi'), 1200); };
+  ['#f-name', '#f-intent', '#f-need', '#f-city'].forEach(sel => { const el = $(sel); if (!el) return; el.addEventListener('input', queueLead); el.addEventListener('change', () => sendLead('mengisi')); });
+  const leadFlushAbandon = () => { if (!leadSubmitted) sendLead('ditinggalkan', true); };
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') leadFlushAbandon(); });
+  window.addEventListener('pagehide', leadFlushAbandon);
   const requireTrimmed = (input, errEl, text) => {
     const ok = input.value.trim().length > 0;
     errEl.hidden = ok; errEl.textContent = ok ? '' : text;
@@ -1522,9 +1546,11 @@ const ARENKA = {
       city ? `Kota tujuan: ${city}` : ''
     ].filter(Boolean).join('\n');
     syncGo();
+    leadSubmitted = true; sendLead('siap-wa');
     form.hidden = true; stepBox.hidden = false; $('#step-title').focus();
   });
   msg.addEventListener('input', syncGo);
+  go.addEventListener('click', () => sendLead('lanjut-wa'));
   $('#form-back').addEventListener('click', () => { stepBox.hidden = true; form.hidden = false; $('#f-need').focus(); });
 })();
 </script>
