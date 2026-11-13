@@ -183,7 +183,7 @@ h4{font-size:19px;letter-spacing:-.02em}
 .service-card.flip .svc-media{order:2}
 .service-card>*{min-width:0}
 .svc-media{position:relative;min-height:420px;background:var(--heritage-deep);overflow:hidden}
-.svc-media svg{position:absolute;inset:0;width:100%;height:100%}
+.svc-media svg,.svc-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .svc-media::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,22,48,.9) 0%,rgba(0,22,48,.35) 38%,transparent 62%)}
 .svc-caption{position:absolute;left:30px;right:30px;bottom:28px;z-index:1;display:grid;gap:12px;justify-items:start}
 .tag{display:inline-block;padding:5px 10px;border-radius:4px;background:var(--lime);color:var(--heritage);font-size:11px;font-weight:800;letter-spacing:.12em}
@@ -817,17 +817,7 @@ html.paused *,html.paused *::before,html.paused *::after{animation-play-state:pa
 
       <article class="service-card reveal" id="titip-beli">
         <div class="svc-media">
-          <svg viewBox="0 0 560 560" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-            <rect width="560" height="560" fill="url(#g-deep)"/>
-            <g fill="#0f4a8f" opacity=".75"><rect x="0" y="120" width="560" height="10"/><rect x="0" y="260" width="560" height="10"/><rect x="0" y="400" width="560" height="10"/></g>
-            <use href="#s-box" x="20" y="64" width="62" height="56"/><use href="#s-box" x="86" y="64" width="62" height="56"/><use href="#s-box" x="420" y="64" width="62" height="56"/><use href="#s-box" x="486" y="64" width="62" height="56"/>
-            <use href="#s-box" x="430" y="204" width="62" height="56"/><use href="#s-box" x="40" y="204" width="62" height="56"/>
-            <use href="#s-phone" x="186" y="78" width="200" height="375"/>
-            <g transform="translate(372 150)"><rect width="92" height="38" rx="19" fill="#d0f600"/><text x="46" y="25" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="16" font-weight="800" fill="#002e62">1688</text></g>
-            <g transform="translate(392 204)"><rect width="104" height="34" rx="17" fill="#ffffff"/><text x="52" y="22" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="700" fill="#002e62">Taobao</text></g>
-            <g transform="translate(98 150)"><circle cx="34" cy="34" r="34" fill="#d0f600"/><path d="M16 22h5l5 22h20l4-15H23" fill="none" stroke="#002e62" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="30" cy="50" r="3" fill="#002e62"/><circle cx="44" cy="50" r="3" fill="#002e62"/></g>
-            <use href="#s-box" x="380" y="330" width="120" height="108"/><use href="#s-box" x="440" y="384" width="100" height="90"/>
-          </svg>
+          <img class="svc-photo" src="/assets/img/titip-beli.webp" width="1000" height="1250" loading="lazy" decoding="async" alt="Parsel belanja dari China dan aplikasi toko online di ponsel">
           <div class="svc-caption"><span class="tag">TITIP BELI</span><strong>Anda pilih barangnya.<br>Kami yang membelikan.</strong></div>
         </div>
         <div class="svc-body">
