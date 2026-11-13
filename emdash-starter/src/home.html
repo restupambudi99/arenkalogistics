@@ -214,7 +214,7 @@ h4{font-size:19px;letter-spacing:-.02em}
 .modes-head .row{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:16px 40px}
 .mode-card{display:flex;flex-direction:column;border-radius:16px;background:var(--white);overflow:hidden;box-shadow:var(--shadow);min-width:0}
 .mode-media{position:relative;aspect-ratio:16/8.4;max-width:100%;overflow:hidden;background:var(--heritage-deep)}
-.mode-media svg{position:absolute;inset:0;width:100%;height:100%}
+.mode-media svg,.mode-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .mode-media::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,22,48,.88),rgba(0,22,48,.15) 60%,transparent)}
 .mode-label{position:absolute;left:22px;bottom:16px;z-index:1;display:grid;gap:4px}
 .mode-label small{color:var(--lime);font-size:11px;font-weight:750;letter-spacing:.12em}
@@ -884,13 +884,7 @@ html.paused *,html.paused *::before,html.paused *::after{animation-play-state:pa
           <div class="slider-track">
             <article class="mode-card">
               <div class="mode-media">
-                <svg viewBox="0 0 400 210" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-                  <rect width="400" height="210" fill="url(#g-dusk)"/>
-                  <circle cx="300" cy="128" r="30" fill="#d0f600" fill-opacity=".9"/>
-                  <rect y="140" width="400" height="70" fill="#0b3466"/>
-                  <use href="#s-ship" x="40" y="74" width="300" height="98"/>
-                  <use href="#s-crane" x="300" y="40" width="96" height="140" style="color:#06213f"/>
-                </svg>
+                <img class="mode-photo" src="/assets/img/lcl.webp" width="1000" height="563" loading="lazy" decoding="async" alt="Truk Arenka Logistics dimuat kardus di gudang, siap dikirim">
                 <span class="mode-badge"><svg class="ic"><use href="#i-boxes"/></svg></span>
                 <div class="mode-label"><small>LAUT · BERBAGI KONTAINER</small><b>LCL</b></div>
               </div>
