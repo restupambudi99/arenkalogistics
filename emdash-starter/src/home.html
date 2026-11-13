@@ -472,7 +472,10 @@ html.paused *,html.paused *::before,html.paused *::after{animation-play-state:pa
   .hero-stats>div+div{padding-left:0;border-left:0}
 }
 @media (width >= 768px){
-  .static-lg .slider-track{grid-auto-flow:row;grid-template-columns:repeat(3,minmax(0,1fr));overflow:visible}
+  .static-lg .slider-track{grid-auto-flow:row;grid-template-columns:repeat(2,minmax(0,1fr));overflow:visible}
+}
+@media (width >= 1024px){
+  .static-lg .slider-track{grid-template-columns:repeat(4,minmax(0,1fr))}
 }
 @media (768px <= width < 1024px){
   .static-lg .benefit-track{grid-template-columns:1fr 1fr}
@@ -905,6 +908,14 @@ html.paused *,html.paused *::before,html.paused *::after{animation-play-state:pa
                 <div class="mode-label"><small>JALUR UDARA</small><b>Air Freight</b></div>
               </div>
               <div class="mode-body"><p>Butuh barang lebih cepat? Diskusikan opsi kargo udara dengan tim kami.</p><small>Jadwal dan tarif mengikuti jenis barang.</small></div>
+            </article>
+            <article class="mode-card">
+              <div class="mode-media">
+                <img class="mode-photo" src="/assets/img/trucking.webp" width="1000" height="525" loading="lazy" decoding="async" alt="Truk Arenka Logistics mengangkut peti kemas kayu untuk pengiriman proyek">
+                <span class="mode-badge"><svg class="ic"><use href="#i-truck"/></svg></span>
+                <div class="mode-label"><small>JALUR DARAT</small><b>Trucking</b></div>
+              </div>
+              <div class="mode-body"><p>Angkutan darat dalam negeri: dari pelabuhan atau gudang kami sampai lokasi tujuan Anda.</p><small>Cocok untuk kargo proyek dan distribusi antar kota.</small></div>
             </article>
           </div>
           <div class="slider-nav">
