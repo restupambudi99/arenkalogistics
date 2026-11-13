@@ -144,10 +144,10 @@ h4{font-size:19px;letter-spacing:-.02em}
 .hero::before{content:"";position:absolute;inset:0;z-index:-2;background:linear-gradient(90deg,rgba(245,249,253,.95) 0%,rgba(245,249,253,.84) 36%,rgba(245,249,253,.32) 60%,rgba(245,249,253,0) 100%),linear-gradient(0deg,rgba(230,240,250,.55),transparent 45%)}
 @keyframes hero-drift{from{transform:scale(1.02)}to{transform:scale(1.07) translate(-1%,0)}}
 .hero-inner{display:grid;gap:22px}
-.route{display:flex;align-items:center;gap:14px;color:var(--heritage);font-size:12px;font-weight:750;letter-spacing:.16em}
-.route .dot{width:9px;height:9px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 2px var(--heritage);animation:halo 2.4s ease-out infinite}
-.route-line{width:56px;height:2px;background:linear-gradient(90deg,var(--heritage),var(--lime));position:relative}
-.route-line::after{content:"";position:absolute;right:-2px;top:-3px;border:4px solid transparent;border-left:6px solid var(--lime)}
+.route{display:flex;align-items:center;gap:16px;color:var(--heritage);font-size:15px;font-weight:800;letter-spacing:.2em;margin-bottom:6px}
+.route .dot{width:12px;height:12px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 2px var(--heritage);animation:halo 2.4s ease-out infinite}
+.route-line{width:86px;height:3px;background:linear-gradient(90deg,var(--heritage),var(--lime));position:relative}
+.route-line::after{content:"";position:absolute;right:-3px;top:-5px;border:6px solid transparent;border-left:9px solid var(--lime)}
 @keyframes halo{0%{box-shadow:0 0 0 2px var(--heritage),0 0 0 0 rgba(208,246,0,.8)}100%{box-shadow:0 0 0 2px var(--heritage),0 0 0 12px rgba(208,246,0,0)}}
 .hero h1{line-height:1.02}
 .hero-sub{min-height:1.5em;font-size:clamp(19px,1.6vw,23px);font-weight:700;letter-spacing:-.02em;color:var(--heritage)}
@@ -787,7 +787,7 @@ html.paused *,html.paused *::before,html.paused *::after{animation-play-state:pa
     </svg>
     <div class="container hero-inner">
       <p class="route"><span class="dot" aria-hidden="true"></span>CHINA<span class="route-line" aria-hidden="true"></span>INDONESIA</p>
-      <h1 id="hero-title">Import dari China,<br><span class="hl">sampai alamat Anda.</span></h1>
+      <h1 id="hero-title">Import dari China,<br><span class="hl">beres sampai depan pintu.</span></h1>
       <p class="hero-sub"><span class="rot" id="hero-rot">Sudah punya supplier? Kami urus pengirimannya.</span></p>
       <p class="hero-lead">Tim Arenka menangani pembelian, pengecekan barang, pengiriman, dan bea cukai. Anda tinggal memantau prosesnya dari satu akun.</p>
       <div class="hero-cta">
