@@ -1,0 +1,229 @@
+---
+import { env } from "cloudflare:workers";
+const siteUrl = "https://arenkalogistics.com/dashboard";
+const enabled = env.INDEXING_ENABLED === "true";
+const wa = "6285216002219";
+const waHref = "https://wa.me/" + wa + "?text=" + encodeURIComponent("Halo Arenka, saya mau akses akun / dashboard member.");
+const member = "Member Arenka";
+const tx = [
+  { key: "total", label: "Total Transaksi", icon: "box" },
+  { key: "checkout", label: "Pesanan Siap Checkout", icon: "cart" },
+  { key: "unpaid", label: "Belum Bayar", icon: "wallet" },
+  { key: "process", label: "Proses", icon: "gear" },
+  { key: "approval", label: "Persetujuan Pengiriman", icon: "check" },
+  { key: "intl", label: "Pengiriman Internasional", icon: "ship" },
+  { key: "dom", label: "Pengiriman Domestik", icon: "truck" },
+  { key: "done", label: "Selesai", icon: "flag" },
+];
+---
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>Dashboard Member | Arenka Logistics</title>
+<meta name="description" content="Dashboard member Arenka Logistics: pantau Titip Beli, Titip Kirim, ringkasan transaksi, tagihan, dan kode marking dalam satu tempat." />
+<link rel="canonical" href={siteUrl} />
+<meta name="robots" content={enabled ? "noindex,follow" : "noindex"} />
+<meta name="theme-color" content="#002e62" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400..800&display=swap" />
+<style>
+:root{
+  --heritage:#002e62; --heritage-2:#0b4589; --heritage-deep:#001b3a;
+  --lime:#d0f600; --lime-edge:#a9c700; --ink:#17294a; --muted:#5a6b86;
+  --soft:#eef3f9; --soft-2:#e2eaf5; --line:#d4deeb; --white:#fff;
+  --font:"Inter","Segoe UI",Arial,sans-serif; --radius:16px;
+  --shadow:0 10px 30px rgba(0,27,58,.07); color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;font:400 15px/1.6 var(--font);color:var(--ink);background:var(--soft);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+svg{display:block}
+.ic{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+/* navbar */
+.nav{position:sticky;top:0;z-index:40;background:var(--white);border-bottom:1px solid var(--line)}
+.nav-top{display:flex;align-items:center;gap:18px;justify-content:flex-end;padding:7px 24px;border-bottom:1px solid var(--soft-2);font-size:13px;color:var(--muted);flex-wrap:wrap}
+.nav-top .kurs{margin-right:auto;font-weight:600;color:var(--heritage)}
+.nav-top .kurs b{color:var(--heritage)}
+.nav-top a:hover{color:var(--heritage)}
+.nav-main{display:flex;align-items:center;gap:22px;padding:12px 24px}
+.nav-main .links{display:flex;gap:20px;align-items:center;margin-left:8px}
+.nav-main .links a{font-weight:600;color:var(--ink);padding:6px 2px;border-bottom:2px solid transparent}
+.nav-main .links a.active{color:var(--heritage);border-color:var(--lime)}
+.nav-main .links a:hover{color:var(--heritage)}
+.nav-main .right{margin-left:auto;display:flex;align-items:center;gap:16px}
+.icon-btn{position:relative;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--white);display:grid;place-items:center;color:var(--heritage);font-size:18px;cursor:pointer}
+.icon-btn .dot{position:absolute;top:7px;right:8px;width:7px;height:7px;border-radius:50%;background:#e23b3b}
+.user{display:flex;align-items:center;gap:9px;padding:5px 12px 5px 6px;border:1px solid var(--line);border-radius:999px;background:var(--white);cursor:pointer}
+.user .av{width:30px;height:30px;border-radius:50%;background:var(--heritage);color:#fff;display:grid;place-items:center;font-weight:700;font-size:13px}
+.user span{font-weight:600;font-size:14px}
+/* layout */
+.wrap{max-width:1160px;margin:0 auto;padding:26px 24px 70px}
+.greet h1{margin:0;font-size:24px;font-weight:800;color:var(--heritage);letter-spacing:-.4px}
+.greet p{margin:6px 0 0;color:var(--muted)}
+.card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+.sec-head{margin:30px 0 14px}
+.sec-head h2{margin:0;font-size:19px;font-weight:800;color:var(--heritage)}
+.sec-head p{margin:4px 0 0;color:var(--muted);font-size:14px}
+/* marking */
+.marking{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px}
+.mark-item{display:flex;align-items:center;gap:14px;padding:18px;background:linear-gradient(135deg,var(--heritage),var(--heritage-deep));color:#fff;border-radius:var(--radius)}
+.mark-item .mi{flex:none;width:44px;height:44px;border-radius:12px;background:rgba(208,246,0,.16);color:var(--lime);display:grid;place-items:center;font-size:20px}
+.mark-item .lbl{font-size:12.5px;color:#aebfd6;text-transform:uppercase;letter-spacing:.6px}
+.mark-item .code{font-size:17px;font-weight:800;letter-spacing:.3px;margin:2px 0 7px}
+.mark-item .bar{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700;color:var(--heritage);background:var(--lime);padding:5px 11px;border-radius:999px;border:0;cursor:pointer}
+.note{margin-top:12px;font-size:13px;color:var(--muted);background:#fff7dd;border:1px solid #ecd98a;color:#6b5600;padding:10px 13px;border-radius:12px}
+.note a{font-weight:700;color:var(--heritage)}
+/* stat grid */
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.stat{padding:18px;position:relative}
+.stat .si{width:40px;height:40px;border-radius:11px;background:var(--soft);color:var(--heritage);display:grid;place-items:center;font-size:19px;margin-bottom:12px}
+.stat .num{font-size:30px;font-weight:800;color:var(--heritage);line-height:1}
+.stat .cap{margin:6px 0 10px;color:var(--muted);font-size:13.5px;min-height:34px}
+.stat .more{font-size:13px;font-weight:700;color:var(--heritage-2)}
+.stat .more:hover{text-decoration:underline}
+/* billing */
+.bill{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:14px;margin-top:4px}
+.bill .b{padding:18px}
+.bill .b.total{background:linear-gradient(135deg,var(--heritage),var(--heritage-2));color:#fff}
+.bill .b .t{font-size:13.5px;color:var(--muted)}
+.bill .b.total .t{color:#c3d0e2}
+.bill .b .v{font-size:24px;font-weight:800;margin-top:6px}
+.bill .b.total .more{display:inline-block;margin-top:10px;font-size:13px;font-weight:700;color:var(--lime)}
+/* empty */
+.empty{display:flex;flex-direction:column;align-items:center;text-align:center;padding:48px 20px}
+.empty .ei{width:64px;height:64px;border-radius:50%;background:var(--soft);color:var(--muted);display:grid;place-items:center;font-size:28px;margin-bottom:16px}
+.empty h3{margin:0 0 6px;font-size:17px;color:var(--heritage)}
+.empty p{margin:0;color:var(--muted);max-width:40ch}
+.empty .cta{margin-top:18px;display:inline-flex;align-items:center;gap:8px;background:var(--heritage);color:#fff;font-weight:700;padding:11px 18px;border-radius:12px}
+/* wa float */
+.wa{position:fixed;right:20px;bottom:20px;z-index:50;display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;font-weight:700;padding:12px 16px;border-radius:999px;box-shadow:0 8px 24px rgba(0,0,0,.18)}
+.foot{text-align:center;color:var(--muted);font-size:13px;padding:22px}
+@media (max-width:1000px){ .grid{grid-template-columns:repeat(2,1fr)} .bill{grid-template-columns:1fr 1fr} }
+@media (max-width:720px){
+  .nav-main .links{display:none}
+  .marking{grid-template-columns:1fr}
+  .user span{display:none}
+  .nav-top{justify-content:center}
+  .nav-top .kurs{margin-right:0;width:100%;text-align:center}
+}
+@media (max-width:460px){ .grid{grid-template-columns:1fr 1fr} .bill{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="nav-top">
+    <span class="kurs">Kurs hari ini &yen;1 = Rp <b data-kurs>&mdash;</b></span>
+    <a href="/#tentang">Tentang Kami</a>
+    <a href="/#cara-kerja">Cara Belanja</a>
+    <a href={waHref} target="_blank" rel="noopener">Kalkulator</a>
+    <a href="/#kontak">Pusat Bantuan</a>
+  </div>
+  <div class="nav-main">
+    <a href="/" aria-label="Arenka, beranda">
+      <svg height="30" viewBox="0 0 172 40" role="img" aria-label="Arenka Logistics">
+        <path d="M3 35L16.5 5h7.4L37.4 35h-7.6L20.2 13.4 10.6 35z" fill="#002e62"/>
+        <path d="M9.5 24.5h24.8l4.7 3.6-4.7 3.6H6.4z" fill="#d0f600"/>
+        <text x="46" y="24" font-family="Inter,Arial,sans-serif" font-size="21" font-weight="800" letter-spacing="-.4" fill="#002e62">ARENKA</text>
+        <text x="47" y="35.5" font-family="Inter,Arial,sans-serif" font-size="7.4" font-weight="650" letter-spacing="2.9" fill="#5a6b86">LOGISTICS</text>
+      </svg>
+    </a>
+    <nav class="links">
+      <a href="/dashboard" class="active">Dashboard</a>
+      <a href="/#titip-beli">Titip Beli</a>
+      <a href="/#titip-kirim">Titip Kirim</a>
+      <a href="/posts">Artikel</a>
+    </nav>
+    <div class="right">
+      <a class="icon-btn" href="/#kontak" aria-label="Keranjang"><svg class="ic" viewBox="0 0 24 24" style="font-size:18px"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg></a>
+      <button class="icon-btn" type="button" aria-label="Notifikasi"><span class="dot"></span><svg class="ic" viewBox="0 0 24 24" style="font-size:18px"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></button>
+      <button class="user" type="button" aria-label="Menu akun"><span class="av" data-initial>MA</span><span data-name>Hai, Member</span></button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="greet">
+    <h1>Hai, <span data-name-full>Member Arenka</span></h1>
+    <p>Berikut ini adalah rangkuman aktivitas logistik Anda untuk hari ini.</p>
+  </section>
+
+  <div class="marking">
+    <div class="mark-item">
+      <span class="mi"><svg class="ic" viewBox="0 0 24 24" style="font-size:20px"><path d="M3 17l9 4 9-4"/><path d="M3 12l9 4 9-4"/><path d="M12 3L3 7l9 4 9-4-9-4z"/></svg></span>
+      <div>
+        <div class="lbl">Pengiriman Laut</div>
+        <div class="code" data-mark-sea>DY/&#8212;/SEA</div>
+        <button class="bar" type="button">Lihat Barcode</button>
+      </div>
+    </div>
+    <div class="mark-item">
+      <span class="mi"><svg class="ic" viewBox="0 0 24 24" style="font-size:20px"><path d="M17.8 19.2 16 11l3.5-3.5a2.1 2.1 0 0 0-3-3L13 8 4.8 6.2a1 1 0 0 0-.9 1.7L9 11l-2 2-2.5-.5a1 1 0 0 0-.9 1.7L7 16l1.8 2.9a1 1 0 0 0 1.7-.9L10 15l2-2 2.4 5.1a1 1 0 0 0 1.7-.1z"/></svg></span>
+      <div>
+        <div class="lbl">Pengiriman Udara</div>
+        <div class="code" data-mark-air>SLC/&#8212;/AIR</div>
+        <button class="bar" type="button">Lihat Barcode</button>
+      </div>
+    </div>
+  </div>
+  <p class="note">Ini pratinjau dashboard member. Kode marking dan data transaksi akan aktif otomatis setelah akun login tersambung. Butuh bantuan sekarang? <a href={waHref} target="_blank" rel="noopener">Hubungi tim via WhatsApp &rarr;</a></p>
+
+  <div class="sec-head"><h2>Ringkasan Transaksi</h2><p>Pantau seluruh aktivitas pengirimanmu dalam satu tempat.</p></div>
+  <div class="grid">
+    {tx.map((s) => (
+      <div class="stat card">
+        <div class="si">
+          {s.icon === "box" && <svg class="ic" viewBox="0 0 24 24" style="font-size:19px"><path d="M21 16V8a2 2 0 0 0-1-1.7l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.7l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>}
+          {s.icon === "cart" && <svg class="ic" viewBox="0 0 24 24" style="font-size:19px"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>}
+          {s.icon === "wallet" && <svg class="ic" viewBox="0 0 24 24" style="font-size:19px"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><path d="M18 12a2 2 0 0 0 0 4h4v-4z"/></svg>}
+          {s.icon === "gear" && <svg class="ic" viewBox="0 0 24 24" style="font-size:19px"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-2.7 1.1V21a2 2 0 1 1-4 0v-.1A1.6 1.6 0 0 0 7 19.4a1.6 1.6 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0-1.1-2.7H1a2 2 0 1 1 0-4h.1A1.6 1.6 0 0 0 2.6 7a1.6 1.6 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1A1.6 1.6 0 0 0 7 2.6h.1A1.6 1.6 0 0 0 8 1.1V1a2 2 0 1 1 4 0v.1A1.6 1.6 0 0 0 15 2.6a1.6 1.6 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0 1.1 2.7h.2a2 2 0 1 1 0 4h-.1a1.6 1.6 0 0 0-1.4 1z"/></svg>}
+          {s.icon === "check" && <svg class="ic" viewBox="0 0 24 24" style="font-size:19px"><path d="M22 11.1V12a10 10 0 1 1-5.9-9.1"/><path d="m9 11 3 3L22 4"/></svg>}
+          {s.icon === "ship" && <svg class="ic" viewBox="0 0 24 24" style="font-size:19px"><path d="M2 21c1.7 0 1.7-1 3.3-1s1.7 1 3.4 1 1.7-1 3.3-1 1.7 1 3.3 1 1.7-1 3.4-1"/><path d="M4 18 2 14h20l-2 4"/><path d="M12 10V4"/><path d="M12 4H7l1 6"/></svg>}
+          {s.icon === "truck" && <svg class="ic" viewBox="0 0 24 24" style="font-size:19px"><path d="M1 3h15v13H1z"/><path d="M16 8h4l3 3v5h-7z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>}
+          {s.icon === "flag" && <svg class="ic" viewBox="0 0 24 24" style="font-size:19px"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><path d="M4 22V15"/></svg>}
+        </div>
+        <div class="num">0</div>
+        <div class="cap">{s.label}</div>
+        <a class="more" href={waHref} target="_blank" rel="noopener">Lihat Detail &rarr;</a>
+      </div>
+    ))}
+  </div>
+
+  <div class="sec-head"><h2>Ringkasan Tagihan</h2><p>Pantau dan kelola seluruh tagihan pengiriman Anda.</p></div>
+  <div class="bill">
+    <div class="b total card"><div class="t">Total Tagihan</div><div class="v">Rp 0</div><a class="more" href={waHref} target="_blank" rel="noopener">Lihat Detail &rarr;</a></div>
+    <div class="b card"><div class="t">Menunggu Pembayaran</div><div class="v">0</div></div>
+    <div class="b card"><div class="t">Pembayaran Kadaluarsa</div><div class="v">0</div></div>
+    <div class="b card"><div class="t">Sudah Dibayar</div><div class="v">0</div></div>
+  </div>
+
+  <div class="sec-head"><h2>Transaksi Terkini</h2><p>Lihat aktivitas kiriman terakhir yang kamu lakukan.</p></div>
+  <div class="card">
+    <div class="empty">
+      <span class="ei"><svg class="ic" viewBox="0 0 24 24" style="font-size:28px"><path d="M21 16V8a2 2 0 0 0-1-1.7l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.7l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg></span>
+      <h3>Belum Ada Transaksi</h3>
+      <p>Kamu belum melakukan aktivitas pengiriman. Silakan tambah kiriman untuk mulai.</p>
+      <a class="cta" href="/#kontak">Mulai Kiriman <svg class="ic" viewBox="0 0 24 24" style="font-size:16px"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+    </div>
+  </div>
+</main>
+
+<a class="wa" href={waHref} target="_blank" rel="noopener" aria-label="Chat WhatsApp">
+  <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347M12.05 21.785h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+  <span>WhatsApp</span>
+</a>
+<footer class="foot">Copyright &copy; 2026 Arenka Logistics | All Rights Reserved</footer>
+
+<script>
+  (async () => {
+    try {
+      var el = document.querySelector("[data-kurs]");
+      var res = await fetch("/api/kurs", { headers: { accept: "application/json" } });
+      if (res.ok) { var j = await res.json(); if (j && j.ok && j.kursText) el.textContent = j.kursText; }
+    } catch (e) {}
+  })();
+</script>
+</body>
+</html>
