@@ -1,0 +1,88 @@
+---
+import { env } from "cloudflare:workers";
+const siteUrl = "https://arenkalogistics.com/ketentuan";
+const enabled = env.INDEXING_ENABLED === "true";
+const updated = "16 November 2026";
+---
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>Ketentuan Layanan | Arenka Logistics</title>
+<meta name="description" content="Ketentuan Layanan penggunaan situs dan layanan Arenka Logistics, termasuk akun member, Titip Beli, dan Titip Kirim." />
+<link rel="canonical" href={siteUrl} />
+<meta name="robots" content={enabled ? "index,follow" : "noindex"} />
+<meta name="theme-color" content="#002e62" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400..800&display=swap" />
+<style>
+:root{--heritage:#002e62;--heritage-2:#0b4589;--lime:#d0f600;--ink:#17294a;--muted:#5a6b86;--soft:#eef3f9;--line:#d4deeb;--white:#fff;--font:"Inter","Segoe UI",Arial,sans-serif;color-scheme:light}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;font:400 16px/1.7 var(--font);color:var(--ink);background:var(--soft);-webkit-font-smoothing:antialiased}
+a{color:var(--heritage-2)}
+.top{background:var(--white);border-bottom:1px solid var(--line)}
+.top .in{max-width:860px;margin:0 auto;padding:14px 22px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.wrap{max-width:860px;margin:0 auto;padding:34px 22px 70px}
+.card{background:var(--white);border:1px solid var(--line);border-radius:18px;box-shadow:0 10px 30px rgba(0,27,58,.06);padding:34px 30px}
+h1{margin:0 0 6px;font-size:28px;font-weight:800;color:var(--heritage);letter-spacing:-.4px}
+.upd{color:var(--muted);font-size:14px;margin:0 0 22px}
+h2{font-size:19px;font-weight:800;color:var(--heritage);margin:26px 0 8px}
+p{margin:0 0 12px}
+ul{margin:0 0 12px;padding-left:20px}
+li{margin:4px 0}
+.back{display:inline-block;margin-top:8px;font-weight:600;text-decoration:none}
+.foot{max-width:860px;margin:0 auto;padding:18px 22px;color:var(--muted);font-size:13px;text-align:center}
+</style>
+</head>
+<body>
+<header class="top"><div class="in">
+  <a href="/" aria-label="Arenka, beranda"><svg height="28" viewBox="0 0 172 40" role="img" aria-label="Arenka Logistics"><path d="M3 35L16.5 5h7.4L37.4 35h-7.6L20.2 13.4 10.6 35z" fill="#002e62"/><path d="M9.5 24.5h24.8l4.7 3.6-4.7 3.6H6.4z" fill="#d0f600"/><text x="46" y="24" font-family="Inter,Arial,sans-serif" font-size="21" font-weight="800" letter-spacing="-.4" fill="#002e62">ARENKA</text><text x="47" y="35.5" font-family="Inter,Arial,sans-serif" font-size="7.4" font-weight="650" letter-spacing="2.9" fill="#5a6b86">LOGISTICS</text></svg></a>
+  <a href="/privasi">Kebijakan Privasi &rarr;</a>
+</div></header>
+<main class="wrap"><div class="card">
+  <h1>Ketentuan Layanan</h1>
+  <p class="upd">Terakhir diperbarui: {updated}</p>
+
+  <p>Dengan mengakses dan menggunakan situs <b>arenkalogistics.com</b> serta layanan Arenka Logistics, Anda menyetujui ketentuan berikut. Mohon dibaca dengan saksama.</p>
+
+  <h2>1. Tentang Layanan</h2>
+  <p>Arenka Logistics menyediakan layanan pembelian dan pengiriman barang dari China ke Indonesia, meliputi <b>Titip Beli</b>, <b>Titip Kirim</b>, pengiriman laut (LCL/FCL), udara, dan trucking. Detail, estimasi harga, dan jadwal dapat berbeda-beda tergantung jenis barang dan rute.</p>
+
+  <h2>2. Akun Member</h2>
+  <ul>
+    <li>Anda dapat membuat akun melalui login Google. Anda bertanggung jawab menjaga kerahasiaan akses akun Anda.</li>
+    <li>Anda setuju memberikan informasi yang benar dan akurat saat menggunakan layanan.</li>
+    <li>Kami berhak menangguhkan akun yang terindikasi melakukan penyalahgunaan atau pelanggaran hukum.</li>
+  </ul>
+
+  <h2>3. Pesanan, Harga &amp; Pembayaran</h2>
+  <ul>
+    <li>Estimasi harga bersifat perkiraan dan dapat berubah sesuai data akhir dari supplier (berat, dimensi, kurs, dan biaya terkait).</li>
+    <li>Kurs yang ditampilkan mengikuti kurs pasar dengan penyesuaian layanan dan dapat berubah sewaktu-waktu.</li>
+    <li>Pesanan diproses setelah konfirmasi dan/atau pembayaran sesuai kesepakatan.</li>
+  </ul>
+
+  <h2>4. Barang yang Dilarang</h2>
+  <p>Anda tidak diperbolehkan menitipkan pembelian atau pengiriman barang yang melanggar hukum Indonesia maupun negara asal, termasuk barang ilegal, berbahaya, atau yang dibatasi tanpa izin yang sah.</p>
+
+  <h2>5. Tanggung Jawab</h2>
+  <p>Kami berupaya menjalankan layanan dengan hati-hati dan transparan. Namun, Arenka Logistics tidak bertanggung jawab atas keterlambatan atau kendala yang disebabkan oleh pihak ketiga (supplier, bea cukai, maskapai/pelayaran) di luar kendali kami, selama telah ditangani dengan itikad baik.</p>
+
+  <h2>6. Kekayaan Intelektual</h2>
+  <p>Seluruh merek, logo, dan konten pada situs ini adalah milik Arenka Logistics dan tidak boleh digunakan tanpa izin tertulis.</p>
+
+  <h2>7. Perubahan Ketentuan</h2>
+  <p>Kami dapat memperbarui ketentuan ini sewaktu-waktu. Penggunaan layanan yang berlanjut setelah pembaruan berarti Anda menyetujui ketentuan terbaru.</p>
+
+  <h2>8. Hubungi Kami</h2>
+  <p>Email: <a href="mailto:arenkalogistics@gmail.com">arenkalogistics@gmail.com</a><br />
+  WhatsApp: <a href="https://wa.me/6285216002219" target="_blank" rel="noopener">+62 852-1600-2219</a><br />
+  Alamat: Jalan Anggrek No.1 Green De Jalen</p>
+
+  <a class="back" href="/">&larr; Kembali ke beranda</a>
+</div></main>
+<footer class="foot">Copyright &copy; 2026 Arenka Logistics | All Rights Reserved</footer>
+</body>
+</html>

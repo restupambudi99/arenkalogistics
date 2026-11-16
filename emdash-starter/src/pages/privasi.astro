@@ -1,0 +1,89 @@
+---
+import { env } from "cloudflare:workers";
+const siteUrl = "https://arenkalogistics.com/privasi";
+const enabled = env.INDEXING_ENABLED === "true";
+const updated = "16 November 2026";
+---
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>Kebijakan Privasi | Arenka Logistics</title>
+<meta name="description" content="Kebijakan Privasi Arenka Logistics: bagaimana kami mengumpulkan, menggunakan, dan melindungi data Anda, termasuk saat login dengan Google." />
+<link rel="canonical" href={siteUrl} />
+<meta name="robots" content={enabled ? "index,follow" : "noindex"} />
+<meta name="theme-color" content="#002e62" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400..800&display=swap" />
+<style>
+:root{--heritage:#002e62;--heritage-2:#0b4589;--lime:#d0f600;--ink:#17294a;--muted:#5a6b86;--soft:#eef3f9;--line:#d4deeb;--white:#fff;--font:"Inter","Segoe UI",Arial,sans-serif;color-scheme:light}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;font:400 16px/1.7 var(--font);color:var(--ink);background:var(--soft);-webkit-font-smoothing:antialiased}
+a{color:var(--heritage-2)}
+.top{background:var(--white);border-bottom:1px solid var(--line)}
+.top .in{max-width:860px;margin:0 auto;padding:14px 22px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.wrap{max-width:860px;margin:0 auto;padding:34px 22px 70px}
+.card{background:var(--white);border:1px solid var(--line);border-radius:18px;box-shadow:0 10px 30px rgba(0,27,58,.06);padding:34px 30px}
+h1{margin:0 0 6px;font-size:28px;font-weight:800;color:var(--heritage);letter-spacing:-.4px}
+.upd{color:var(--muted);font-size:14px;margin:0 0 22px}
+h2{font-size:19px;font-weight:800;color:var(--heritage);margin:26px 0 8px}
+p{margin:0 0 12px}
+ul{margin:0 0 12px;padding-left:20px}
+li{margin:4px 0}
+.back{display:inline-block;margin-top:8px;font-weight:600;text-decoration:none}
+.foot{max-width:860px;margin:0 auto;padding:18px 22px;color:var(--muted);font-size:13px;text-align:center}
+</style>
+</head>
+<body>
+<header class="top"><div class="in">
+  <a href="/" aria-label="Arenka, beranda"><svg height="28" viewBox="0 0 172 40" role="img" aria-label="Arenka Logistics"><path d="M3 35L16.5 5h7.4L37.4 35h-7.6L20.2 13.4 10.6 35z" fill="#002e62"/><path d="M9.5 24.5h24.8l4.7 3.6-4.7 3.6H6.4z" fill="#d0f600"/><text x="46" y="24" font-family="Inter,Arial,sans-serif" font-size="21" font-weight="800" letter-spacing="-.4" fill="#002e62">ARENKA</text><text x="47" y="35.5" font-family="Inter,Arial,sans-serif" font-size="7.4" font-weight="650" letter-spacing="2.9" fill="#5a6b86">LOGISTICS</text></svg></a>
+  <a href="/ketentuan">Ketentuan Layanan &rarr;</a>
+</div></header>
+<main class="wrap"><div class="card">
+  <h1>Kebijakan Privasi</h1>
+  <p class="upd">Terakhir diperbarui: {updated}</p>
+
+  <p>Arenka Logistics ("kami") menghargai privasi Anda. Kebijakan ini menjelaskan data apa yang kami kumpulkan, bagaimana kami menggunakannya, dan hak Anda ketika menggunakan situs <b>arenkalogistics.com</b> beserta layanan akun member kami.</p>
+
+  <h2>1. Data yang Kami Kumpulkan</h2>
+  <ul>
+    <li><b>Data akun Google</b> (saat Anda login dengan Google): nama, alamat email, dan foto profil. Kami tidak pernah menerima atau menyimpan kata sandi Google Anda.</li>
+    <li><b>Data yang Anda kirimkan</b> melalui formulir, seperti nama, kota tujuan, kebutuhan impor/pengiriman, dan pesan yang Anda tulis.</li>
+    <li><b>Data teknis</b> standar seperti alamat IP, jenis perangkat, dan aktivitas halaman untuk keamanan dan peningkatan layanan.</li>
+  </ul>
+
+  <h2>2. Cara Kami Menggunakan Data</h2>
+  <ul>
+    <li>Membuat dan mengelola akun member Anda, termasuk kode marking dan status pengiriman.</li>
+    <li>Memproses serta menindaklanjuti permintaan Titip Beli dan Titip Kirim.</li>
+    <li>Menghubungi Anda terkait pesanan, penawaran harga, atau pertanyaan Anda (mis. melalui WhatsApp atau email).</li>
+    <li>Menjaga keamanan layanan dan mencegah penyalahgunaan.</li>
+  </ul>
+
+  <h2>3. Berbagi Data</h2>
+  <p>Kami tidak menjual data pribadi Anda. Data hanya dibagikan seperlunya kepada pihak yang membantu menjalankan layanan (mis. mitra pengiriman dan supplier terkait pesanan Anda) atau jika diwajibkan oleh hukum.</p>
+
+  <h2>4. Penyimpanan &amp; Keamanan</h2>
+  <p>Data disimpan pada infrastruktur tepercaya (Cloudflare) dan dilindungi dengan koneksi terenkripsi (HTTPS) serta sesi login yang ditandatangani secara aman. Kami menyimpan data selama akun aktif atau selama diperlukan untuk tujuan layanan.</p>
+
+  <h2>5. Data Google &amp; Pembatasan Penggunaan</h2>
+  <p>Penggunaan informasi yang diterima dari Google API akan mematuhi <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener">Google API Services User Data Policy</a>, termasuk persyaratan Limited Use. Kami hanya menggunakan data profil dasar (nama, email, foto) untuk autentikasi dan personalisasi akun Anda.</p>
+
+  <h2>6. Hak Anda</h2>
+  <p>Anda dapat meminta akses, perbaikan, atau penghapusan data pribadi Anda, serta mencabut akses login Google kapan saja. Hubungi kami untuk permintaan tersebut.</p>
+
+  <h2>7. Perubahan Kebijakan</h2>
+  <p>Kami dapat memperbarui kebijakan ini sewaktu-waktu. Versi terbaru akan selalu tersedia di halaman ini dengan tanggal pembaruan.</p>
+
+  <h2>8. Hubungi Kami</h2>
+  <p>Email: <a href="mailto:arenkalogistics@gmail.com">arenkalogistics@gmail.com</a><br />
+  WhatsApp: <a href="https://wa.me/6285216002219" target="_blank" rel="noopener">+62 852-1600-2219</a><br />
+  Alamat: Jalan Anggrek No.1 Green De Jalen</p>
+
+  <a class="back" href="/">&larr; Kembali ke beranda</a>
+</div></main>
+<footer class="foot">Copyright &copy; 2026 Arenka Logistics | All Rights Reserved</footer>
+</body>
+</html>
