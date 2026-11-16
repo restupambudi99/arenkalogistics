@@ -25,6 +25,7 @@ export async function GET({ request, cookies, redirect }: any) {
     return redirect("/masuk?error=state", 302);
   }
 
+  try {
   // Tukar authorization code dengan token.
   const tokenRes = await fetch("https://oauth2.googleapis.com/token", {
     method: "POST",
@@ -69,4 +70,8 @@ export async function GET({ request, cookies, redirect }: any) {
     maxAge: sessionMaxAge,
   });
   return redirect("/dashboard", 302);
+  } catch (e: any) {
+    console.error("auth/callback error:", e && (e.stack || e.message || String(e)));
+    return redirect("/masuk?error=auth", 302);
+  }
 }

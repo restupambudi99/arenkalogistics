@@ -113,7 +113,7 @@ export function decodeJwtPayload(jwt: string): any {
 export async function ensureSchema(db: any): Promise<void> {
   await db
     .prepare(
-      "CREATE TABLE IF NOT EXISTS users (id TEXT PRIMARY KEY, email TEXT UNIQUE, name TEXT, picture TEXT, marking_code TEXT, created_at INTEGER, last_login INTEGER)",
+      "CREATE TABLE IF NOT EXISTS arenka_members (id TEXT PRIMARY KEY, email TEXT UNIQUE, name TEXT, picture TEXT, marking_code TEXT, created_at INTEGER, last_login INTEGER)",
     )
     .run();
 }
@@ -139,18 +139,19 @@ export async function upsertUser(
 ): Promise<DbUser> {
   await ensureSchema(db);
   const now = Math.floor(Date.now() / 1000);
-  const existing = await db.prepare("SELECT id, email, name, picture, marking_code FROM users WHERE id = ?").bind(profile.sub).first();
+  const existing = await db.prepare("SELECT id, email, name, picture, marking_code FROM arenka_members WHERE id = ?").bind(profile.sub).first();
   if (existing) {
     await db
-      .prepare("UPDATE users SET name = ?, picture = ?, last_login = ? WHERE id = ?")
+      .prepare("UPDATE arenka_members SET name = ?, picture = ?, last_login = ? WHERE id = ?")
       .bind(profile.name || existing.name, profile.picture || existing.picture, now, profile.sub)
       .run();
     return existing as DbUser;
   }
   const marking = makeMarking(profile.name || "", profile.email);
   await db
-    .prepare("INSERT INTO users (id, email, name, picture, marking_code, created_at, last_login) VALUES (?, ?, ?, ?, ?, ?, ?)")
+    .prepare("INSERT INTO arenka_members (id, email, name, picture, marking_code, created_at, last_login) VALUES (?, ?, ?, ?, ?, ?, ?)")
     .bind(profile.sub, profile.email, profile.name || "", profile.picture || "", marking, now, now)
     .run();
   return { id: profile.sub, email: profile.email, name: profile.name || "", picture: profile.picture || "", marking_code: marking };
 }
+
