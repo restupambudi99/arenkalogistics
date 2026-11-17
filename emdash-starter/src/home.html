@@ -270,6 +270,7 @@ h4{font-size:19px;letter-spacing:-.02em}
 .step{display:grid;align-content:start;gap:12px;min-width:0}
 .step-media{position:relative;border-radius:12px;overflow:hidden;aspect-ratio:16/10.6;max-width:100%;background:var(--soft-2)}
 .step-media svg{position:absolute;inset:0;width:100%;height:100%}
+.step-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 34%}
 .step-no{position:absolute;left:10px;bottom:10px;display:grid;place-items:center;min-width:34px;height:30px;padding:0 8px;border-radius:7px;background:var(--lime);color:var(--heritage);font-size:13px;font-weight:800;font-variant-numeric:tabular-nums}
 .step small{color:var(--heritage-2);font-size:11px;font-weight:750;letter-spacing:.08em;text-transform:uppercase}
 .step h3{font-size:clamp(17px,1.3vw,19px);line-height:1.25;letter-spacing:-.02em}
@@ -694,12 +695,7 @@ html.paused *,html.paused *::before,html.paused *::after{animation-play-state:pa
 <header class="site-header" id="top">
   <div class="container header-row">
     <a class="brand" href="#top" aria-label="Arenka, kembali ke atas">
-      <svg class="logo" viewBox="0 0 172 40" role="img" aria-label="Arenka Logistics">
-        <path d="M3 35L16.5 5h7.4L37.4 35h-7.6L20.2 13.4 10.6 35z" fill="var(--logo-ink)"/>
-        <path d="M9.5 24.5h24.8l4.7 3.6-4.7 3.6H6.4z" fill="#d0f600"/>
-        <text x="46" y="24" font-family="Inter,Arial,sans-serif" font-size="21" font-weight="800" letter-spacing="-.4" fill="var(--logo-ink)">ARENKA</text>
-        <text x="47" y="35.5" font-family="Inter,Arial,sans-serif" font-size="7.4" font-weight="650" letter-spacing="2.9" fill="var(--logo-sub)">LOGISTICS</text>
-      </svg>
+      <img class="logo" src="/assets/img/arenka-logo.jpg" alt="Arenka Logistics">
     </a>
     <nav class="main-nav" aria-label="Navigasi utama">
       <details class="dd">
@@ -742,12 +738,7 @@ html.paused *,html.paused *::before,html.paused *::after{animation-play-state:pa
 
 <dialog class="drawer" id="drawer" aria-label="Menu">
   <div class="drawer-head">
-    <svg class="logo" viewBox="0 0 172 40" role="img" aria-label="Arenka Logistics">
-      <path d="M3 35L16.5 5h7.4L37.4 35h-7.6L20.2 13.4 10.6 35z" fill="var(--logo-ink)"/>
-      <path d="M9.5 24.5h24.8l4.7 3.6-4.7 3.6H6.4z" fill="#d0f600"/>
-      <text x="46" y="24" font-family="Inter,Arial,sans-serif" font-size="21" font-weight="800" letter-spacing="-.4" fill="var(--logo-ink)">ARENKA</text>
-      <text x="47" y="35.5" font-family="Inter,Arial,sans-serif" font-size="7.4" font-weight="650" letter-spacing="2.9" fill="var(--logo-sub)">LOGISTICS</text>
-    </svg>
+    <img class="logo" src="/assets/img/arenka-logo.jpg" alt="Arenka Logistics">
     <button class="icon-btn" type="button" aria-label="Tutup menu" data-close-dialog><svg class="ic"><use href="#i-x"/></svg></button>
   </div>
   <div class="drawer-body">
@@ -1164,12 +1155,7 @@ html.paused *,html.paused *::before,html.paused *::after{animation-play-state:pa
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <svg class="logo logo-light" viewBox="0 0 172 40" role="img" aria-label="Arenka Logistics">
-          <path d="M3 35L16.5 5h7.4L37.4 35h-7.6L20.2 13.4 10.6 35z" fill="var(--logo-ink)"/>
-          <path d="M9.5 24.5h24.8l4.7 3.6-4.7 3.6H6.4z" fill="#d0f600"/>
-          <text x="46" y="24" font-family="Inter,Arial,sans-serif" font-size="21" font-weight="800" letter-spacing="-.4" fill="var(--logo-ink)">ARENKA</text>
-          <text x="47" y="35.5" font-family="Inter,Arial,sans-serif" font-size="7.4" font-weight="650" letter-spacing="2.9" fill="var(--logo-sub)">LOGISTICS</text>
-        </svg>
+        <img class="logo logo-light" src="/assets/img/arenka-logo.jpg" alt="Arenka Logistics">
         <p>Mitra perjalanan import<br>untuk usaha Anda.</p>
         <a class="link-arrow" href="#kontak" data-login>Masuk ke dashboard <svg class="ic"><use href="#i-arrow-ur"/></svg></a>
       </div>
@@ -1430,11 +1416,16 @@ const ARENKA = {
   const stepsEl = $('#steps');
   const panel = $('#steps-panel');
   const renderSteps = kind => {
-    stepsEl.innerHTML = steps[kind].map(([art, meta, title, text], i) => `
-      <li class="step">
-        <div class="step-media"><svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><use href="#${art}"/></svg><span class="step-no">0${i + 1}</span></div>
-        <small>${meta}</small><h3>${title}</h3><p>${text}</p>
-      </li>`).join('');
+    stepsEl.innerHTML = steps[kind].map(([art, meta, title, text], i) => {
+      const visual = art === 'v-marking'
+        ? '<img class="step-photo" src="/assets/img/marking-gudang.webp" alt="Petugas gudang memindai kode pada karton sebelum dikirim" width="960" height="1200" loading="lazy" decoding="async">'
+        : `<svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><use href="#${art}"/></svg>`;
+      return `
+        <li class="step">
+          <div class="step-media">${visual}<span class="step-no">0${i + 1}</span></div>
+          <small>${meta}</small><h3>${title}</h3><p>${text}</p>
+        </li>`;
+    }).join('');
     stepsEl.classList.remove('swap'); void stepsEl.offsetWidth; stepsEl.classList.add('swap');
   };
   const tabs = $$('[data-process]');
