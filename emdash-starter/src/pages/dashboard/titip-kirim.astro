@@ -1,0 +1,289 @@
+---
+import { env } from "cloudflare:workers";
+import { cookieNames, verifySessionToken } from "../../lib/auth";
+const siteUrl = "https://arenkalogistics.com/dashboard/titip-kirim";
+const enabled = env.INDEXING_ENABLED === "true";
+const wa = "6285216002219";
+const waHref = "https://wa.me/" + wa + "?text=" + encodeURIComponent("Halo Arenka, saya mau Titip Kirim barang dari China.");
+const sessionUser = await verifySessionToken(Astro.cookies.get(cookieNames.session)?.value);
+if (!sessionUser) {
+  return Astro.redirect("/masuk", 302);
+}
+const fullName = sessionUser.name || sessionUser.email;
+const firstName = (sessionUser.name || "").split(/\s+/)[0] || "Member";
+const initialsStr =
+  ((fullName.split(/\s+/)[0]?.[0] || "") + (fullName.split(/\s+/)[1]?.[0] || fullName.split(/\s+/)[0]?.[1] || "")).toUpperCase() || "MA";
+const markingSea = "DY/" + sessionUser.marking + "/SEA";
+const markingAir = "SLC/" + sessionUser.marking + "/AIR";
+const steps = [
+  { n: "01", t: "Dapatkan Alamat Gudang & Marking Code", d: "Marking Code Anda sudah tersedia di Dashboard. Cantumkan kode ini pada setiap paket, lalu minta supplier mengirim ke alamat gudang Arenka di China." },
+  { n: "02", t: "Barang Tiba & Diperiksa Tim Arenka", d: "Begitu paket tiba di gudang kami, tim Arenka menerima, menimbang ulang, dan memeriksa barang Anda sebelum masuk jalur pengiriman." },
+  { n: "03", t: "Konfirmasi & Persetujuan Pengiriman", d: "Kami tampilkan berat/volume final beserta estimasi biaya. Setelah Anda setujui, barang disiapkan untuk pengiriman internasional." },
+  { n: "04", t: "Pengiriman Internasional oleh Arenka", d: "Barang dikirim via laut (LCL/FCL) atau udara, lengkap dengan pengurusan dokumen dan bea cukai sampai masuk Indonesia." },
+  { n: "05", t: "Pembayaran & Barang Diterima", d: "Lakukan pembayaran sesuai kesepakatan, lalu barang diantar door-to-door sampai alamat tujuan Anda di Indonesia." },
+];
+const adv = [
+  { t: "Bebas Ribet Izin Impor", d: "Urusan dokumen, perizinan, dan bea cukai kami tangani penuh. Anda tinggal kirim barang, kami pastikan tiba aman dan legal." },
+  { t: "Transparansi Penuh", d: "Berat/volume final dan estimasi biaya tampil jelas sebelum dikirim. Tidak ada biaya tersembunyi." },
+  { t: "Pengiriman Door-to-Door", d: "Tanpa repot ambil barang di pelabuhan. Arenka antar langsung sampai alamat tujuan Anda." },
+  { t: "Status Terpantau", d: "Pantau perkembangan kiriman Anda lewat dashboard dan update langsung dari tim kami." },
+];
+const jalur = [
+  { k: "LCL", d: "Laut, berbagi kontainer" },
+  { k: "FCL", d: "Laut, kontainer penuh" },
+  { k: "Air", d: "Udara, lebih cepat" },
+  { k: "Truck", d: "Trucking domestik" },
+];
+const faqs = [
+  { q: "Apa perbedaan Titip Kirim dan Titip Beli?", a: "Titip Kirim dipakai jika Anda sudah punya barang di China dan hanya butuh jasa pengiriman. Titip Beli dipakai jika Anda ingin Arenka membelikan barang untuk Anda." },
+  { q: "Berapa lama waktu pengirimannya?", a: "Tergantung jalur (laut LCL/FCL atau udara) dan jenis barang. Estimasi waktu kami sampaikan saat konfirmasi berat/volume dan biaya." },
+  { q: "Bagaimana cara mengetahui status kiriman saya?", a: "Status kiriman dapat Anda pantau melalui dashboard akun serta update dari tim kami via WhatsApp." },
+  { q: "Kapan saya harus melakukan pembayaran?", a: "Pembayaran dilakukan setelah berat/volume final dan biaya dikonfirmasi serta Anda setujui, sesuai kesepakatan sebelum pengiriman internasional." },
+  { q: "Bagaimana cara klaim jika barang rusak?", a: "Laporkan ke tim kami dengan foto dan detail pengiriman. Kami bantu tindak lanjut sesuai kondisi dan kebijakan yang berlaku." },
+  { q: "Apakah bisa kirim barang berisiko (cairan, baterai, elektronik)?", a: "Beberapa jenis barang memerlukan penanganan khusus atau memiliki pembatasan. Konsultasikan dulu dengan tim kami agar jalur dan dokumennya disiapkan dengan benar." },
+];
+---
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>Titip Kirim | Dashboard Arenka Logistics</title>
+<meta name="description" content="Titip Kirim barang dari China ke Indonesia bersama Arenka Logistics: kirim ke gudang kami di China, kami urus pengiriman laut/udara, bea cukai, hingga door-to-door." />
+<link rel="canonical" href={siteUrl} />
+<meta name="robots" content={enabled ? "noindex,follow" : "noindex"} />
+<meta name="theme-color" content="#002e62" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400..800&display=swap" />
+<style>
+:root{
+  --heritage:#002e62;--heritage-2:#0b4589;--heritage-deep:#001b3a;
+  --lime:#d0f600;--lime-edge:#a9c700;--ink:#17294a;--muted:#5a6b86;
+  --soft:#eef3f9;--soft-2:#e2eaf5;--line:#d4deeb;--white:#fff;
+  --font:"Inter","Segoe UI",Arial,sans-serif;--radius:16px;
+  --shadow:0 10px 30px rgba(0,27,58,.07);color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;font:400 15px/1.6 var(--font);color:var(--ink);background:var(--soft);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+svg{display:block}
+.ic{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.nav{position:sticky;top:0;z-index:40;background:var(--white);border-bottom:1px solid var(--line)}
+.nav-top{display:flex;align-items:center;gap:18px;justify-content:flex-end;padding:7px 24px;border-bottom:1px solid var(--soft-2);font-size:13px;color:var(--muted);flex-wrap:wrap}
+.nav-top .kurs{margin-right:auto;font-weight:600;color:var(--heritage)}
+.nav-top a:hover{color:var(--heritage)}
+.nav-main{display:flex;align-items:center;gap:22px;padding:12px 24px}
+.nav-main .links{display:flex;gap:20px;align-items:center;margin-left:8px}
+.nav-main .links a{font-weight:600;color:var(--ink);padding:6px 2px;border-bottom:2px solid transparent}
+.nav-main .links a.active{color:var(--heritage);border-color:var(--lime)}
+.nav-main .links a:hover{color:var(--heritage)}
+.nav-main .right{margin-left:auto;display:flex;align-items:center;gap:16px}
+.icon-btn{position:relative;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--white);display:grid;place-items:center;color:var(--heritage);font-size:18px;cursor:pointer}
+.user{display:flex;align-items:center;gap:9px;padding:5px 12px 5px 6px;border:1px solid var(--line);border-radius:999px;background:var(--white)}
+.user .av{width:30px;height:30px;border-radius:50%;background:var(--heritage);color:#fff;display:grid;place-items:center;font-weight:700;font-size:13px}
+.user span{font-weight:600;font-size:14px}
+.wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+.badge{display:inline-flex;align-items:center;gap:8px;background:var(--lime);color:var(--heritage);font-weight:800;font-size:12px;letter-spacing:.6px;text-transform:uppercase;padding:6px 12px;border-radius:999px}
+.hero{background:linear-gradient(160deg,var(--heritage) 0%,var(--heritage-deep) 100%);color:#fff;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;right:-140px;top:-120px;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(208,246,0,.18),transparent 65%)}
+.hero .wrap{position:relative;z-index:1;display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:center;padding-top:44px;padding-bottom:44px}
+.hero h1{margin:16px 0 14px;font-size:clamp(25px,3.2vw,38px);line-height:1.14;font-weight:800;letter-spacing:-.5px}
+.hero p{margin:0 0 22px;color:#c3d0e2;max-width:54ch}
+.hero .cta{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;font-weight:700;padding:12px 18px;border-radius:12px;border:1px solid transparent;cursor:pointer;font-size:15px}
+.btn-lime{background:var(--lime);color:var(--heritage)}
+.btn-lime:hover{background:#e2ff33}
+.btn-ghost{background:transparent;border-color:rgba(255,255,255,.35);color:#fff}
+.btn-ghost:hover{border-color:#fff}
+.btn-blue{background:var(--heritage);color:#fff}
+.btn-blue:hover{background:#013a7d}
+.hero-art{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:20px}
+.hero-art .lbl{font-size:12px;letter-spacing:.6px;text-transform:uppercase;color:#aebfd6;margin-bottom:12px}
+.mk{display:grid;gap:10px}
+.mk .row{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.06);border-radius:12px;padding:12px 14px}
+.mk .row .d{width:38px;height:38px;flex:none;border-radius:10px;background:rgba(208,246,0,.16);color:var(--lime);display:grid;place-items:center}
+.mk .row b{display:block;font-size:14px;letter-spacing:.3px}
+.mk .row small{color:#aebfd6}
+.jalur{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px}
+.jalur .j{text-align:center;background:rgba(255,255,255,.06);border-radius:10px;padding:10px 6px}
+.jalur .j b{display:block;color:var(--lime);font-size:14px}
+.jalur .j small{color:#aebfd6;font-size:11px}
+section{padding:48px 0}
+.sec-head{text-align:center;max-width:760px;margin:0 auto 30px}
+.sec-head h2{margin:0 0 8px;font-size:clamp(21px,2.6vw,28px);font-weight:800;color:var(--heritage);letter-spacing:-.3px}
+.sec-head p{margin:0;color:var(--muted)}
+.about{background:var(--white)}
+.about .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:900px;margin:22px auto 0}
+.about .pt{display:flex;gap:12px;align-items:flex-start;background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:16px}
+.about .pt .i{flex:none;width:36px;height:36px;border-radius:10px;background:var(--white);color:var(--heritage);display:grid;place-items:center;font-size:18px}
+.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.step{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
+.step .n{font-size:26px;font-weight:800;color:var(--lime-edge);line-height:1}
+.step h3{margin:9px 0 6px;font-size:15px;color:var(--heritage)}
+.step p{margin:0;color:var(--muted);font-size:13.5px}
+.adv-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.adv{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:20px}
+.adv .i{width:40px;height:40px;border-radius:11px;background:var(--heritage);color:var(--lime);display:grid;place-items:center;font-size:19px;margin-bottom:12px}
+.adv h3{margin:0 0 6px;font-size:15.5px;color:var(--heritage)}
+.adv p{margin:0;color:var(--muted);font-size:13.5px}
+.cross{background:var(--heritage);color:#fff}
+.cross .wrap{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center}
+.cross h2{margin:0 0 8px;font-size:24px;font-weight:800}
+.cross p{margin:0;color:#c3d0e2;max-width:60ch}
+.faq{max-width:820px;margin:0 auto}
+details{background:var(--white);border:1px solid var(--line);border-radius:12px;margin-bottom:12px;overflow:hidden}
+summary{cursor:pointer;list-style:none;padding:16px 18px;font-weight:700;color:var(--heritage);display:flex;justify-content:space-between;gap:12px;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary .pm{flex:none;width:22px;height:22px;border-radius:50%;background:var(--soft);color:var(--heritage);display:grid;place-items:center;font-size:16px;font-weight:800}
+details[open] summary .pm{background:var(--lime)}
+details p{margin:0;padding:0 18px 16px;color:var(--muted)}
+.final{background:linear-gradient(160deg,var(--heritage-2),var(--heritage-deep));color:#fff;text-align:center}
+.final h2{margin:0 0 10px;font-size:clamp(22px,2.8vw,30px);font-weight:800}
+.final p{margin:0 auto 20px;color:#c3d0e2;max-width:60ch}
+.wa{position:fixed;right:20px;bottom:20px;z-index:50;display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;font-weight:700;padding:12px 16px;border-radius:999px;box-shadow:0 8px 24px rgba(0,0,0,.18)}
+.foot{text-align:center;color:var(--muted);font-size:13px;padding:22px}
+@media (max-width:1000px){ .steps{grid-template-columns:repeat(2,1fr)} .adv-grid{grid-template-columns:repeat(2,1fr)} .hero .wrap{grid-template-columns:1fr} .hero-art{order:-1} }
+@media (max-width:720px){ .nav-main .links{display:none} .user span{display:none} .about .grid{grid-template-columns:1fr} .cross .wrap{grid-template-columns:1fr} .nav-top{justify-content:center} .nav-top .kurs{width:100%;text-align:center;margin-right:0} }
+@media (max-width:460px){ .steps,.adv-grid{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="nav-top">
+    <span class="kurs">Kurs hari ini &yen;1 = Rp <b data-kurs>&mdash;</b></span>
+    <a href="/#tentang">Tentang Kami</a>
+    <a href="/#cara-kerja">Cara Belanja</a>
+    <a href={waHref} target="_blank" rel="noopener">Kalkulator</a>
+    <a href="/#kontak">Pusat Bantuan</a>
+  </div>
+  <div class="nav-main">
+    <a href="/" aria-label="Arenka, beranda">
+      <svg height="30" viewBox="0 0 172 40" role="img" aria-label="Arenka Logistics">
+        <path d="M3 35L16.5 5h7.4L37.4 35h-7.6L20.2 13.4 10.6 35z" fill="#002e62"/>
+        <path d="M9.5 24.5h24.8l4.7 3.6-4.7 3.6H6.4z" fill="#d0f600"/>
+        <text x="46" y="24" font-family="Inter,Arial,sans-serif" font-size="21" font-weight="800" letter-spacing="-.4" fill="#002e62">ARENKA</text>
+        <text x="47" y="35.5" font-family="Inter,Arial,sans-serif" font-size="7.4" font-weight="650" letter-spacing="2.9" fill="#5a6b86">LOGISTICS</text>
+      </svg>
+    </a>
+    <nav class="links">
+      <a href="/dashboard">Dashboard</a>
+      <a href="/dashboard/titip-beli">Titip Beli</a>
+      <a href="/dashboard/titip-kirim" class="active">Titip Kirim</a>
+      <a href="/posts">Artikel</a>
+    </nav>
+    <div class="right">
+      <span class="user"><span class="av">{initialsStr}</span><span>Hai, {firstName}</span></span>
+      <a class="icon-btn" href="/api/auth/logout" aria-label="Keluar" title="Keluar"><svg class="ic" viewBox="0 0 24 24" style="font-size:18px"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/></svg></a>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <span class="badge"><svg class="ic" viewBox="0 0 24 24" style="font-size:14px"><path d="M1 3h15v13H1z"/><path d="M16 8h4l3 3v5h-7z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg> Titip Kirim</span>
+      <h1>Titip Kirim Barang dari China ke Indonesia dengan Mudah, Aman, dan Terpercaya</h1>
+      <p>Sudah punya barang di China? Kirim ke gudang Arenka, dan kami urus seluruh proses pengiriman internasional hingga sampai ke alamat tujuan Anda di Indonesia.</p>
+      <div class="cta">
+        <a class="btn btn-lime" href={waHref} target="_blank" rel="noopener">Titip Kirim Sekarang</a>
+        <a class="btn btn-ghost" href="#cara-kerja">Pelajari Cara Kerja</a>
+      </div>
+    </div>
+    <div class="hero-art">
+      <div class="lbl">Marking Code Anda</div>
+      <div class="mk">
+        <div class="row"><span class="d"><svg class="ic" viewBox="0 0 24 24" style="font-size:18px"><path d="M3 17l9 4 9-4"/><path d="M3 12l9 4 9-4"/><path d="M12 3L3 7l9 4 9-4-9-4z"/></svg></span><span><b>{markingSea}</b><small>Pengiriman Laut</small></span></div>
+        <div class="row"><span class="d"><svg class="ic" viewBox="0 0 24 24" style="font-size:18px"><path d="M17.8 19.2 16 11l3.5-3.5a2.1 2.1 0 0 0-3-3L13 8 4.8 6.2a1 1 0 0 0-.9 1.7L9 11l-2 2-2.5-.5a1 1 0 0 0-.9 1.7L7 16l1.8 2.9a1 1 0 0 0 1.7-.9L10 15l2-2 2.4 5.1a1 1 0 0 0 1.7-.1z"/></svg></span><span><b>{markingAir}</b><small>Pengiriman Udara</small></span></div>
+      </div>
+      <div class="jalur">
+        {jalur.map((j) => (<div class="j"><b>{j.k}</b><small>{j.d}</small></div>))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about">
+  <div class="wrap">
+    <div class="sec-head"><h2>Tentang Layanan Titip Kirim</h2><p>Untuk Anda yang sudah punya produk di China dari supplier, marketplace, atau pabrik, dan butuh solusi logistik lengkap sampai ke Indonesia.</p></div>
+    <div class="grid">
+      <div class="pt"><span class="i"><svg class="ic" viewBox="0 0 24 24" style="font-size:18px"><path d="M20 7h-9"/><path d="M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></svg></span><span>Kirim dari supplier mana pun di China ke gudang kami.</span></div>
+      <div class="pt"><span class="i"><svg class="ic" viewBox="0 0 24 24" style="font-size:18px"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg></span><span>Dapatkan alamat gudang Arenka &amp; Marking Code khusus Anda.</span></div>
+      <div class="pt"><span class="i"><svg class="ic" viewBox="0 0 24 24" style="font-size:18px"><path d="M2 21c1.7 0 1.7-1 3.3-1s1.7 1 3.4 1 1.7-1 3.3-1 1.7 1 3.3 1 1.7-1 3.4-1"/><path d="M4 18 2 14h20l-2 4"/><path d="M12 10V4"/><path d="M12 4H7l1 6"/></svg></span><span>Kami urus pengiriman lintas negara, dokumen, dan bea cukai.</span></div>
+      <div class="pt"><span class="i"><svg class="ic" viewBox="0 0 24 24" style="font-size:18px"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span><span>Pantau status kiriman di dashboard dan update dari tim kami.</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="cara-kerja">
+  <div class="wrap">
+    <div class="sec-head"><h2>Cara Kerja Titip Kirim</h2><p>Setiap langkah ditangani Arenka secara profesional — dari penerimaan di gudang China hingga barang tiba di alamat Anda di Indonesia.</p></div>
+    <div class="steps">
+      {steps.map((s) => (
+        <div class="step"><div class="n">{s.n}</div><h3>{s.t}</h3><p>{s.d}</p></div>
+      ))}
+    </div>
+    <div style="text-align:center;margin-top:22px"><a class="btn btn-blue" href="/dashboard">Lihat Marking Code di Dashboard</a></div>
+  </div>
+</section>
+
+<section class="about">
+  <div class="wrap">
+    <div class="sec-head"><h2>Keunggulan Layanan Titip Kirim Arenka</h2></div>
+    <div class="adv-grid">
+      {adv.map((a) => (
+        <div class="adv"><div class="i"><svg class="ic" viewBox="0 0 24 24" style="font-size:19px"><path d="M22 11.1V12a10 10 0 1 1-5.9-9.1"/><path d="m9 11 3 3L22 4"/></svg></div><h3>{a.t}</h3><p>{a.d}</p></div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="cross">
+  <div class="wrap">
+    <div>
+      <h2>Belum Punya Barang di China?</h2>
+      <p>Gunakan layanan Titip Beli: kirim tautan produk dari 1688/Alibaba/Taobao, kami bantu beli, cek, dan kirim sampai alamat Anda.</p>
+    </div>
+    <a class="btn btn-lime" href="/dashboard/titip-beli">Pelajari Titip Beli</a>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head"><h2>Pertanyaan Umum Seputar Titip Kirim</h2></div>
+    <div class="faq">
+      {faqs.map((f) => (
+        <details>
+          <summary>{f.q}<span class="pm">+</span></summary>
+          <p>{f.a}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <div class="wrap">
+    <h2>Mulai Kirim Barang dari China ke Indonesia Bersama Arenka</h2>
+    <p>Kami siap mengurus seluruh proses pengiriman Anda — dari gudang kami di China hingga tiba dengan aman di alamat tujuan Anda.</p>
+    <a class="btn btn-lime" href={waHref} target="_blank" rel="noopener">Titip Kirim Sekarang</a>
+  </div>
+</section>
+
+<a class="wa" href={waHref} target="_blank" rel="noopener" aria-label="Chat WhatsApp">
+  <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347M12.05 21.785h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+  <span>WhatsApp</span>
+</a>
+<footer class="foot">Copyright &copy; 2026 Arenka Logistics | All Rights Reserved</footer>
+
+<script>
+  (async () => {
+    try {
+      var el = document.querySelector("[data-kurs]");
+      var res = await fetch("/api/kurs", { headers: { accept: "application/json" } });
+      if (res.ok) { var j = await res.json(); if (j && j.ok && j.kursText) el.textContent = j.kursText; }
+    } catch (e) {}
+  })();
+</script>
+</body>
+</html>
