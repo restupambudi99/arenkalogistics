@@ -11,11 +11,13 @@ interface Props {
 	description?: string | null;
 	image?: string | null;
 	canonical?: string | null;
+	/** Open Graph page type, e.g. "article" for blog posts */
+	pageType?: string | null;
 	/** Pass content reference for plugin page contributions on content pages */
 	content?: { collection: string; id: string; slug?: string | null };
 }
 
-const { title, pageTitle, description, image, canonical, content } =
+const { title, pageTitle, description, image, canonical, content, pageType } =
 	Astro.props;
 const [settingsResult, menuResult] = await Promise.all([
 	getSiteSettingsWithCacheHint(),
@@ -40,7 +42,7 @@ const menu = menuResult.data;
 const pageCtx = createPublicPageContext({
 	Astro,
 	kind: content ? "content" : "custom",
-	pageType: "website",
+	pageType: pageType ?? "website",
 	title: fullTitle,
 	pageTitle: pageTitle ?? title,
 	description: pageDescription,
@@ -52,7 +54,7 @@ const pageCtx = createPublicPageContext({
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="id">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -81,6 +83,7 @@ const pageCtx = createPublicPageContext({
 			article a{color:var(--heritage-2)}
 			article strong{color:var(--heritage)}
 			article time{display:inline-block;color:var(--muted);font-size:14px;margin-bottom:6px}
+			article .byline{color:var(--muted);font-size:14px;margin:0 0 14px;font-weight:600}
 			article ul,article ol{margin:0 0 16px;padding-left:22px}
 			article li{margin:6px 0;font-size:17px}
 			article blockquote{margin:0 0 16px;padding:10px 18px;border-left:4px solid var(--lime);background:#fff;border-radius:8px;color:var(--ink)}
