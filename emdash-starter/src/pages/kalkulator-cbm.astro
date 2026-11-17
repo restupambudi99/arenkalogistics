@@ -1,0 +1,169 @@
+---
+import { env } from "cloudflare:workers";
+const siteUrl = "https://arenkalogistics.com/kalkulator-cbm";
+const enabled = env.INDEXING_ENABLED === "true";
+const wa = "6285216002219";
+---
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>Kalkulator CBM & Ongkir Impor | Arenka Logistics</title>
+<meta name="description" content="Kalkulator CBM gratis dari Arenka: hitung volume (meter kubik), berat volumetrik udara, dan CBM tertagih laut dari dimensi kardus Anda untuk impor dari China." />
+<link rel="canonical" href={siteUrl} />
+<meta name="robots" content={enabled ? "index,follow" : "noindex"} />
+<meta name="theme-color" content="#002e62" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400..800&display=swap" />
+<style>
+:root{--heritage:#002e62;--heritage-2:#0b4589;--heritage-deep:#001b3a;--lime:#d0f600;--lime-edge:#a9c700;--ink:#17294a;--muted:#5a6b86;--soft:#eef3f9;--line:#d4deeb;--white:#fff;--font:"Inter","Segoe UI",Arial,sans-serif;color-scheme:light}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;font:400 15px/1.6 var(--font);color:var(--ink);background:var(--soft);-webkit-font-smoothing:antialiased}
+a{color:var(--heritage-2)}
+svg{display:block}
+.top{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20}
+.top .in{max-width:960px;margin:0 auto;display:flex;align-items:center;gap:18px;padding:12px 22px;flex-wrap:wrap}
+.top .in .sp{margin-left:auto;display:flex;gap:18px}
+.top a{color:var(--ink);text-decoration:none;font-weight:600;font-size:14.5px}
+.top a:hover{color:var(--heritage)}
+.wrap{max-width:960px;margin:0 auto;padding:30px 22px 70px}
+h1{margin:0 0 6px;font-size:clamp(24px,3.4vw,32px);font-weight:800;color:var(--heritage);letter-spacing:-.4px}
+.lead{margin:0 0 22px;color:var(--muted);max-width:60ch}
+.card{background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 10px 30px rgba(0,27,58,.06);padding:22px}
+.unit-row{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.unit-row label{font-weight:700;color:var(--heritage);font-size:14px}
+select,input{font:400 15px var(--font);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:#fff}
+select:focus,input:focus{outline:none;border-color:var(--heritage-2);box-shadow:0 0 0 3px rgba(11,69,137,.14)}
+table{width:100%;border-collapse:collapse}
+th{text-align:left;font-size:12.5px;color:var(--muted);font-weight:700;padding:6px 8px;text-transform:uppercase;letter-spacing:.4px}
+td{padding:6px 8px}
+td input{width:100%}
+.rows td .cbm{font-weight:700;color:var(--heritage)}
+.del{border:0;background:transparent;color:#c0392b;font-weight:800;cursor:pointer;font-size:18px;line-height:1;padding:4px 8px}
+.addrow{margin-top:10px;display:inline-flex;align-items:center;gap:8px;background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:8px 14px;font-weight:700;color:var(--heritage);cursor:pointer}
+.addrow:hover{background:#e6edf7}
+.results{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:20px}
+.res{background:linear-gradient(135deg,var(--heritage),var(--heritage-deep));color:#fff;border-radius:14px;padding:16px}
+.res.alt{background:var(--soft);color:var(--ink);border:1px solid var(--line)}
+.res .lbl{font-size:12.5px;opacity:.85}
+.res.alt .lbl{color:var(--muted);opacity:1}
+.res .val{font-size:24px;font-weight:800;margin-top:4px}
+.res .val small{font-size:13px;font-weight:600;opacity:.8}
+.note{margin-top:16px;font-size:13.5px;color:#6b5600;background:#fff7dd;border:1px solid #ecd98a;border-radius:12px;padding:12px 14px}
+.cta{margin-top:18px;display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;font-weight:700;padding:12px 18px;border-radius:12px;text-decoration:none;font-size:15px}
+.btn-wa{background:#25D366;color:#fff}
+.btn-ghost{background:#fff;border:1px solid var(--line);color:var(--heritage)}
+.how{margin-top:34px}
+.how h2{font-size:20px;color:var(--heritage)}
+.how ul{padding-left:20px;color:var(--ink)}
+.how li{margin:6px 0}
+.foot{text-align:center;color:var(--muted);font-size:13px;padding:22px}
+@media (max-width:760px){ .results{grid-template-columns:1fr 1fr} th.hidem,td.hidem{display:none} }
+@media (max-width:460px){ .results{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+<header class="top"><div class="in">
+  <a href="/" aria-label="Arenka, beranda"><svg height="28" viewBox="0 0 172 40" role="img" aria-label="Arenka Logistics"><path d="M3 35L16.5 5h7.4L37.4 35h-7.6L20.2 13.4 10.6 35z" fill="#002e62"/><path d="M9.5 24.5h24.8l4.7 3.6-4.7 3.6H6.4z" fill="#d0f600"/><text x="46" y="24" font-family="Inter,Arial,sans-serif" font-size="21" font-weight="800" letter-spacing="-.4" fill="#002e62">ARENKA</text><text x="47" y="35.5" font-family="Inter,Arial,sans-serif" font-size="7.4" font-weight="650" letter-spacing="2.9" fill="#5a6b86">LOGISTICS</text></svg></a>
+  <nav class="sp"><a href="/">Beranda</a><a href="/posts">Artikel</a><a href="/#kontak">Hubungi Kami</a></nav>
+</div></header>
+<main class="wrap">
+  <h1>Kalkulator CBM & Ongkir Impor</h1>
+  <p class="lead">Hitung volume kiriman Anda dalam CBM (meter kubik) dari dimensi kardus. Dipakai untuk memperkirakan ongkir laut (LCL) dan berat volumetrik udara saat impor dari China.</p>
+
+  <div class="card">
+    <div class="unit-row">
+      <label for="unit">Satuan dimensi:</label>
+      <select id="unit">
+        <option value="cm" selected>Sentimeter (cm)</option>
+        <option value="m">Meter (m)</option>
+        <option value="in">Inci (inch)</option>
+      </select>
+      <label for="wunit" style="margin-left:10px">Satuan berat:</label>
+      <select id="wunit">
+        <option value="kg" selected>Kilogram (kg)</option>
+      </select>
+    </div>
+    <div style="overflow-x:auto">
+      <table>
+        <thead><tr>
+          <th>Panjang</th><th>Lebar</th><th>Tinggi</th><th>Jumlah</th><th class="hidem">Berat/karton</th><th>CBM</th><th></th>
+        </tr></thead>
+        <tbody id="rows" class="rows"></tbody>
+      </table>
+    </div>
+    <button type="button" class="addrow" id="addrow">+ Tambah jenis kardus</button>
+
+    <div class="results">
+      <div class="res"><div class="lbl">Total volume</div><div class="val"><span id="r-cbm">0</span> <small>CBM (m&sup3;)</small></div></div>
+      <div class="res alt"><div class="lbl">Total karton</div><div class="val" id="r-qty">0</div></div>
+      <div class="res alt"><div class="lbl">Total berat aktual</div><div class="val"><span id="r-weight">0</span> <small>kg</small></div></div>
+      <div class="res alt"><div class="lbl">Berat volumetrik udara</div><div class="val"><span id="r-air">0</span> <small>kg</small></div></div>
+    </div>
+    <div class="note">Perkiraan: <b>berat volumetrik udara</b> = volume (cm&sup3;) &divide; 6000. Untuk laut LCL, biaya umumnya dihitung per <b>CBM</b> (1 CBM &asymp; 1.000 kg, mana yang lebih besar). Angka ini perkiraan; tarif final mengikuti rute, jenis barang, dan kurs.</div>
+    <div class="cta">
+      <a class="btn btn-wa" id="wa-cta" href="#" target="_blank" rel="noopener">Minta tarif untuk volume ini via WhatsApp</a>
+      <a class="btn btn-ghost" href="/posts/lcl-vs-fcl-pengiriman-laut-impor-china">Pelajari LCL vs FCL</a>
+    </div>
+  </div>
+
+  <section class="how">
+    <h2>Cara menghitung CBM</h2>
+    <ul>
+      <li><b>CBM per karton</b> = panjang &times; lebar &times; tinggi (dalam meter).</li>
+      <li><b>Total CBM</b> = CBM per karton &times; jumlah karton.</li>
+      <li>Contoh: kardus 40 &times; 30 &times; 20 cm = 0,4 &times; 0,3 &times; 0,2 = <b>0,024 CBM</b>. 100 karton = <b>2,4 CBM</b>.</li>
+      <li>Butuh penjelasan lengkap? Baca artikel kami: <a href="/posts/cara-menghitung-ongkir-cbm-impor-china">Cara Menghitung Ongkir &amp; CBM Impor dari China</a>.</li>
+    </ul>
+  </section>
+</main>
+<footer class="foot">Copyright &copy; 2026 Arenka Logistics | <a href="/privasi">Kebijakan Privasi</a> &middot; <a href="/ketentuan">Ketentuan Layanan</a></footer>
+
+<script>
+  var WA = "6285216002219";
+  var rowsEl = document.getElementById("rows");
+  function unitFactor(){ var u=document.getElementById("unit").value; return u==="cm"?0.01:(u==="in"?0.0254:1); }
+  function num(v){ v=parseFloat(String(v).replace(",",".")); return isFinite(v)&&v>0?v:0; }
+  function newRow(){
+    var tr=document.createElement("tr");
+    tr.innerHTML='<td><input type="number" min="0" step="any" class="p" placeholder="0"></td>'+
+      '<td><input type="number" min="0" step="any" class="l" placeholder="0"></td>'+
+      '<td><input type="number" min="0" step="any" class="t" placeholder="0"></td>'+
+      '<td><input type="number" min="0" step="1" class="q" placeholder="1" value="1"></td>'+
+      '<td class="hidem"><input type="number" min="0" step="any" class="w" placeholder="0"></td>'+
+      '<td><span class="cbm">0</span></td>'+
+      '<td><button type="button" class="del" aria-label="Hapus baris">&times;</button></td>';
+    rowsEl.appendChild(tr);
+    tr.querySelector(".del").addEventListener("click",function(){ tr.remove(); if(!rowsEl.children.length) newRow(); recalc(); });
+    tr.querySelectorAll("input").forEach(function(i){ i.addEventListener("input",recalc); });
+  }
+  function recalc(){
+    var f=unitFactor(), totalCbm=0, totalQty=0, totalW=0;
+    [].forEach.call(rowsEl.children,function(tr){
+      var p=num(tr.querySelector(".p").value)*f;
+      var l=num(tr.querySelector(".l").value)*f;
+      var t=num(tr.querySelector(".t").value)*f;
+      var q=Math.max(0,Math.floor(num(tr.querySelector(".q").value)))||0;
+      var w=num(tr.querySelector(".w").value);
+      var cbm=p*l*t*q;
+      tr.querySelector(".cbm").textContent=(p*l*t).toFixed(4);
+      totalCbm+=cbm; totalQty+=q; totalW+=w*q;
+    });
+    var air=totalCbm*1000000/6000;
+    document.getElementById("r-cbm").textContent=totalCbm.toFixed(3);
+    document.getElementById("r-qty").textContent=totalQty;
+    document.getElementById("r-weight").textContent=totalW.toFixed(1);
+    document.getElementById("r-air").textContent=air.toFixed(1);
+    var msg="Halo Arenka, saya mau minta tarif pengiriman. Perkiraan volume "+totalCbm.toFixed(3)+" CBM ("+totalQty+" karton, berat "+totalW.toFixed(1)+" kg). Mohon info ongkirnya.";
+    document.getElementById("wa-cta").href="https://wa.me/"+WA+"?text="+encodeURIComponent(msg);
+  }
+  document.getElementById("addrow").addEventListener("click",function(){ newRow(); });
+  document.getElementById("unit").addEventListener("change",recalc);
+  newRow();
+  recalc();
+</script>
+</body>
+</html>
