@@ -1425,6 +1425,8 @@ const ARENKA = {
     stepsEl.innerHTML = steps[kind].map(([art, meta, title, text], i) => {
       const visual = art === 'v-quote' && kind === 'kirim' && i === 2
         ? '<img class="step-photo" src="/assets/img/konfirmasi-biaya-impor.webp" alt="Kalkulator dan catatan volume karton untuk mengonfirmasi biaya impor" width="960" height="960" loading="lazy" decoding="async">'
+        : art === 'v-door' && kind === 'kirim' && i === 4
+        ? '<img class="step-photo" src="/assets/img/serah-terima-paket.webp" alt="Petugas Arenka menyerahkan paket kepada penerima di alamat tujuan" width="960" height="640" loading="lazy" decoding="async">'
         : art === 'v-transit' && kind === 'kirim' && i === 3
         ? '<img class="step-photo" src="/assets/img/kapal-pesawat-titip-kirim.webp" alt="Kapal kargo dan pesawat Arenka membawa barang menuju Indonesia" width="960" height="640" loading="lazy" decoding="async">'
         : art === 'v-warehouse' && kind === 'kirim' && i === 1
