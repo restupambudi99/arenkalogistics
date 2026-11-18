@@ -1423,7 +1423,9 @@ const ARENKA = {
   const panel = $('#steps-panel');
   const renderSteps = kind => {
     stepsEl.innerHTML = steps[kind].map(([art, meta, title, text], i) => {
-      const visual = art === 'v-warehouse' && kind === 'kirim' && i === 1
+      const visual = art === 'v-quote' && kind === 'kirim' && i === 2
+        ? '<img class="step-photo" src="/assets/img/konfirmasi-biaya-impor.webp" alt="Kalkulator dan catatan volume karton untuk mengonfirmasi biaya impor" width="960" height="960" loading="lazy" decoding="async">'
+        : art === 'v-warehouse' && kind === 'kirim' && i === 1
         ? '<img class="step-photo" src="/assets/img/penerimaan-pemeriksaan-gudang.webp" alt="Tim Arenka memeriksa dan mencatat barang di gudang" width="960" height="640" loading="lazy" decoding="async">'
         : art === 'v-marking'
         ? '<img class="step-photo" src="/assets/img/marking-gudang.webp" alt="Petugas gudang memindai kode pada karton sebelum dikirim" width="960" height="1200" loading="lazy" decoding="async">'
