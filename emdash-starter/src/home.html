@@ -342,7 +342,8 @@ h4{font-size:19px;letter-spacing:-.02em}
 .final-copy p{color:var(--muted);max-width:52ch}
 .final-actions{display:flex;flex-wrap:wrap;align-items:center;gap:24px;margin-top:6px}
 .final-art{max-width:100%}
-.final-art svg{display:block;width:100%;height:auto}
+.final-art picture{display:block}
+.final-art img{display:block;width:100%;height:auto;aspect-ratio:1.8;object-fit:cover;object-position:75% center;border-radius:20px}
 
 /* contact */
 .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:86px;align-items:start}
@@ -444,6 +445,7 @@ html.paused *,html.paused *::before,html.paused *::after{animation-play-state:pa
   .usp-inner{grid-template-columns:1fr 1fr}
   .static-lg .benefit-track{grid-template-columns:1fr 1fr}
   .faq-grid,.contact-grid,.final-grid{grid-template-columns:minmax(0,1fr);gap:44px}
+  .final-art img{aspect-ratio:4/3;object-position:center}
   .faq-intro{position:static}
   .feature{grid-template-columns:minmax(0,1fr)}
   .footer-grid{grid-template-columns:1fr 1fr}
@@ -1097,18 +1099,10 @@ html.paused *,html.paused *::before,html.paused *::after{animation-play-state:pa
         </div>
       </div>
       <div class="final-art reveal">
-        <svg viewBox="0 0 600 430" aria-hidden="true">
-          <circle cx="380" cy="190" r="150" fill="url(#g-globe)"/>
-          <g fill="none" stroke="#ffffff" stroke-opacity=".18" stroke-width="2"><ellipse cx="380" cy="190" rx="150" ry="52"/><ellipse cx="380" cy="190" rx="150" ry="104"/><ellipse cx="380" cy="190" rx="54" ry="150"/><ellipse cx="380" cy="190" rx="108" ry="150"/><path d="M230 190h300M380 40v300"/></g>
-          <path d="M300 120C350 70 440 80 470 150" fill="none" stroke="#d0f600" stroke-width="4" stroke-dasharray="8 8" stroke-linecap="round"/>
-          <circle cx="300" cy="120" r="8" fill="#d0f600"/>
-          <path d="M470 136c-8 0-14 6-14 14 0 10 14 24 14 24s14-14 14-24c0-8-6-14-14-14z" fill="#d0f600"/><circle cx="470" cy="150" r="5" fill="#002e62"/>
-          <use href="#s-plane" x="70" y="20" width="300" height="112" transform="rotate(-10 220 76)"/>
-          <use href="#s-ship" x="300" y="248" width="300" height="98"/>
-          <use href="#s-truck" x="20" y="250" width="300" height="127"/>
-          <use href="#s-box" x="250" y="346" width="78" height="70"/><use href="#s-box" x="318" y="356" width="70" height="63"/><use href="#s-box" x="284" y="318" width="64" height="58"/>
-          <ellipse cx="300" cy="420" rx="260" ry="8" fill="#002e62" fill-opacity=".08"/>
-        </svg>
+        <picture>
+          <source media="(max-width: 1023px)" srcset="/assets/img/final-cta-logistics-mobile.webp" width="900" height="675">
+          <img src="/assets/img/final-cta-logistics.webp" width="1600" height="600" alt="Kapal kontainer dan truk Arenka Logistics bersiap mengirim barang, dengan pesawat kargo di atas pelabuhan" loading="lazy" decoding="async">
+        </picture>
       </div>
     </div>
   </section>
