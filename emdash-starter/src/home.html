@@ -1477,6 +1477,16 @@ const ARENKA = {
         ? '<img class="step-photo" src="/assets/img/kapal-pesawat-titip-kirim.webp" alt="Kapal kargo dan pesawat Arenka membawa barang menuju Indonesia" width="960" height="640" loading="lazy" decoding="async">'
         : art === 'v-warehouse' && kind === 'kirim' && i === 1
         ? '<img class="step-photo" src="/assets/img/penerimaan-pemeriksaan-gudang.webp" alt="Tim Arenka memeriksa dan mencatat barang di gudang" width="960" height="640" loading="lazy" decoding="async">'
+        : kind === 'beli' && i === 0
+        ? '<img class="step-photo" src="/assets/img/titip-beli-link-produk.webp" alt="Pelanggan memilih produk dari ponsel untuk dikirimkan ke Arenka" width="960" height="640" loading="lazy" decoding="async">'
+        : kind === 'beli' && i === 1
+        ? '<img class="step-photo" src="/assets/img/titip-beli-penawaran.webp" alt="Tim Arenka dan pelanggan meninjau penawaran pengiriman bersama" width="960" height="640" loading="lazy" decoding="async">'
+        : kind === 'beli' && i === 2
+        ? '<img class="step-photo" src="/assets/img/titip-beli-pemeriksaan-gudang.webp" alt="Petugas Arenka memeriksa barang pesanan di gudang" width="960" height="640" loading="lazy" decoding="async">'
+        : kind === 'beli' && i === 3
+        ? '<img class="step-photo" src="/assets/img/titip-beli-pengiriman.webp" alt="Kapal dan pesawat membawa kiriman Arenka menuju Indonesia" width="960" height="640" loading="lazy" decoding="async">'
+        : kind === 'beli' && i === 4
+        ? '<img class="step-photo" src="/assets/img/titip-beli-serah-terima.webp" alt="Kurir Arenka menyerahkan paket kepada pelanggan di alamat tujuan" width="960" height="640" loading="lazy" decoding="async">'
         : art === 'v-marking'
         ? '<img class="step-photo" src="/assets/img/marking-gudang.webp" alt="Petugas gudang memindai kode pada karton sebelum dikirim" width="960" height="1200" loading="lazy" decoding="async">'
         : `<svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><use href="#${art}"/></svg>`;
