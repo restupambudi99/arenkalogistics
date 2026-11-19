@@ -28,12 +28,17 @@ const postsWithTags = posts.map((post) => ({
 }));
 ---
 
-<Base title="All Posts">
-	<h1>Posts</h1>
+<Base
+	title="Artikel Impor dan Logistik"
+	pageTitle="Artikel Impor dan Logistik"
+	description="Panduan impor dari China, pengiriman, CBM, HS Code, dan logistik untuk membantu bisnis merencanakan kiriman."
+	canonical={`${Astro.url.origin}/posts`}
+>
+	<h1>Artikel Impor dan Logistik</h1>
 
 	{
 		postsWithTags.length === 0 ? (
-			<p>No posts yet.</p>
+			<p>Artikel baru sedang disiapkan.</p>
 		) : (
 			<ul>
 				{postsWithTags.map(({ post, tags }) => (
@@ -58,11 +63,11 @@ const postsWithTags = posts.map((post) => ({
 		)
 	}
 	<nav aria-label="Pagination">
-		{cursor && <a href="/posts">First page</a>}
+		{cursor && <a href="/posts">Halaman pertama</a>}
 		{
 			nextCursor && (
 				<a href={`/posts?cursor=${encodeURIComponent(nextCursor)}`}>
-					Next page
+				Artikel berikutnya
 				</a>
 			)
 		}
