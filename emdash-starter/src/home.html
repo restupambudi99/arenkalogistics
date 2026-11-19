@@ -991,6 +991,13 @@ html.paused *,html.paused *::before,html.paused *::after{animation-play-state:pa
       <div id="steps-panel" role="tabpanel" aria-labelledby="tab-kirim">
         <ol class="steps" id="steps"></ol>
       </div>
+      <div class="steps-nav" aria-label="Navigasi langkah kerja">
+        <span class="slider-status" id="steps-status" aria-live="polite"></span>
+        <div class="slider-btns">
+          <button class="slider-btn" type="button" id="steps-prev" aria-label="Langkah sebelumnya"><svg class="ic"><use href="#i-arrow-l"/></svg></button>
+          <button class="slider-btn" type="button" id="steps-next" aria-label="Langkah berikutnya"><svg class="ic"><use href="#i-arrow-r"/></svg></button>
+        </div>
+      </div>
       <div class="steps-foot">
         <p><svg class="ic"><use href="#i-check-circle"/></svg>Butuh perkiraan ongkos? Tim kami bisa menghitungkan sebelum Anda mulai.</p>
         <a class="link-arrow" href="#kontak">Mulai Import <svg class="ic"><use href="#i-arrow-r"/></svg></a>
@@ -1448,6 +1455,7 @@ const ARENKA = {
   const stepsPrev = $('#steps-prev');
   const stepsNext = $('#steps-next');
   const updateStepsNav = () => {
+    if (!stepsStatus || !stepsPrev || !stepsNext) return;
     const mobile = matchMedia('(width < 768px)').matches;
     const stride = stepsEl.clientWidth || 1;
     const index = Math.round(stepsEl.scrollLeft / stride);
