@@ -140,8 +140,9 @@ h4{font-size:19px;letter-spacing:-.02em}
 
 /* hero */
 .hero{position:relative;isolation:isolate;overflow:hidden;background:#dfeaf7;padding-block:52px 34px}
-.hero-film{align-self:center;min-width:0;padding:clamp(4px,.6vw,8px);border:1px solid rgba(255,255,255,.88);border-radius:20px;background:linear-gradient(145deg,rgba(255,255,255,.86),rgba(151,189,210,.42));box-shadow:0 14px 36px rgba(17,56,89,.13)}
-.hero-film video{display:block;width:100%;height:auto;aspect-ratio:16/9;border-radius:13px;background:#b2cbdc}
+.hero-film{position:relative;align-self:center;min-width:0;overflow:hidden;border:1px solid rgba(255,255,255,.5);border-radius:22px;background:rgba(223,234,247,.18);box-shadow:0 22px 48px rgba(17,56,89,.12)}
+.hero-film::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(223,234,247,.42),transparent 16%,transparent 84%,rgba(223,234,247,.32)),linear-gradient(0deg,rgba(223,234,247,.32),transparent 28%,transparent 78%,rgba(223,234,247,.14))}
+.hero-film video{display:block;width:100%;height:auto;aspect-ratio:1920/854;object-fit:cover;background:#b2cbdc}
 @media (min-width:1024px){
   .hero-inner{grid-template-columns:minmax(0,1fr) minmax(0,1.04fr);column-gap:clamp(28px,4vw,64px)}
   .hero-inner>*{grid-column:1}
@@ -793,7 +794,7 @@ html.paused *,html.paused *::before,html.paused *::after{animation-play-state:pa
       </div>
       <p class="hero-note"><svg class="ic"><use href="#i-check-circle"/></svg>Pesanan dibuat dan dipantau lewat akun Arenka.</p>
       <div class="hero-film">
-        <video id="hero-film" width="1280" height="720" muted loop playsinline preload="none" poster="/assets/img/hero-pelabuhan-poster.webp" aria-hidden="true"></video>
+        <video id="hero-film" width="960" height="427" muted loop playsinline preload="none" poster="/assets/img/hero-arenka-motion-poster.webp" aria-hidden="true"></video>
       </div>
       <div class="hero-bottom">
         <div class="hero-stats">
@@ -1307,14 +1308,20 @@ const ARENKA = {
   const film = $('#hero-film');
   const motionPreference = matchMedia('(prefers-reduced-motion: reduce)');
   let filmVisible = false;
+  let filmVariant = '';
   const syncFilm = () => {
     if (!filmVisible || document.hidden || motionPreference.matches || navigator.connection?.saveData || root.classList.contains('paused')) {
       film.pause();
       return;
     }
-    if (!film.hasAttribute('src')) {
-      const size = matchMedia('(max-width: 767px)').matches ? 'sm' : 'lg';
-      film.src = '/assets/img/hero-pelabuhan-' + size + '.mp4';
+    const size = matchMedia('(max-width: 767px)').matches ? 'sm' : 'lg';
+    const supportsWebM = film.canPlayType('video/webm; codecs="vp8"');
+    const variant = supportsWebM ? size : 'fallback';
+    if (filmVariant !== variant) {
+      filmVariant = variant;
+      film.src = supportsWebM
+        ? '/assets/img/hero-arenka-motion-' + size + '.webm'
+        : '/assets/img/hero-arenka-motion-fallback.mp4';
     }
     film.play().catch(() => {});
   };
@@ -1323,6 +1330,7 @@ const ARENKA = {
     syncFilm();
   }).observe(film);
   motionPreference.addEventListener('change', syncFilm);
+  addEventListener('resize', syncFilm, { passive: true });
   document.addEventListener('visibilitychange', syncFilm);
   const setPaused = on => {
     root.classList.toggle('paused', on);
