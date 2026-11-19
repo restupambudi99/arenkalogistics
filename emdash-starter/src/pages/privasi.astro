@@ -2,7 +2,7 @@
 import { env } from "cloudflare:workers";
 const siteUrl = "https://arenkalogistics.com/privasi";
 const enabled = env.INDEXING_ENABLED === "true";
-const updated = "16 November 2026";
+const updated = "19 November 2026";
 ---
 <!doctype html>
 <html lang="id">
@@ -74,10 +74,13 @@ li{margin:4px 0}
   <h2>6. Hak Anda</h2>
   <p>Anda dapat meminta akses, perbaikan, atau penghapusan data pribadi Anda, serta mencabut akses login Google kapan saja. Hubungi kami untuk permintaan tersebut.</p>
 
-  <h2>7. Perubahan Kebijakan</h2>
+  <h2>7. Cookie dan penyimpanan lokal</h2>
+  <p>Cookie yang kami gunakan diperlukan untuk fungsi login: <code>arenka_session</code> menjaga sesi akun, sedangkan <code>arenka_oauth_state</code> membantu mengamankan proses login Google dan dihapus setelah proses tersebut. Pemberitahuan cookie menyimpan pilihan “terima” di penyimpanan lokal browser, bukan sebagai cookie. Saat ini kami tidak menggunakan cookie analitik atau iklan. Penerimaan cookie tidak mempercepat situs; browser menyimpan aset situs dalam cache secara terpisah.</p>
+
+  <h2>8. Perubahan Kebijakan</h2>
   <p>Kami dapat memperbarui kebijakan ini sewaktu-waktu. Versi terbaru akan selalu tersedia di halaman ini dengan tanggal pembaruan.</p>
 
-  <h2>8. Hubungi Kami</h2>
+  <h2>9. Hubungi Kami</h2>
   <p>Email: <a href="mailto:arenkalogistics@gmail.com">arenkalogistics@gmail.com</a><br />
   WhatsApp: <a href="https://wa.me/6285216002219" target="_blank" rel="noopener">+62 852-1600-2219</a><br />
   Alamat: Jalan Anggrek No.1 Green De Jalen</p>
@@ -85,5 +88,6 @@ li{margin:4px 0}
   <a class="back" href="/">&larr; Kembali ke beranda</a>
 </div></main>
 <footer class="foot">Copyright &copy; 2026 Arenka Logistics | All Rights Reserved</footer>
+<script src="/assets/js/cookie-notice.js" defer></script>
 </body>
 </html>
