@@ -1,5 +1,5 @@
 ---
-import { getEmDashCollection, getTermsForEntries } from "emdash";
+import { getEmDashCollection } from "emdash";
 import { Image } from "emdash/ui";
 import Base from "../../layouts/Base.astro";
 
@@ -15,17 +15,6 @@ const {
 });
 if (Astro.cache?.enabled) Astro.cache.set(cacheHint);
 
-// Single batched query for tags across every post, instead of calling
-// getEntryTerms() per post (which would be N round-trips).
-const tagsByEntry = await getTermsForEntries(
-	"posts",
-	posts.map((p) => p.data.id),
-	"tag",
-);
-const postsWithTags = posts.map((post) => ({
-	post,
-	tags: tagsByEntry.get(post.data.id) ?? [],
-}));
 ---
 
 <Base
@@ -37,11 +26,11 @@ const postsWithTags = posts.map((post) => ({
 	<h1>Artikel Impor dan Logistik</h1>
 
 	{
-		postsWithTags.length === 0 ? (
+		posts.length === 0 ? (
 			<p>Artikel baru sedang disiapkan.</p>
 		) : (
 			<ul>
-				{postsWithTags.map(({ post, tags }) => (
+				{posts.map((post) => (
 					<li>
 						<a href={`/posts/${post.id}`}>
 							{post.data.featured_image && (
@@ -50,13 +39,6 @@ const postsWithTags = posts.map((post) => ({
 							<h2 {...post.edit.title}>{post.data.title}</h2>
 						</a>
 						{post.data.excerpt && <p {...post.edit.excerpt}>{post.data.excerpt}</p>}
-						{tags.length > 0 && (
-							<div>
-								{tags.map((t) => (
-									<a href={`/tag/${t.slug}`}>{t.label}</a>
-								))}
-							</div>
-						)}
 					</li>
 				))}
 			</ul>
