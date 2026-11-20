@@ -37,6 +37,7 @@ h1{margin:0 0 6px;font-size:clamp(24px,3.4vw,32px);font-weight:800;color:var(--h
 select,input{font:400 15px var(--font);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:#fff}
 select:focus,input:focus{outline:none;border-color:var(--heritage-2);box-shadow:0 0 0 3px rgba(11,69,137,.14)}
 table{width:100%;border-collapse:collapse}
+.table-wrap{width:100%;overflow-x:auto}
 th{text-align:left;font-size:12.5px;color:var(--muted);font-weight:700;padding:6px 8px;text-transform:uppercase;letter-spacing:.4px}
 td{padding:6px 8px}
 td input{width:100%}
@@ -61,7 +62,23 @@ td input{width:100%}
 .how ul{padding-left:20px;color:var(--ink)}
 .how li{margin:6px 0}
 .foot{text-align:center;color:var(--muted);font-size:13px;padding:22px}
-@media (max-width:760px){ .results{grid-template-columns:1fr 1fr} th.hidem,td.hidem{display:none} }
+@media (max-width:760px){
+  .results{grid-template-columns:1fr 1fr}
+  th.hidem,td.hidem{display:none}
+  .table-wrap{overflow:visible}
+  .table-wrap table{display:block;width:100%}
+  .table-wrap thead{display:none}
+  .table-wrap :global(#rows){display:grid;gap:12px}
+  .table-wrap :global(#rows tr){display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:12px;border:1px solid var(--line);border-radius:12px;background:#fff}
+  .table-wrap :global(#rows td){display:block;min-width:0;padding:0}
+  .table-wrap :global(#rows td::before){content:attr(data-label);display:block;margin:0 0 5px;color:var(--muted);font-size:11px;font-weight:700;letter-spacing:.03em;text-transform:uppercase}
+  .table-wrap :global(#rows td input){display:block;width:100%;min-width:0;padding:9px 10px}
+  .table-wrap :global(#rows td:nth-child(5)){display:none}
+  .table-wrap :global(#rows td:nth-child(6)){grid-column:1;display:block;align-self:end}
+  .table-wrap :global(#rows td:last-child){grid-column:2;display:flex;justify-content:flex-end;align-items:flex-end;align-self:end}
+  .table-wrap :global(#rows td:last-child .del){width:40px;height:38px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--muted);font-size:20px;line-height:1}
+  .table-wrap :global(#rows td:last-child::before){content:none}
+}
 @media (max-width:460px){ .results{grid-template-columns:1fr} }
 </style>
 </head>
@@ -87,7 +104,7 @@ td input{width:100%}
         <option value="kg" selected>Kilogram (kg)</option>
       </select>
     </div>
-    <div style="overflow-x:auto">
+    <div class="table-wrap">
       <table>
         <thead><tr>
           <th>Panjang</th><th>Lebar</th><th>Tinggi</th><th>Jumlah</th><th class="hidem">Berat/karton</th><th>CBM</th><th></th>
@@ -129,12 +146,12 @@ td input{width:100%}
   function num(v){ v=parseFloat(String(v).replace(",",".")); return isFinite(v)&&v>0?v:0; }
   function newRow(){
     var tr=document.createElement("tr");
-    tr.innerHTML='<td><input type="number" min="0" step="any" class="p" placeholder="0"></td>'+
-      '<td><input type="number" min="0" step="any" class="l" placeholder="0"></td>'+
-      '<td><input type="number" min="0" step="any" class="t" placeholder="0"></td>'+
-      '<td><input type="number" min="0" step="1" class="q" placeholder="1" value="1"></td>'+
-      '<td class="hidem"><input type="number" min="0" step="any" class="w" placeholder="0"></td>'+
-      '<td><span class="cbm">0</span></td>'+
+    tr.innerHTML='<td data-label="Panjang"><input type="number" min="0" step="any" class="p" aria-label="Panjang karton" placeholder="0"></td>'+
+      '<td data-label="Lebar"><input type="number" min="0" step="any" class="l" aria-label="Lebar karton" placeholder="0"></td>'+
+      '<td data-label="Tinggi"><input type="number" min="0" step="any" class="t" aria-label="Tinggi karton" placeholder="0"></td>'+
+      '<td data-label="Jumlah karton"><input type="number" min="0" step="1" class="q" aria-label="Jumlah karton" placeholder="1" value="1"></td>'+
+      '<td class="hidem" data-label="Berat per karton"><input type="number" min="0" step="any" class="w" placeholder="0"></td>'+
+      '<td data-label="Volume CBM"><span class="cbm">0</span></td>'+
       '<td><button type="button" class="del" aria-label="Hapus baris">&times;</button></td>';
     rowsEl.appendChild(tr);
     tr.querySelector(".del").addEventListener("click",function(){ tr.remove(); if(!rowsEl.children.length) newRow(); recalc(); });
