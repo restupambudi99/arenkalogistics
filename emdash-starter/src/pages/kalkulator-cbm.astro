@@ -36,11 +36,18 @@ h1{margin:0 0 6px;font-size:clamp(24px,3.4vw,32px);font-weight:800;color:var(--h
 .unit-row label{font-weight:700;color:var(--heritage);font-size:14px}
 select,input{font:400 15px var(--font);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:#fff}
 select:focus,input:focus{outline:none;border-color:var(--heritage-2);box-shadow:0 0 0 3px rgba(11,69,137,.14)}
-table{width:100%;border-collapse:collapse}
-.table-wrap{width:100%;overflow-x:auto}
+table{width:100%;min-width:0;border-collapse:collapse;table-layout:fixed}
+.table-wrap{width:100%;overflow:visible}
 th{text-align:left;font-size:12.5px;color:var(--muted);font-weight:700;padding:6px 8px;text-transform:uppercase;letter-spacing:.4px}
 td{padding:6px 8px}
-td input{width:100%}
+th:nth-child(1),td:nth-child(1),th:nth-child(2),td:nth-child(2),th:nth-child(3),td:nth-child(3){width:15%}
+th:nth-child(4),td:nth-child(4){width:13%}
+th:nth-child(5),td:nth-child(5){width:18%}
+th:nth-child(6),td:nth-child(6){width:14%}
+th:nth-child(7),td:nth-child(7){width:10%}
+:global(#rows td){min-width:0}
+:global(#rows td input){display:block;width:100%;min-width:0;padding:9px 8px;font-size:14px}
+:global(#rows td .cbm){white-space:nowrap;font-size:14px}
 .rows td .cbm{font-weight:700;color:var(--heritage)}
 .del{border:0;background:transparent;color:#c0392b;font-weight:800;cursor:pointer;font-size:18px;line-height:1;padding:4px 8px}
 .addrow{margin-top:10px;display:inline-flex;align-items:center;gap:8px;background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:8px 14px;font-weight:700;color:var(--heritage);cursor:pointer}
