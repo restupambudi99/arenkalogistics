@@ -41,11 +41,12 @@ img,svg{max-width:100%}
 a{color:inherit}
 button{font:inherit;color:inherit}
 h1,h2,h3,h4,p,figure,dl,dd{margin:0}
-h1,h2,h3,h4{font-weight:760;line-height:1.1;letter-spacing:-.045em;color:var(--heritage);text-wrap:balance}
+h1,h2,h3,h4{font-weight:600;line-height:1.1;letter-spacing:-.02em;color:var(--heritage);text-wrap:balance}
+h1{letter-spacing:-.03em}
 h1{font-size:clamp(40px,5.9vw,88px)}
 h2{font-size:clamp(32px,3.7vw,52px)}
-h3{font-size:clamp(22px,1.8vw,26px);letter-spacing:-.03em}
-h4{font-size:19px;letter-spacing:-.02em}
+h3{font-size:clamp(22px,1.8vw,26px);letter-spacing:-.01em}
+h4{font-size:19px;letter-spacing:0}
 :focus-visible{outline:3px solid var(--lime);outline-offset:3px;box-shadow:0 0 0 6px var(--heritage)}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .sprite{position:absolute;width:0;height:0;overflow:hidden}
@@ -61,7 +62,7 @@ h4{font-size:19px;letter-spacing:-.02em}
 /* text accents */
 .hl{background:linear-gradient(180deg,transparent 58%,var(--lime) 58%,var(--lime) 90%,transparent 90%);-webkit-box-decoration-break:clone;box-decoration-break:clone;padding-inline:.04em}
 .on-dark .hl{background:none;color:var(--lime);padding:0}
-.eyebrow{display:flex;align-items:center;gap:10px;color:var(--heritage);font-size:12px;font-weight:750;line-height:1.5;letter-spacing:.12em;text-transform:uppercase}
+.eyebrow{display:flex;align-items:center;gap:10px;color:var(--heritage);font-size:13px;font-weight:600;line-height:1.5;letter-spacing:0}
 .eyebrow::before{content:"";width:24px;height:4px;border-radius:3px;background:var(--lime);box-shadow:0 0 0 1px rgba(0,46,98,.12)}
 .on-dark .eyebrow{color:var(--lime)}
 .on-dark .eyebrow::before{box-shadow:none}
@@ -73,22 +74,22 @@ h4{font-size:19px;letter-spacing:-.02em}
 .center .lead{margin-inline:auto}
 
 /* buttons */
-.btn{position:relative;isolation:isolate;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:54px;max-width:100%;padding:14px 25px;border:1px solid transparent;border-radius:9px;font-size:14px;font-weight:750;line-height:1.4;text-decoration:none;cursor:pointer;transition:background .2s,box-shadow .2s,translate .2s,border-color .2s}
+.btn{position:relative;isolation:isolate;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:54px;max-width:100%;padding:14px 25px;border:1px solid transparent;border-radius:9px;font-size:14px;font-weight:600;line-height:1.4;text-decoration:none;cursor:pointer;transition:background .2s,box-shadow .2s,translate .2s,border-color .2s}
 .btn:hover{translate:0 -2px;box-shadow:0 12px 26px rgba(0,27,58,.16)}
 .btn .ic{width:19px;height:19px}
-.btn-lime{background:var(--lime);color:var(--heritage);border-color:var(--lime-edge);box-shadow:0 8px 22px rgba(169,199,0,.32)}
-.btn-lime::after{content:"";position:absolute;inset:0 auto 0 -60%;width:45%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.65),transparent);transform:skewX(-18deg);animation:shine 5.5s ease-in-out infinite;z-index:-1}
+.btn-lime{background:var(--lime);color:var(--heritage);border-color:var(--lime-edge);box-shadow:0 1px 2px rgba(0,0,0,.05)}
+
 .btn-blue{background:var(--heritage);color:var(--white)}
 .btn-blue:hover{background:var(--heritage-2)}
 .btn-ghost{background:rgba(255,255,255,.72);color:var(--heritage);border-color:#b9c8dc;backdrop-filter:blur(4px)}
 .btn-ghost:hover{border-color:var(--heritage)}
 .btn-block{width:100%;justify-content:space-between}
 .btn-sm{min-height:44px;padding:10px 18px;font-size:13px}
-.link-arrow{display:inline-flex;align-items:center;gap:10px;color:var(--heritage);font-size:14px;font-weight:750;text-decoration:none}
+.link-arrow{display:inline-flex;align-items:center;gap:10px;color:var(--heritage);font-size:14px;font-weight:600;text-decoration:none}
 .link-arrow .ic{transition:translate .2s}
 .link-arrow:hover .ic{translate:3px 0}
 .on-dark .link-arrow{color:var(--lime)}
-@keyframes shine{0%,62%{left:-60%}100%{left:130%}}
+
 
 /* header */
 .site-header{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--white)}
@@ -96,7 +97,7 @@ h4{font-size:19px;letter-spacing:-.02em}
 .brand{display:inline-flex;align-items:center;width:fit-content;text-decoration:none}
 .logo{height:38px;width:auto;--logo-ink:var(--heritage);--logo-sub:var(--muted)}
 .logo-light{--logo-ink:#ffffff;--logo-sub:var(--on-dark)}
-.main-nav{display:flex;align-items:center;gap:28px;font-size:13px;font-weight:650}
+.main-nav{display:flex;align-items:center;gap:28px;font-size:13px;font-weight:600}
 .main-nav>a,.dd>summary{display:inline-flex;align-items:center;gap:6px;padding:8px 0;color:var(--heritage);text-decoration:none;cursor:pointer;list-style:none}
 .dd>summary::-webkit-details-marker{display:none}
 .main-nav>a:hover,.dd>summary:hover{color:var(--heritage-2)}
@@ -105,7 +106,7 @@ h4{font-size:19px;letter-spacing:-.02em}
 .dd[open]>summary .ic{rotate:180deg}
 .dd-panel{position:absolute;left:50%;top:calc(100% + 14px);translate:-50% 0;min-width:240px;padding:12px;border:1px solid var(--line);border-radius:16px;background:var(--white);box-shadow:0 24px 60px rgba(0,27,58,.16);animation:dropdown-in .18s ease-out}
 .dd-wide{width:min(560px,90vw)}
-.dd-label{padding:4px 10px 10px;color:var(--muted);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.dd-label{padding:4px 10px 10px;color:var(--muted);font-size:12px;font-weight:600}
 .dd-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
 .dd-item{display:flex;gap:12px;align-items:flex-start;padding:12px;border-radius:12px;text-decoration:none;color:var(--heritage)}
 .dd-item:hover{background:var(--soft)}
@@ -113,17 +114,17 @@ h4{font-size:19px;letter-spacing:-.02em}
 .dd-item small{display:block;color:var(--muted);font-size:12px;font-weight:500;line-height:1.45;margin-top:2px}
 .dd-ic{display:grid;place-items:center;width:36px;height:36px;border-radius:10px;background:var(--lime);color:var(--heritage);flex:none}
 .dd-list{display:grid;gap:2px}
-.dd-list a{padding:10px 12px;border-radius:10px;text-decoration:none;color:var(--heritage);font-weight:650}
+.dd-list a{padding:10px 12px;border-radius:10px;text-decoration:none;color:var(--heritage);font-weight:600}
 .dd-list a:hover{background:var(--soft)}
 @keyframes dropdown-in{from{opacity:0;translate:-50% -6px}}
 .header-actions{justify-self:end;display:flex;align-items:center;gap:14px}
 .kurs{display:grid;padding:6px 12px;border-radius:9px;background:var(--soft);line-height:1.35}
 .kurs span{color:var(--muted);font-size:11px;font-weight:600}
-.kurs b{color:var(--heritage);font-size:14px;font-weight:750;font-variant-numeric:tabular-nums;white-space:nowrap}
+.kurs b{color:var(--heritage);font-size:14px;font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
 .burger{display:none;place-items:center;width:44px;height:44px;border:0;border-radius:10px;background:transparent;color:var(--heritage);cursor:pointer}
 .burger .ic{width:24px;height:24px}
 .header-line{height:3px;background:linear-gradient(90deg,var(--heritage) 0 70%,var(--lime) 70% 100%)}
-.skip{position:fixed;left:12px;top:8px;z-index:100;translate:0 -200%;padding:10px 18px;border-radius:8px;background:var(--heritage);color:var(--white);font-weight:700;text-decoration:none}
+.skip{position:fixed;left:12px;top:8px;z-index:100;translate:0 -200%;padding:10px 18px;border-radius:8px;background:var(--heritage);color:var(--white);font-weight:600;text-decoration:none}
 .skip:focus{translate:0 0}
 
 /* drawer */
@@ -133,8 +134,8 @@ h4{font-size:19px;letter-spacing:-.02em}
 @keyframes drawer-in{from{translate:30px 0;opacity:0}}
 .drawer-head{display:flex;align-items:center;justify-content:space-between;padding:calc(16px + env(safe-area-inset-top,0px)) 20px 16px;border-bottom:1px solid var(--line)}
 .drawer-body{flex:1;overflow:auto;padding:12px 20px 24px}
-.drawer-body p{margin:14px 0 6px;color:var(--muted);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
-.drawer-body a{display:flex;justify-content:space-between;align-items:center;padding:13px 4px;border-bottom:1px solid var(--soft-2);color:var(--heritage);font-weight:650;text-decoration:none}
+.drawer-body p{margin:14px 0 6px;color:var(--muted);font-size:12px;font-weight:600}
+.drawer-body a{display:flex;justify-content:space-between;align-items:center;padding:13px 4px;border-bottom:1px solid var(--soft-2);color:var(--heritage);font-weight:600;text-decoration:none}
 .drawer-foot{display:grid;gap:10px;padding:16px 20px calc(16px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line)}
 .icon-btn{display:grid;place-items:center;width:42px;height:42px;border:1px solid var(--line);border-radius:50%;background:var(--white);color:var(--heritage);cursor:pointer}
 
@@ -152,13 +153,13 @@ h4{font-size:19px;letter-spacing:-.02em}
 }
 .hero::before{content:"";position:absolute;inset:0;z-index:-2;background:linear-gradient(90deg,rgba(245,249,253,.95) 0%,rgba(245,249,253,.84) 36%,rgba(245,249,253,.32) 60%,rgba(245,249,253,0) 100%),linear-gradient(0deg,rgba(230,240,250,.55),transparent 45%)}
 .hero-inner{display:grid;gap:22px}
-.route{display:flex;align-items:center;gap:16px;color:var(--heritage);font-size:15px;font-weight:800;letter-spacing:.2em;margin-bottom:6px}
-.route .dot{width:12px;height:12px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 2px var(--heritage);animation:halo 2.4s ease-out infinite}
+.route{display:flex;align-items:center;gap:16px;color:var(--heritage);font-size:15px;font-weight:600;letter-spacing:0;margin-bottom:6px}
+.route .dot{width:12px;height:12px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 2px var(--heritage)}
 .route-line{width:86px;height:3px;background:linear-gradient(90deg,var(--heritage),var(--lime));position:relative}
 .route-line::after{content:"";position:absolute;right:-3px;top:-5px;border:6px solid transparent;border-left:9px solid var(--lime)}
-@keyframes halo{0%{box-shadow:0 0 0 2px var(--heritage),0 0 0 0 rgba(208,246,0,.8)}100%{box-shadow:0 0 0 2px var(--heritage),0 0 0 12px rgba(208,246,0,0)}}
+
 .hero h1{line-height:1.02}
-.hero-sub{min-height:1.5em;font-size:clamp(19px,1.6vw,23px);font-weight:700;letter-spacing:-.02em;color:var(--heritage)}
+.hero-sub{min-height:1.5em;font-size:clamp(19px,1.6vw,23px);font-weight:600;letter-spacing:-.01em;color:var(--heritage)}
 .rot{display:inline-block}
 .rot.in{animation:copy-in .5s ease-out}
 @keyframes copy-in{from{opacity:0;translate:0 10px}}
@@ -171,12 +172,13 @@ h4{font-size:19px;letter-spacing:-.02em}
 .hero-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;min-width:0;padding:18px 26px;border:1px solid rgba(255,255,255,.8);border-radius:16px;background:rgba(255,255,255,.55);box-shadow:0 12px 30px rgba(10,50,100,.1);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
 .hero-stats>div{display:flex;flex-direction:column;gap:6px;min-width:0}
 .hero-stats>div+div{padding-left:28px;border-left:1px solid rgba(0,46,98,.16)}
-.num{color:var(--heritage);font-size:clamp(28px,2.6vw,38px);font-weight:780;letter-spacing:-.04em;line-height:1;font-variant-numeric:tabular-nums}
+.num{color:var(--heritage);font-size:clamp(28px,2.6vw,38px);font-weight:600;letter-spacing:-.02em;line-height:1;font-variant-numeric:tabular-nums}
+.num-word{font-variant-numeric:normal}
 .num .ph{font-size:.62em;letter-spacing:0;vertical-align:middle}
 .hero-stats span.lbl{color:#3d5172;font-size:12px;font-weight:600}
-.hero-find{display:inline-flex;align-items:center;gap:12px;color:var(--heritage);font-size:13px;font-weight:700;line-height:1.35;text-decoration:none}
-.hero-find .ic{display:grid;width:38px;height:38px;padding:9px;border-radius:50%;background:var(--lime);color:var(--heritage);animation:nudge 2s ease-in-out infinite}
-@keyframes nudge{50%{translate:0 4px}}
+.hero-find{display:inline-flex;align-items:center;gap:12px;color:var(--heritage);font-size:13px;font-weight:600;line-height:1.35;text-decoration:none}
+.hero-find .ic{display:grid;width:38px;height:38px;padding:9px;border-radius:50%;background:var(--lime);color:var(--heritage)}
+
 
 /* sections */
 .section{padding-block:96px}
@@ -194,14 +196,14 @@ h4{font-size:19px;letter-spacing:-.02em}
 .svc-media svg,.svc-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .svc-media::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,22,48,.9) 0%,rgba(0,22,48,.35) 38%,transparent 62%)}
 .svc-caption{position:absolute;left:30px;right:30px;bottom:28px;z-index:1;display:grid;gap:12px;justify-items:start}
-.tag{display:inline-block;padding:5px 10px;border-radius:4px;background:var(--lime);color:var(--heritage);font-size:11px;font-weight:800;letter-spacing:.12em}
-.svc-caption strong{color:var(--white);font-size:clamp(22px,2vw,28px);font-weight:760;letter-spacing:-.03em;line-height:1.2}
+.tag{display:inline-block;padding:5px 10px;border-radius:4px;background:var(--lime);color:var(--heritage);font-size:12px;font-weight:600}
+.svc-caption strong{color:var(--white);font-size:clamp(22px,2vw,28px);font-weight:600;letter-spacing:-.01em;line-height:1.2}
 .svc-body{display:grid;align-content:start;gap:18px;padding:clamp(28px,3.4vw,44px)}
-.svc-body h3{font-size:clamp(38px,3.4vw,50px);letter-spacing:-.05em;line-height:1}
+.svc-body h3{font-size:clamp(38px,3.4vw,50px);letter-spacing:-.03em;line-height:1}
 .svc-body h4{font-size:clamp(19px,1.5vw,22px);line-height:1.25}
 .svc-body>p{color:var(--muted)}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
-.chip{display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border:1px solid var(--line);border-radius:7px;background:var(--soft);color:var(--heritage);font-size:12px;font-weight:650}
+.chip{display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border:1px solid var(--line);border-radius:7px;background:var(--soft);color:var(--heritage);font-size:12px;font-weight:600}
 .chip-lg{padding:9px 15px;font-size:13px}
 .sub-tiles{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .sub-tile{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--lime-edge);border-radius:11px;background:#fbffe9;color:var(--heritage);text-decoration:none;transition:background .2s,translate .2s}
@@ -225,8 +227,8 @@ h4{font-size:19px;letter-spacing:-.02em}
 .mode-media svg,.mode-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .mode-media::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,22,48,.88),rgba(0,22,48,.15) 60%,transparent)}
 .mode-label{position:absolute;left:22px;bottom:16px;z-index:1;display:grid;gap:4px}
-.mode-label small{color:var(--lime);font-size:11px;font-weight:750;letter-spacing:.12em}
-.mode-label b{color:var(--white);font-size:30px;font-weight:780;letter-spacing:-.04em;line-height:1}
+.mode-label small{color:var(--lime);font-size:12px;font-weight:600}
+.mode-label b{color:var(--white);font-size:30px;font-weight:600;letter-spacing:-.02em;line-height:1}
 .mode-badge{position:absolute;top:16px;right:16px;z-index:1;display:grid;place-items:center;width:42px;height:42px;border-radius:10px;background:var(--lime);color:var(--heritage)}
 .mode-body{display:grid;gap:16px;padding:22px 24px 24px;flex:1}
 .mode-body p{color:#3d5172;font-size:15px;line-height:1.65}
@@ -265,14 +267,14 @@ h4{font-size:19px;letter-spacing:-.02em}
 .benefit-track{grid-auto-columns:calc((100% - 88px)/3);gap:40px 44px}
 .static-lg .benefit-track{grid-auto-flow:row;grid-template-columns:repeat(3,minmax(0,1fr));overflow:visible}
 .benefit{display:grid;align-content:start;gap:14px;padding-top:26px;border-top:1px solid #bfcde3;min-width:0}
-.bubble{display:grid;place-items:center;width:52px;height:52px;border-radius:50%;background:var(--lime);color:var(--heritage)}
+.bubble{display:grid;place-items:center start;width:auto;height:40px;color:var(--heritage)}
 .bubble .ic{width:24px;height:24px}
 .benefit h3{font-size:clamp(20px,1.6vw,23px)}
 .benefit p{color:var(--muted);font-size:15px;line-height:1.7}
 
 /* process */
 .tabs{display:flex;width:max-content;max-width:100%;margin:0 auto 42px;padding:5px;border-radius:12px;background:var(--soft)}
-.tabs button{min-width:140px;padding:11px 20px;border:0;border-radius:9px;background:transparent;color:var(--muted);font-size:14px;font-weight:700;cursor:pointer}
+.tabs button{min-width:140px;padding:11px 20px;border:0;border-radius:9px;background:transparent;color:var(--muted);font-size:14px;font-weight:600;cursor:pointer}
 .tabs button[aria-selected="true"]{background:var(--heritage);color:var(--white);box-shadow:0 6px 16px rgba(0,46,98,.25)}
 .steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:20px;padding:0;margin:0;list-style:none}
 .steps-nav{display:none}
@@ -280,9 +282,9 @@ h4{font-size:19px;letter-spacing:-.02em}
 .step-media{position:relative;border-radius:12px;overflow:hidden;aspect-ratio:16/10.6;max-width:100%;background:var(--soft-2)}
 .step-media svg{position:absolute;inset:0;width:100%;height:100%}
 .step-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 34%}
-.step-no{position:absolute;left:10px;bottom:10px;display:grid;place-items:center;min-width:34px;height:30px;padding:0 8px;border-radius:7px;background:var(--lime);color:var(--heritage);font-size:13px;font-weight:800;font-variant-numeric:tabular-nums}
-.step small{color:var(--heritage-2);font-size:11px;font-weight:750;letter-spacing:.08em;text-transform:uppercase}
-.step h3{font-size:clamp(17px,1.3vw,19px);line-height:1.25;letter-spacing:-.02em}
+.step-no{position:absolute;left:10px;bottom:10px;display:grid;place-items:center;min-width:34px;height:30px;padding:0 8px;border-radius:7px;background:var(--lime);color:var(--heritage);font-size:13px;font-weight:600;font-variant-numeric:tabular-nums}
+.step small{color:var(--heritage-2);font-size:12px;font-weight:600}
+.step h3{font-size:clamp(17px,1.3vw,19px);line-height:1.25;letter-spacing:0}
 .step p{color:var(--muted);font-size:14px;line-height:1.65}
 .steps-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;margin-top:30px;padding-top:24px;border-top:1px solid var(--line)}
 .steps-foot p{display:flex;gap:10px;align-items:center;color:var(--muted);font-size:14px}
@@ -305,15 +307,15 @@ h4{font-size:19px;letter-spacing:-.02em}
 .feature-art{position:relative;min-height:330px}
 .feature-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .feature-copy{display:grid;align-content:center;gap:20px;padding:clamp(28px,4vw,52px)}
-.feature-copy p:not(.eyebrow){color:var(--white);font-size:clamp(24px,2.3vw,32px);font-weight:500;line-height:1.3;letter-spacing:-.025em}
-.feature-copy p b{color:var(--lime);font-weight:700}
+.feature-copy p:not(.eyebrow){color:var(--white);font-size:clamp(24px,2.3vw,32px);font-weight:500;line-height:1.3;letter-spacing:-.01em}
+.feature-copy p b{color:var(--lime);font-weight:600}
 .quote{display:flex;flex-direction:column;gap:22px;padding:26px 24px;border-radius:16px;background:var(--white);color:var(--ink);min-width:0}
 .quote-image{display:block;align-self:start;padding:0;overflow:hidden;background:#fff}
 .quote-image img{display:block;width:100%;height:auto}
-.quote-mark{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--lime);color:var(--heritage);font-size:30px;font-weight:800;line-height:1;padding-top:12px}
+.quote-mark{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--lime);color:var(--heritage);font-size:30px;font-weight:600;line-height:1;padding-top:12px}
 .quote blockquote{margin:0;flex:1;color:#3d5172;font-size:15px;line-height:1.75}
 .quote figcaption{display:flex;align-items:center;gap:12px}
-.avatar{display:grid;place-items:center;width:46px;height:46px;border-radius:50%;background:var(--soft-2);color:var(--heritage);font-weight:800;font-size:14px;flex:none}
+.avatar{display:grid;place-items:center;width:46px;height:46px;border-radius:50%;background:var(--soft-2);color:var(--heritage);font-weight:600;font-size:14px;flex:none}
 .quote figcaption b{display:block;color:var(--heritage);font-size:14px}
 .quote figcaption small{display:block;color:var(--muted);font-size:12px}
 .testi .slider-btn{background:transparent;border-color:rgba(255,255,255,.35);color:var(--white)}
@@ -327,7 +329,7 @@ h4{font-size:19px;letter-spacing:-.02em}
 .faq-intro .btn{margin-top:10px}
 .faq-list{border-top:1px solid var(--line)}
 .faq-list details{border-bottom:1px solid var(--line)}
-.faq-list summary{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:20px 0;color:var(--heritage);font-size:16px;font-weight:700;line-height:1.4;cursor:pointer;list-style:none}
+.faq-list summary{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:20px 0;color:var(--heritage);font-size:16px;font-weight:600;line-height:1.4;cursor:pointer;list-style:none}
 .faq-list summary::-webkit-details-marker{display:none}
 .faq-list summary .pm{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--soft);flex:none;transition:rotate .2s,background .2s}
 .faq-list details[open] summary .pm{rotate:45deg;background:var(--lime)}
@@ -353,14 +355,14 @@ h4{font-size:19px;letter-spacing:-.02em}
 .contact-list li{display:flex;gap:16px;align-items:flex-start}
 .contact-list .ic{width:22px;height:22px;margin-top:2px;color:var(--heritage)}
 .contact-list small{display:block;color:var(--muted);font-size:12px;font-weight:600}
-.contact-list b,.contact-list a{color:var(--heritage);font-size:15px;font-weight:700;text-decoration:none;overflow-wrap:anywhere}
+.contact-list b,.contact-list a{color:var(--heritage);font-size:15px;font-weight:600;text-decoration:none;overflow-wrap:anywhere}
 .contact-list a:hover{text-decoration:underline}
 .form-card{padding:clamp(24px,3vw,36px);border-radius:18px;background:var(--white);box-shadow:0 18px 50px rgba(0,27,58,.09);border-top:4px solid var(--lime)}
 .form-card h3{font-size:clamp(21px,1.7vw,24px)}
 .form-card>p,.form-step>p{margin-top:6px;color:var(--muted);font-size:14px}
 .form-grid{display:grid;gap:18px;margin-top:24px}
 .field{display:grid;gap:7px}
-.field label{color:var(--heritage);font-size:13px;font-weight:700}
+.field label{color:var(--heritage);font-size:13px;font-weight:600}
 .field label span{color:var(--muted);font-weight:500}
 .field input,.field select,.field textarea{width:100%;padding:13px 14px;border:1px solid #c6d3e4;border-radius:10px;background:var(--white);color:var(--ink);font:500 15px/1.5 var(--font)}
 .field textarea{min-height:110px;resize:vertical}
@@ -369,7 +371,7 @@ h4{font-size:19px;letter-spacing:-.02em}
 .fine{display:flex;gap:8px;align-items:center;color:var(--muted);font-size:12px}
 .form-step textarea{min-height:170px}
 .form-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
-.btn-text{border:0;background:none;color:var(--heritage);font-weight:700;font-size:14px;cursor:pointer;padding:10px 4px}
+.btn-text{border:0;background:none;color:var(--heritage);font-weight:600;font-size:14px;cursor:pointer;padding:10px 4px}
 .notice{padding:12px 14px;border-radius:10px;background:#fff8db;color:#6b4e00;font-size:13px;line-height:1.5}
 
 /* footer */
@@ -382,32 +384,32 @@ h4{font-size:19px;letter-spacing:-.02em}
 .site-footer ul a{color:var(--on-dark);text-decoration:none}
 .site-footer ul a:hover{color:var(--white)}
 .footer-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;margin-top:44px;padding-block:22px calc(22px + env(safe-area-inset-bottom,0px));border-top:1px solid rgba(255,255,255,.12);font-size:13px}
-.motion-toggle{display:inline-flex;align-items:center;gap:8px;border:0;background:none;color:var(--white);font-size:13px;font-weight:650;cursor:pointer}
+.motion-toggle{display:inline-flex;align-items:center;gap:8px;border:0;background:none;color:var(--white);font-size:13px;font-weight:600;cursor:pointer}
 
 /* floating launcher + help dialog */
 .launcher{position:fixed;right:calc(22px + env(safe-area-inset-right,0px));bottom:calc(22px + env(safe-area-inset-bottom,0px));z-index:45;display:flex;align-items:center;gap:12px;padding:8px 22px 8px 8px;border:2px solid var(--lime);border-radius:999px;background:var(--heritage);color:var(--white);text-align:left;cursor:pointer;box-shadow:0 16px 36px rgba(0,27,58,.35)}
-.launcher::before,.launcher::after{content:"";position:absolute;inset:-6px;border:2px solid var(--lime);border-radius:inherit;pointer-events:none;animation:ripple 2.6s ease-out infinite;z-index:-1}
+.launcher::before,.launcher::after{content:none}
 .launcher::after{animation-delay:1.3s}
-@keyframes ripple{from{opacity:.8;transform:scale(1)}to{opacity:0;transform:scale(1.18)}}
-.wa-dot{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--wa);color:var(--white);animation:wiggle 4s ease-in-out infinite}
+
+.wa-dot{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--wa);color:var(--white)}
 .wa-dot .ic{width:24px;height:24px}
-@keyframes wiggle{0%,86%,100%{rotate:0}89%{rotate:-12deg}92%{rotate:12deg}95%{rotate:-6deg}}
+
 .launcher b{display:block;font-size:15px;line-height:1.2}
-.launcher small{display:flex;align-items:center;gap:6px;color:var(--lime);font-size:12px;font-weight:650}
+.launcher small{display:flex;align-items:center;gap:6px;color:var(--lime);font-size:12px;font-weight:600}
 .help{width:min(480px,calc(100% - 32px));max-height:calc(100dvh - 48px);padding:0;border:0;border-radius:24px;background:var(--white);color:var(--ink);box-shadow:0 28px 100px rgba(1,24,52,.4);overflow:hidden}
 .help[open]{display:flex;flex-direction:column;animation:dialog-in .25s ease-out}
 .help::backdrop{background:rgba(7,21,43,.6);backdrop-filter:blur(5px)}
 @keyframes dialog-in{from{opacity:0;translate:0 14px}}
 .help-head{display:flex;align-items:center;gap:14px;padding:18px 20px;background:var(--heritage);color:var(--white);border-bottom:4px solid var(--lime)}
 .help-head .avatar{width:52px;height:52px;background:var(--lime);color:var(--heritage);font-size:16px;box-shadow:0 0 0 3px rgba(255,255,255,.9)}
-.help-head h2{color:var(--white);font-size:20px;letter-spacing:-.02em}
+.help-head h2{color:var(--white);font-size:20px;letter-spacing:0}
 .help-head p{color:var(--on-dark);font-size:12px}
 .help-head .icon-btn{margin-left:auto;background:transparent;border-color:var(--lime);color:var(--white)}
 .help-body{flex:1;overflow:auto;display:grid;gap:10px;align-content:start;padding:16px 18px;background:#f2f5fa}
-.help-body .day{justify-self:center;color:var(--muted);font-size:11px;font-weight:700;letter-spacing:.08em}
+.help-body .day{justify-self:center;color:var(--muted);font-size:12px;font-weight:600}
 .bubble-msg{max-width:92%;padding:12px 14px;border-radius:4px 14px 14px 14px;background:var(--white);font-size:14px;line-height:1.6;box-shadow:0 2px 6px rgba(0,27,58,.06)}
 .quick{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
-.quick button{padding:7px 12px;border:1px solid var(--heritage);border-radius:999px;background:var(--white);color:var(--heritage);font-size:12px;font-weight:700;cursor:pointer}
+.quick button{padding:7px 12px;border:1px solid var(--heritage);border-radius:999px;background:var(--white);color:var(--heritage);font-size:12px;font-weight:600;cursor:pointer}
 .quick button:hover{background:var(--lime)}
 .help-foot{display:grid;gap:8px;padding:14px 18px calc(14px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line)}
 .help-input{display:flex;gap:10px;align-items:flex-end}
@@ -469,7 +471,7 @@ html.paused *,html.paused *::before,html.paused *::after{animation-play-state:pa
   .slider-track,.benefit-track{grid-auto-columns:100%}
   #testi-track{grid-auto-columns:100%}
   .benefit-track{gap:24px}
-  .section-head h2{font-size:clamp(26px,7.4vw,36px);letter-spacing:-.04em}
+  .section-head h2{font-size:clamp(26px,7.4vw,36px);letter-spacing:-.02em}
   .section-head{padding-inline:4px}
   .steps{grid-auto-flow:column;grid-auto-columns:100%;grid-template-columns:none;gap:24px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-bottom:4px}
   .steps::-webkit-scrollbar{display:none}
@@ -750,7 +752,7 @@ html.paused *,html.paused *::before,html.paused *::after{animation-play-state:pa
         <span>Kurs hari ini</span>
         <b>¥1 = Rp <span class="ph" data-key="kurs">isi kurs</span></b>
       </div>
-      <a class="btn btn-blue btn-sm" href="#kontak" data-login>MASUK <svg class="ic"><use href="#i-arrow-ur"/></svg></a>
+      <a class="btn btn-blue btn-sm" href="#kontak" data-login>Masuk <svg class="ic"><use href="#i-arrow-ur"/></svg></a>
       <button class="burger" type="button" aria-label="Buka menu" data-open-drawer><svg class="ic"><use href="#i-menu"/></svg></button>
     </div>
   </div>
@@ -786,8 +788,8 @@ html.paused *,html.paused *::before,html.paused *::after{animation-play-state:pa
   <!-- HERO -->
   <section class="hero" aria-labelledby="hero-title">
     <div class="container hero-inner">
-      <p class="route"><span class="dot" aria-hidden="true"></span>CHINA<span class="route-line" aria-hidden="true"></span>INDONESIA</p>
-      <h1 id="hero-title">Import dari China,<br><span class="hl">beres sampai depan pintu.</span></h1>
+      <p class="route"><span class="dot" aria-hidden="true"></span>China<span class="route-line" aria-hidden="true"></span>Indonesia</p>
+      <h1 id="hero-title">Import dari China,<br><span class="hl">beres sampai depan pintu</span></h1>
       <p class="hero-sub"><span class="rot" id="hero-rot">Sudah punya supplier? Kami urus pengirimannya.</span></p>
       <p class="hero-lead">Tim Arenka menangani pembelian, pengecekan barang, pengiriman, dan bea cukai. Anda tinggal memantau prosesnya dari satu akun.</p>
       <div class="hero-cta">
@@ -800,9 +802,9 @@ html.paused *,html.paused *::before,html.paused *::after{animation-play-state:pa
       </div>
       <div class="hero-bottom">
         <div class="hero-stats">
-          <div><b class="num" style="color:#f3761e">1688</b><span class="lbl">Official Partner</span></div>
-          <div><b class="num">450rb<span style="color:#f3761e">+</span></b><span class="lbl">Pesanan Titip Beli</span></div>
-          <div><b class="num">10rb<span style="color:#f3761e">+</span></b><span class="lbl">Kiriman Titip Kirim</span></div>
+          <div><b class="num">4</b><span class="lbl">Pilihan layanan</span></div>
+          <div><b class="num">3</b><span class="lbl">Jalur kirim dari China</span></div>
+          <div><b class="num">1</b><span class="lbl">Akun untuk memantau</span></div>
         </div>
         <a class="hero-find" href="#layanan"><svg class="ic"><use href="#i-arrow-d"/></svg><span>Temukan layanan<br>yang cocok untuk Anda</span></a>
       </div>
@@ -814,19 +816,19 @@ html.paused *,html.paused *::before,html.paused *::after{animation-play-state:pa
     <div class="container">
       <div class="section-head center reveal">
         <p class="eyebrow">Dua cara untuk mulai</p>
-        <h2 id="layanan-title">Supplier sudah di tangan,<br><span class="hl">atau masih mencari?</span></h2>
+        <h2 id="layanan-title">Supplier sudah di tangan,<br>atau masih mencari?</h2>
         <p class="lead">Pilih titik awal Anda. Bagian yang belum Anda pegang, kami lanjutkan.</p>
       </div>
 
       <article class="service-card reveal" id="titip-beli">
         <div class="svc-media">
           <img class="svc-photo" src="/assets/img/titip-beli-office.webp" width="1100" height="947" loading="lazy" decoding="async" alt="Pelanggan menunjukkan barang incaran di aplikasi belanja, dibantu staf Arenka untuk impor dari China">
-          <div class="svc-caption"><span class="tag">TITIP BELI</span><strong>Anda pilih barangnya.<br>Kami yang membelikan.</strong></div>
+          <div class="svc-caption"><span class="tag">Titip Beli</span><strong>Anda pilih barangnya.<br>Kami yang membelikan</strong></div>
         </div>
         <div class="svc-body">
           <p class="eyebrow">01 / Belum punya supplier</p>
-          <h3>Titip Beli.</h3>
-          <h4>Sudah ada barang incaran?<br>Kirim saja linknya.</h4>
+          <h3>Titip Beli</h3>
+          <h4>Sudah ada barang incaran?<br>Kirim saja linknya</h4>
           <p>Kami menghubungi penjual, membayar dalam Yuan, mengecek barang, lalu mengirimnya ke Indonesia.</p>
           <div class="chips"><span class="chip">1688</span><span class="chip">Alibaba</span><span class="chip">Taobao</span><span class="chip">Produk custom</span></div>
           <div class="sub-tiles">
@@ -848,12 +850,12 @@ html.paused *,html.paused *::before,html.paused *::after{animation-play-state:pa
       <article class="service-card flip reveal" id="titip-kirim">
         <div class="svc-media">
           <img class="svc-photo" src="/assets/img/titip-kirim.webp" width="1000" height="1250" loading="lazy" decoding="async" alt="Staf Arenka Logistics memuat kardus ke dalam kontainer pengiriman">
-          <div class="svc-caption"><span class="tag">TITIP KIRIM</span><strong>Supplier sudah siap.<br>Arahkan ke gudang kami.</strong></div>
+          <div class="svc-caption"><span class="tag">Titip Kirim</span><strong>Supplier sudah siap.<br>Arahkan ke gudang kami</strong></div>
         </div>
         <div class="svc-body">
           <p class="eyebrow">02 / Sudah punya supplier</p>
-          <h3>Titip Kirim.</h3>
-          <h4>Belanja tetap di tangan Anda.<br>Perjalanannya urusan kami.</h4>
+          <h3>Titip Kirim</h3>
+          <h4>Belanja tetap di tangan Anda.<br>Perjalanannya urusan kami</h4>
           <p>Minta supplier mengirim ke gudang Arenka di China. Dari sana kami bawa sampai alamat tujuan.</p>
           <div class="chips">
             <span class="chip chip-lg"><svg class="ic"><use href="#i-boxes"/></svg>LCL</span>
@@ -889,7 +891,7 @@ html.paused *,html.paused *::before,html.paused *::after{animation-play-state:pa
               <div class="mode-media">
                 <img class="mode-photo" src="/assets/img/lcl.webp" width="1000" height="563" loading="lazy" decoding="async" alt="Truk Arenka Logistics dimuat kardus di gudang, siap dikirim">
                 <span class="mode-badge"><svg class="ic"><use href="#i-boxes"/></svg></span>
-                <div class="mode-label"><small>LAUT · LESS CONTAINER LOAD</small><b>LCL</b></div>
+                <div class="mode-label"><small>Laut · Less container load</small><b>LCL</b></div>
               </div>
               <div class="mode-body"><p>Volume masih kecil? Barang Anda digabung dengan kiriman lain dalam satu kontainer.</p><small>Cocok untuk tes pasar dan stok awal.</small></div>
             </article>
@@ -897,7 +899,7 @@ html.paused *,html.paused *::before,html.paused *::after{animation-play-state:pa
               <div class="mode-media">
                 <img class="mode-photo" src="/assets/img/fcl.webp" width="1000" height="525" loading="lazy" decoding="async" alt="Staf Arenka Logistics di pelabuhan dengan kapal kontainer, melayani pengiriman satu kontainer penuh">
                 <span class="mode-badge"><svg class="ic"><use href="#i-container"/></svg></span>
-                <div class="mode-label"><small>LAUT · FULL CONTAINER LOAD</small><b>FCL</b></div>
+                <div class="mode-label"><small>Laut · Full container load</small><b>FCL</b></div>
               </div>
               <div class="mode-body"><p>Satu kontainer khusus untuk barang Anda, dari gudang di China sampai tujuan.</p><small>Cocok untuk volume besar yang rutin.</small></div>
             </article>
@@ -905,7 +907,7 @@ html.paused *,html.paused *::before,html.paused *::after{animation-play-state:pa
               <div class="mode-media">
                 <img class="mode-photo" src="/assets/img/udara.webp" width="1000" height="525" loading="lazy" decoding="async" alt="Pesawat kargo Arenka Logistics terbang di atas awan">
                 <span class="mode-badge"><svg class="ic"><use href="#i-plane"/></svg></span>
-                <div class="mode-label"><small>JALUR UDARA</small><b>Air Freight</b></div>
+                <div class="mode-label"><small>Jalur udara</small><b>Air Freight</b></div>
               </div>
               <div class="mode-body"><p>Butuh barang lebih cepat? Diskusikan opsi kargo udara dengan tim kami.</p><small>Jadwal dan tarif mengikuti jenis barang.</small></div>
             </article>
@@ -913,7 +915,7 @@ html.paused *,html.paused *::before,html.paused *::after{animation-play-state:pa
               <div class="mode-media">
                 <img class="mode-photo" src="/assets/img/trucking.webp" width="1000" height="525" loading="lazy" decoding="async" alt="Truk Arenka Logistics mengangkut peti kemas kayu untuk pengiriman proyek">
                 <span class="mode-badge"><svg class="ic"><use href="#i-truck"/></svg></span>
-                <div class="mode-label"><small>JALUR DARAT</small><b>Trucking</b></div>
+                <div class="mode-label"><small>Jalur darat</small><b>Trucking</b></div>
               </div>
               <div class="mode-body"><p>Angkutan darat dalam negeri: dari pelabuhan atau gudang kami sampai lokasi tujuan Anda.</p><small>Cocok untuk kargo proyek dan distribusi antar kota.</small></div>
             </article>
@@ -944,10 +946,10 @@ html.paused *,html.paused *::before,html.paused *::after{animation-play-state:pa
   <section class="proof on-lime" aria-label="Arenka dalam angka">
     <div class="container proof-inner">
       <p class="proof-intro">Mulai dari satu kiriman.<b>Lanjutkan sesuai kebutuhan usaha Anda.</b></p>
-      <div><b class="num" data-count><span class="ph" data-key="stats.packages">angka</span></b><span class="lbl">Paket terkirim</span></div>
-      <div><b class="num" data-count><span class="ph" data-key="stats.customers">angka</span></b><span class="lbl">Pelanggan</span></div>
-      <div><b class="num" data-count><span class="ph" data-key="stats.ontime">angka</span></b><span class="lbl">Tepat waktu</span></div>
-      <div><b class="num" data-count><span class="ph" data-key="stats.satisfaction">angka</span></b><span class="lbl">Kepuasan pelanggan</span></div>
+      <div><b class="num num-word">Dicek</b><span class="lbl">Barang diperiksa sebelum dikirim</span></div>
+      <div><b class="num num-word">Timbang</b><span class="lbl">Ulang sebelum biaya dikonfirmasi</span></div>
+      <div><b class="num num-word">All-in</b><span class="lbl">Rincian biaya di awal</span></div>
+      <div><b class="num num-word">Ke alamat</b><span class="lbl">Rumah, toko, atau gudang</span></div>
       <p class="proof-reach"><svg class="ic"><use href="#i-pin"/></svg><span>Jangkauan pengantaran<br><span class="ph" data-key="coverage">isi area</span></span></p>
     </div>
   </section>
@@ -957,7 +959,7 @@ html.paused *,html.paused *::before,html.paused *::after{animation-play-state:pa
     <div class="container">
       <div class="section-head center reveal">
         <p class="eyebrow">Kenapa Arenka</p>
-        <h2 id="kenapa-title">Urusan import lebih ringan.<br><span class="hl">Fokus Anda tetap di bisnis.</span></h2>
+        <h2 id="kenapa-title">Urusan import lebih ringan.<br>Fokus Anda tetap di bisnis</h2>
       </div>
       <div class="slider static-lg" data-slider>
         <div class="slider-track benefit-track">
@@ -986,7 +988,7 @@ html.paused *,html.paused *::before,html.paused *::after{animation-play-state:pa
     <div class="container">
       <div class="section-head center reveal">
         <p class="eyebrow">Cara kerja Arenka</p>
-        <h2 id="proses-title">Dari gudang di China,<br><span class="hl">sampai di tangan Anda.</span></h2>
+        <h2 id="proses-title">Dari gudang di China,<br>sampai di tangan Anda</h2>
         <p class="lead">Pilih layanan Anda, lalu ikuti lima langkahnya.</p>
       </div>
       <div class="tabs" role="tablist" aria-label="Pilih layanan">
@@ -1015,7 +1017,7 @@ html.paused *,html.paused *::before,html.paused *::after{animation-play-state:pa
     <div class="container mid-inner">
       <div>
         <p class="eyebrow">Siap untuk mulai?</p>
-        <h2 id="mid-title">Rencananya sudah ada?<br>Ayo kirim yang pertama.</h2>
+        <h2 id="mid-title">Rencananya sudah ada?<br>Ayo kirim yang pertama</h2>
       </div>
       <div class="mid-actions">
         <a class="btn btn-blue" href="#kontak">Mulai Import <svg class="ic"><use href="#i-arrow-ur"/></svg></a>
@@ -1029,7 +1031,7 @@ html.paused *,html.paused *::before,html.paused *::after{animation-play-state:pa
     <div class="container">
       <div class="section-head reveal">
         <p class="eyebrow">Cerita pelanggan</p>
-        <h2 id="testi-title">Kata mereka,<br><span class="hl">setelah kirim lewat Arenka.</span></h2>
+        <h2 id="testi-title">Kata mereka,<br>setelah kirim lewat Arenka</h2>
         <p class="lead">Pengalaman pelanggan Arenka, dari kiriman pertama sampai yang sudah rutin.</p>
       </div>
       <div class="feature reveal">
@@ -1041,7 +1043,7 @@ html.paused *,html.paused *::before,html.paused *::after{animation-play-state:pa
         </div>
         <div class="feature-copy">
           <p class="eyebrow">Lebih dari sekadar paket</p>
-          <p>Setiap karton yang kami bawa adalah bagian dari usaha yang sedang <b>Anda bangun.</b></p>
+          <p>Setiap karton yang kami bawa adalah bagian dari usaha yang sedang <b>Anda bangun</b></p>
         </div>
       </div>
       <div class="slider" data-slider data-autoplay>
@@ -1069,7 +1071,7 @@ html.paused *,html.paused *::before,html.paused *::after{animation-play-state:pa
     <div class="container faq-grid">
       <div class="faq-intro reveal">
         <p class="eyebrow">Sebelum mulai</p>
-        <h2 id="faq-title">Pertanyaan yang<br><span class="hl">sering kami terima.</span></h2>
+        <h2 id="faq-title">Pertanyaan yang<br>sering kami terima</h2>
         <p class="lead">Belum terjawab di sini? Tanyakan langsung ke tim kami.</p>
         <a class="btn btn-ghost" href="#kontak" data-wa="Halo Arenka, saya punya pertanyaan soal import.">Konsultasi Gratis <svg class="ic"><use href="#i-arrow-ur"/></svg></a>
       </div>
@@ -1094,7 +1096,7 @@ html.paused *,html.paused *::before,html.paused *::after{animation-play-state:pa
     <div class="container final-grid">
       <div class="final-copy reveal">
         <p class="eyebrow">Dari rencana ke pengiriman</p>
-        <h2 id="final-title">Barangnya Anda yang pilih.<br><span class="hl">Perjalanannya kami yang urus.</span></h2>
+        <h2 id="final-title">Barangnya Anda yang pilih.<br>Perjalanannya kami yang urus</h2>
         <p>Untuk pesanan pertama maupun kiriman rutin, mulai bersama Arenka.</p>
         <div class="final-actions">
           <a class="btn btn-lime" href="#kontak">Mulai Import <svg class="ic"><use href="#i-arrow-ur"/></svg></a>
@@ -1115,7 +1117,7 @@ html.paused *,html.paused *::before,html.paused *::after{animation-play-state:pa
     <div class="container contact-grid">
       <div class="contact-copy reveal">
         <p class="eyebrow">Ceritakan kebutuhan Anda</p>
-        <h2 id="kontak-title">Punya rencana import?<br><span class="hl">Kita bahas dari sini.</span></h2>
+        <h2 id="kontak-title">Punya rencana import?<br>Kita bahas dari sini</h2>
         <p class="lead">Mau tanya produk, ongkos, atau masih menimbang? Tulis saja, tim kami bantu jelaskan.</p>
         <ul class="contact-list">
           <li><svg class="ic"><use href="#i-wa"/></svg><div><small>WhatsApp konsultasi</small><b id="c-wa"><span class="ph">isi nomor WhatsApp</span></b></div></li>
@@ -1143,7 +1145,7 @@ html.paused *,html.paused *::before,html.paused *::after{animation-play-state:pa
           </div>
         </form>
         <div class="form-step" id="form-step" hidden>
-          <h3 tabindex="-1" id="step-title">Pesan Anda siap.</h3>
+          <h3 tabindex="-1" id="step-title">Pesan Anda siap</h3>
           <p>Periksa ringkasannya. Anda masih bisa mengubah teksnya di bawah.</p>
           <div class="form-grid">
             <div class="field"><label for="f-message">Isi pesan</label><textarea id="f-message"></textarea></div>
@@ -1192,7 +1194,7 @@ html.paused *,html.paused *::before,html.paused *::after{animation-play-state:pa
     <button class="icon-btn" type="button" aria-label="Tutup obrolan" data-close-dialog><svg class="ic"><use href="#i-x"/></svg></button>
   </div>
   <div class="help-body">
-    <span class="day">MULAI OBROLAN</span>
+    <span class="day">Mulai obrolan</span>
     <p class="bubble-msg">Halo! 👋 Sedang cari info soal <b>import dari China?</b></p>
     <p class="bubble-msg">Ceritakan barang yang Anda cari atau supplier yang sudah Anda punya. Kami bantu tentukan langkah berikutnya.</p>
     <p class="bubble-msg">Tulis pertanyaan di bawah, lalu kita lanjutkan di <b>WhatsApp</b>.</p>
@@ -1228,7 +1230,7 @@ const ARENKA = {
   leadSheetUrl: 'https://script.google.com/macros/s/AKfycbylZnAhujJOxfCiPKvoSeF6bbZdHFLzC7JUn3oPVRh6TPOWGSXh2I7JxBOE5G6MBV-MtA/exec', // URL Web App Apps Script Google Sheet (kosong = rekam lead dimatikan)
   coverage: 'seluruh Indonesia',      // contoh 'seluruh Indonesia'
   reviewSource: '',  // contoh 'Google Maps'
-  stats: { orders: '', shipments: '', cities: '', packages: '350.000+', customers: '50.000+', ontime: '98,7%', satisfaction: '95%' },
+  stats: { orders: '', shipments: '', cities: '', packages: '', customers: '', ontime: '', satisfaction: '' },
   testimonials: [
     { image: '/assets/img/testimoni-pelanggan-titip-kirim.webp', alt: 'Percakapan pelanggan tentang titip kirim' },
     { image: '/assets/img/testimoni-pelunasan-supplier.webp', alt: 'Percakapan pelanggan tentang pelunasan supplier' },
@@ -1268,7 +1270,8 @@ const ARENKA = {
     } catch {}
   })();
   if (waNumber) {
-    $('#c-wa').innerHTML = `<a href="https://wa.me/${waNumber}" target="_blank" rel="noopener" aria-label="Chat WhatsApp konsultasi" style="display:inline-flex;align-items:center;gap:.45em;background:#25D366;color:#fff;padding:.4em .85em;border-radius:999px;font-weight:700;text-decoration:none;line-height:1;white-space:nowrap;max-width:100%;box-shadow:0 1px 2px rgba(0,0,0,.14)"><svg viewBox="0 0 24 24" width="1.15em" height="1.15em" aria-hidden="true" style="flex:none"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg><span>WhatsApp</span></a>`;
+    const waShown = '+' + waNumber.slice(0, 2) + ' ' + waNumber.slice(2, 5) + '-' + waNumber.slice(5, 9) + '-' + waNumber.slice(9);
+    $('#c-wa').innerHTML = `<a href="https://wa.me/${waNumber}" target="_blank" rel="noopener" aria-label="Chat WhatsApp konsultasi">${waShown} ↗</a>`;
   }
   if (ARENKA.email) { $('#c-email').textContent = ARENKA.email; $('#f-email').textContent = ARENKA.email; }
   if (ARENKA.instagram) {
