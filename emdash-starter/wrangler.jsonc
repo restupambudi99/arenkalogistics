@@ -16,6 +16,7 @@
 		{
 			"binding": "DB",
 			"database_name": "arenka-logistics",
+			"database_id": "8159a06b-1e5a-430b-b4d4-cd0ecec012b9",
 		},
 	],
 	"r2_buckets": [
