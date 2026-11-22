@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}[hidden]{display:none!important}</style>
 <title>Arenka Logistics</title>
-<meta name="claude:viewport-fit-sides" content="cover">
+
 <meta name="description" content="Arenka membantu pembelian dan pengiriman barang dari China ke Indonesia: Titip Beli, Titip Kirim, OEM/ODM, dan Pengadaan, via laut (LCL/FCL) atau udara.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1055,6 +1055,7 @@ html.paused *,html.paused *::before,html.paused *::after{animation-play-state:pa
           <figure class="quote"><span class="quote-mark" aria-hidden="true">“</span><blockquote><span class="ph ph-block">Tempel ulasan asli pelanggan #5 di sini.</span></blockquote><figcaption><span class="avatar">–</span><span><b><span class="ph">Nama pelanggan</span></b><small>Kota</small></span></figcaption></figure>
         </div>
         <div class="testi-nav">
+          <span class="src">Percakapan asli pelanggan, disunting untuk privasi</span>
           <div class="slider-btns">
             <button class="slider-btn" type="button" data-prev aria-label="Ulasan sebelumnya"><svg class="ic"><use href="#i-arrow-l"/></svg></button>
             <button class="slider-btn" type="button" data-next aria-label="Ulasan berikutnya"><svg class="ic"><use href="#i-arrow-r"/></svg></button>
@@ -1477,7 +1478,7 @@ const ARENKA = {
   const renderSteps = kind => {
     stepsEl.innerHTML = steps[kind].map(([art, meta, title, text], i) => {
       const visual = art === 'v-quote' && kind === 'kirim' && i === 2
-        ? '<img class="step-photo" src="/assets/img/konfirmasi-biaya-impor.webp" alt="Kalkulator dan catatan volume karton untuk mengonfirmasi biaya impor" width="960" height="960" loading="lazy" decoding="async">'
+        ? '<img class="step-photo" src="/assets/img/konfirmasi-biaya-impor-v2.webp" alt="Karton, kalkulator, dan meteran untuk menghitung volume kiriman" width="470" height="313" loading="lazy" decoding="async">'
         : art === 'v-door' && kind === 'kirim' && i === 4
         ? '<img class="step-photo" src="/assets/img/serah-terima-paket.webp" alt="Petugas Arenka menyerahkan paket kepada penerima di alamat tujuan" width="960" height="640" loading="lazy" decoding="async">'
         : art === 'v-transit' && kind === 'kirim' && i === 3
@@ -1495,7 +1496,7 @@ const ARENKA = {
         : kind === 'beli' && i === 4
         ? '<img class="step-photo" src="/assets/img/titip-beli-serah-terima.webp" alt="Kurir Arenka menyerahkan paket kepada pelanggan di alamat tujuan" width="960" height="640" loading="lazy" decoding="async">'
         : art === 'v-marking'
-        ? '<img class="step-photo" src="/assets/img/marking-gudang.webp" alt="Petugas gudang memindai kode pada karton sebelum dikirim" width="960" height="1200" loading="lazy" decoding="async">'
+        ? '<img class="step-photo" src="/assets/img/marking-gudang-v2.webp" alt="Petugas gudang memindai kode pada karton sebelum dikirim" width="960" height="972" loading="lazy" decoding="async">'
         : `<svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><use href="#${art}"/></svg>`;
       return `
         <li class="step">

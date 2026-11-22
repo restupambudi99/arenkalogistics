@@ -10,6 +10,7 @@
     .arenka-cookie-notice p{margin:0;flex:1}.arenka-cookie-notice a{color:#d0f600;text-underline-offset:3px}
     .arenka-cookie-notice button{flex:none;border:0;border-radius:10px;background:#d0f600;color:#002e62;padding:11px 15px;font-family:inherit;font-size:14px;line-height:1.2;font-weight:700;cursor:pointer}
     .arenka-cookie-notice button:focus-visible,.arenka-cookie-notice a:focus-visible{outline:3px solid #fff;outline-offset:3px}
+    html.has-cookie-notice .launcher{bottom:calc(var(--cookie-notice-h,0px) + 28px + env(safe-area-inset-bottom,0px))}
     @media(max-width:560px){.arenka-cookie-notice{inset:auto 12px 12px;gap:12px;padding:14px;border-radius:14px;font-size:13px}.arenka-cookie-notice button{padding:10px 12px;white-space:nowrap}}
   `;
   document.head.append(style);
@@ -19,9 +20,16 @@
   notice.setAttribute("role", "region");
   notice.setAttribute("aria-label", "Pemberitahuan cookie");
   notice.innerHTML = '<p>Kami memakai cookie penting untuk fungsi dasar, seperti sesi login. <a href="/privasi">Baca Kebijakan Privasi</a>.</p><button type="button">Terima &amp; tutup</button>';
+  const root = document.documentElement;
+  const fit = () => root.style.setProperty("--cookie-notice-h", notice.offsetHeight + "px");
   notice.querySelector("button").addEventListener("click", () => {
     try { localStorage.setItem(key, "accepted"); } catch {}
     notice.remove();
+    root.classList.remove("has-cookie-notice");
+    removeEventListener("resize", fit);
   });
   document.body.append(notice);
+  root.classList.add("has-cookie-notice");
+  fit();
+  addEventListener("resize", fit, { passive: true });
 })();

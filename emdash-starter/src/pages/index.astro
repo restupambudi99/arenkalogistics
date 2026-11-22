@@ -5,7 +5,8 @@ const siteUrl = "https://arenkalogistics.com/";
 const description = "Arenka membantu pembelian dan pengiriman barang dari China ke Indonesia: Titip Beli, Titip Kirim, OEM/ODM, dan Pengadaan, via laut (LCL/FCL) atau udara.";
 const enabled = env.INDEXING_ENABLED === "true";
 const seoHead = `<meta name="google-site-verification" content="4G7naoHEQ5DtMHDaY6oaKJNlinzKVB-uxkmpyN3s-os"><link rel="canonical" href="${siteUrl}"><meta name="robots" content="${enabled ? "index,follow" : "noindex"}"><meta property="og:type" content="website"><meta property="og:locale" content="id_ID"><meta property="og:site_name" content="Arenka Logistics"><meta property="og:title" content="Arenka Logistics"><meta property="og:description" content="${description}"><meta property="og:url" content="${siteUrl}"><meta name="twitter:card" content="summary_large_image"><meta name="theme-color" content="#002e62">`;
-const homeHtml = homeSource.replace("</head>", `${seoHead}</head>`);
+// Astro already writes <!DOCTYPE html>; drop the copy inside home.html so the page has one.
+const homeHtml = homeSource.replace(/^\s*<!doctype html>\s*/i, "").replace("</head>", `${seoHead}</head>`);
 ---
 
 <!-- Halaman awal dipertahankan sebagai HTML utuh dari versi 1 untuk menjaga render dan interaksinya. -->
