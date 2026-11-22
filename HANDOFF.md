@@ -75,3 +75,12 @@ Target fingerprint: `6801293a482d45cc936fde5d9128a429eaf87b2ef959c59339a019fa857
 - **Belum di-deploy.** Jalankan `git pull` lalu `pnpm run deploy` dari `emdash-starter/` di mesin pemilik.
 - Keputusan pemilik: gambar armada berlogo Arenka (pesawat/kapal) dipertahankan; testimoni adalah chat asli yang sedikit dimodifikasi.
 - Branch `main` sudah disamakan dengan `emdash-seo` (fast-forward). Kerjakan perubahan berikutnya di `main` atau branch dari `main`.
+
+## Deploy otomatis (2026-11-22)
+
+- Repo `restupambudi99/arenkalogistics` tersambung ke Worker `arenka-logistics` lewat Cloudflare Workers Builds.
+- Production branch `main`; root directory `emdash-starter`; build `pnpm run build`; deploy `npx wrangler deploy`.
+- Preview builds untuk branch lain dimatikan. API token build dibuat otomatis oleh Cloudflare ("Workers Builds - 2026-11-22 09:23").
+- Node 22.23.4 dikunci lewat `emdash-starter/.node-version` (default build image adalah Node 24).
+- Secret runtime (`EMDASH_ENCRYPTION_KEY`, `AUTH_SECRET`, `GOOGLE_CLIENT_*`) tersimpan di Worker dan tidak tersentuh oleh deploy.
+- `pnpm run deploy` dari mesin pemilik tetap bisa dipakai sebagai cadangan.

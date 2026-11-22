@@ -21,10 +21,12 @@ Website **Arenka Logistics** (https://arenkalogistics.com), jasa import China ke
 cd emdash-starter
 pnpm install
 pnpm run build        # cek build
-pnpm run deploy       # astro build && wrangler deploy (butuh wrangler login ke akun pemilik)
+pnpm run deploy       # deploy manual, hanya kalau perlu (butuh wrangler login ke akun pemilik)
 ```
 
-Deploy dilakukan manual dari mesin pemilik. Push ke GitHub saja tidak menayangkan perubahan.
+**Deploy otomatis:** setiap push ke branch `main` di-build dan langsung tayang lewat Cloudflare Workers Builds
+(root directory `emdash-starter`, build `pnpm run build`, deploy `npx wrangler deploy`, Node 22.23.4 dari `.node-version`).
+Branch lain tidak di-build. Status build ada di dashboard Cloudflare: Workers & Pages → arenka-logistics → Deployments.
 
 ## Identitas merek
 

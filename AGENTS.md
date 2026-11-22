@@ -27,4 +27,5 @@ versi 1 dan tidak dipakai situs live.
 - Cek beranda di lebar 1440 px dan 390 px: tidak ada scroll ke samping, tidak ada error di console.
 - Cek interaksi: dropdown navigasi, menu mobile, tab Cara kerja, carousel testimoni, formulir kontak,
   dialog bantuan (juga saat banner cookie tampil), tombol "Jeda animasi".
-- Deploy (`pnpm run deploy`) hanya dari mesin pemilik. Catat perubahan di `HANDOFF.md`.
+- **Push ke `main` = tayang ke produksi** (Cloudflare Workers Builds). Kerjakan di branch lain, cek build dan tampilan,
+  baru gabungkan ke `main`. Catat perubahan di `HANDOFF.md`.
