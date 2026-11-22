@@ -1,7 +1,5 @@
 ---
-import { env } from "cloudflare:workers";
 const siteUrl = "https://arenkalogistics.com/masuk";
-const enabled = env.INDEXING_ENABLED === "true";
 const wa = "6285216002219";
 const waHref = "https://wa.me/" + wa + "?text=" + encodeURIComponent("Halo Arenka, saya mau akses akun / dashboard member.");
 ---
@@ -13,7 +11,7 @@ const waHref = "https://wa.me/" + wa + "?text=" + encodeURIComponent("Halo Arenk
 <title>Masuk ke Akun Arenka | Arenka Logistics</title>
 <meta name="description" content="Masuk ke akun Arenka Logistics untuk memantau Titip Beli, Titip Kirim, status gudang, dan pengiriman dalam satu dashboard." />
 <link rel="canonical" href={siteUrl} />
-<meta name="robots" content={enabled ? "index,follow" : "noindex"} />
+<meta name="robots" content="noindex,follow" />
 <meta name="theme-color" content="#002e62" />
 <style>
 :root{

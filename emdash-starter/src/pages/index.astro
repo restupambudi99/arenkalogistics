@@ -4,7 +4,71 @@ import { env } from "cloudflare:workers";
 const siteUrl = "https://arenkalogistics.com/";
 const description = "Arenka membantu pembelian dan pengiriman barang dari China ke Indonesia: Titip Beli, Titip Kirim, OEM/ODM, dan Pengadaan, via laut (LCL/FCL) atau udara.";
 const enabled = env.INDEXING_ENABLED === "true";
-const seoHead = `<meta name="google-site-verification" content="4G7naoHEQ5DtMHDaY6oaKJNlinzKVB-uxkmpyN3s-os"><link rel="canonical" href="${siteUrl}"><meta name="robots" content="${enabled ? "index,follow" : "noindex"}"><meta property="og:type" content="website"><meta property="og:locale" content="id_ID"><meta property="og:site_name" content="Arenka Logistics"><meta property="og:title" content="Arenka Logistics"><meta property="og:description" content="${description}"><meta property="og:url" content="${siteUrl}"><meta name="twitter:card" content="summary_large_image"><meta name="theme-color" content="#002e62">`;
+
+// Contact data comes from the ARENKA object in home.html, so the structured data
+// always matches what the page shows.
+const cfg = (key: string) => (homeSource.match(new RegExp(`\\b${key}:\\s*'([^']*)'`)) || [])[1] || "";
+const whatsapp = cfg("whatsapp");
+const email = cfg("email");
+const instagram = cfg("instagram").replace(/^@/, "");
+
+// FAQPage built from the visible FAQ list (questions and answers as written on the page).
+const text = (html: string) => html
+	.replace(/<[^>]+>/g, " ")
+	.replace(/&nbsp;/g, " ")
+	.replace(/&quot;/g, '"')
+	.replace(/&#39;/g, "'")
+	.replace(/&amp;/g, "&")
+	.replace(/\s+/g, " ")
+	.trim();
+const faqStart = homeSource.indexOf('class="faq-list"');
+const faqBlock = faqStart < 0 ? "" : homeSource.slice(faqStart, homeSource.indexOf("</section>", faqStart));
+const faq = [...faqBlock.matchAll(/<details[^>]*>\s*<summary[^>]*>([\s\S]*?)<\/summary>([\s\S]*?)<\/details>/g)]
+	.map(([, q, a]) => ({ "@type": "Question", name: text(q), acceptedAnswer: { "@type": "Answer", text: text(a) } }))
+	.filter((item) => item.name && item.acceptedAnswer.text);
+
+const organization = {
+	"@type": "Organization",
+	"@id": `${siteUrl}#organization`,
+	name: "Arenka Logistics",
+	url: siteUrl,
+	logo: { "@type": "ImageObject", url: `${siteUrl}assets/img/arenka-logo.jpg`, width: 1113, height: 356 },
+	description,
+	...(email ? { email } : {}),
+	...(instagram ? { sameAs: [`https://www.instagram.com/${instagram}/`] } : {}),
+	...(whatsapp || email
+		? {
+			contactPoint: [{
+				"@type": "ContactPoint",
+				contactType: "customer service",
+				...(whatsapp ? { telephone: `+${whatsapp}` } : {}),
+				...(email ? { email } : {}),
+				areaServed: "ID",
+				availableLanguage: ["id"],
+			}],
+		}
+		: {}),
+};
+const structuredData = {
+	"@context": "https://schema.org",
+	"@graph": [
+		organization,
+		{
+			"@type": "WebSite",
+			"@id": `${siteUrl}#website`,
+			url: siteUrl,
+			name: "Arenka Logistics",
+			inLanguage: "id-ID",
+			publisher: { "@id": `${siteUrl}#organization` },
+		},
+		...(faq.length ? [{ "@type": "FAQPage", "@id": `${siteUrl}#faq`, mainEntity: faq }] : []),
+	],
+};
+const ldJson = JSON.stringify(structuredData).replace(/</g, "\\u003c");
+
+const ogImage = `${siteUrl}assets/img/og-arenka.jpg`;
+const ogAlt = "Gudang Arenka Logistics dengan tumpukan karton siap kirim";
+const seoHead = `<meta name="google-site-verification" content="4G7naoHEQ5DtMHDaY6oaKJNlinzKVB-uxkmpyN3s-os"><link rel="canonical" href="${siteUrl}"><meta name="robots" content="${enabled ? "index,follow" : "noindex"}"><meta property="og:type" content="website"><meta property="og:locale" content="id_ID"><meta property="og:site_name" content="Arenka Logistics"><meta property="og:title" content="Arenka Logistics"><meta property="og:description" content="${description}"><meta property="og:url" content="${siteUrl}"><meta property="og:image" content="${ogImage}"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="${ogAlt}"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Arenka Logistics"><meta name="twitter:description" content="${description}"><meta name="twitter:image" content="${ogImage}"><meta name="theme-color" content="#002e62"><script type="application/ld+json">${ldJson}</script>`;
 // Astro already writes <!DOCTYPE html>; drop the copy inside home.html so the page has one.
 const homeHtml = homeSource.replace(/^\s*<!doctype html>\s*/i, "").replace("</head>", `${seoHead}</head>`);
 ---
