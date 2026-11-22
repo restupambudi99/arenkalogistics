@@ -52,7 +52,7 @@ Target fingerprint: `6801293a482d45cc936fde5d9128a429eaf87b2ef959c59339a019fa857
 
 1. (SELESAI) Verifikasi HTTPS: homepage & admin tidak lagi 404; situs live. Catatan: HTTPS dari shell Windows sesi ini bisa gagal (Schannel `SEC_E_NO_CREDENTIALS`) — pakai `node -e "fetch(...)"` atau browser.
 2. (SELESAI) Setup Wizard EmDash: admin & seed selesai, situs terbit.
-3. Lanjutkan penyesuaian struktur untuk SEO/GEO/AEO tanpa mengubah tampilan: structured data JSON-LD (Organization/LocalBusiness + WebSite) di homepage, lengkapi Open Graph/Twitter, isi sitemap setelah ada artikel.
+3. (SELESAI di kode, 2026-11-22, commit `cf0e19d`) JSON-LD Organization + WebSite + FAQPage di homepage, og:image/twitter:image (`public/assets/img/og-arenka.jpg`), `sitemap-static.xml` untuk halaman tetap, `/masuk` noindex. LocalBusiness sengaja tidak dipasang karena alamat di halaman belum lengkap (tanpa kota/kode pos).
 
 ## Catatan paket gratis
 
@@ -64,3 +64,14 @@ Target fingerprint: `6801293a482d45cc936fde5d9128a429eaf87b2ef959c59339a019fa857
 - Form homepage (`src/home.html`) mengirim snapshot ke `ARENKA.leadSheetUrl` (Apps Script Web App). Perekaman bertahap: status `mengisi` (debounce input), `ditinggalkan` (sendBeacon saat tab ditutup), `siap-wa` (submit), `lanjut-wa` (klik tombol WhatsApp). Upsert berdasarkan Lead ID → satu baris per pengunjung yang terus diperbarui, jadi pengisian belum selesai tetap terekam.
 - Skrip penerima: `emdash-starter/apps-script-lead-form.gs`. Pemilik Google deploy sekali sebagai Web App (Execute as Me, Who has access: Anyone), lalu URL `/exec` dimasukkan ke `ARENKA.leadSheetUrl` di `src/home.html` dan deploy ulang.
 - Status saat ini: kolom + logika frontend sudah live (Version `6dcd7040`). Menunggu URL Apps Script dari pemilik untuk mengaktifkan penulisan ke Sheet. Saat `leadSheetUrl` kosong, perekaman mati otomatis (form WhatsApp tetap jalan).
+
+## Update 2026-11-22 (unslop + SEO)
+
+- `0887a44` polish beranda dengan skill unslop: animasi berulang dihapus, judul berat 600, label huruf biasa, stabilo hanya di hero,
+  angka statistik yang belum terverifikasi diganti fakta yang ada di halaman, titik di akhir judul dihapus.
+- `4b0e7ab` catatan testimoni "disunting untuk privasi", gambar langkah 01/03 tanpa teks tertanam (`*-v2.webp`),
+  satu doctype, tombol konsultasi naik di atas banner cookie.
+- `cf0e19d` SEO beranda (lihat TODO 3).
+- **Belum di-deploy.** Jalankan `git pull` lalu `pnpm run deploy` dari `emdash-starter/` di mesin pemilik.
+- Keputusan pemilik: gambar armada berlogo Arenka (pesawat/kapal) dipertahankan; testimoni adalah chat asli yang sedikit dimodifikasi.
+- Branch `main` masih versi 1. Situs live dibangun dari `emdash-seo`; sebaiknya `emdash-seo` di-merge ke `main`.
