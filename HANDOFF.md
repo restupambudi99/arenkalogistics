@@ -74,4 +74,4 @@ Target fingerprint: `6801293a482d45cc936fde5d9128a429eaf87b2ef959c59339a019fa857
 - `cf0e19d` SEO beranda (lihat TODO 3).
 - **Belum di-deploy.** Jalankan `git pull` lalu `pnpm run deploy` dari `emdash-starter/` di mesin pemilik.
 - Keputusan pemilik: gambar armada berlogo Arenka (pesawat/kapal) dipertahankan; testimoni adalah chat asli yang sedikit dimodifikasi.
-- Branch `main` masih versi 1. Situs live dibangun dari `emdash-seo`; sebaiknya `emdash-seo` di-merge ke `main`.
+- Branch `main` sudah disamakan dengan `emdash-seo` (fast-forward). Kerjakan perubahan berikutnya di `main` atau branch dari `main`.
