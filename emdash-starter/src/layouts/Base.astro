@@ -15,9 +15,13 @@ interface Props {
 	pageType?: string | null;
 	/** Pass content reference for plugin page contributions on content pages */
 	content?: { collection: string; id: string; slug?: string | null };
+	/** Use `title` as-is (the page already decided whether to add the site name) */
+	rawTitle?: boolean;
+	/** Article dates for article:* meta tags and the BlogPosting JSON-LD */
+	articleMeta?: { publishedTime?: string | null; modifiedTime?: string | null; author?: string | null };
 }
 
-const { title, pageTitle, description, image, canonical, content, pageType } =
+const { title, pageTitle, description, image, canonical, content, pageType, rawTitle, articleMeta } =
 	Astro.props;
 const [settingsResult, menuResult] = await Promise.all([
 	getSiteSettingsWithCacheHint(),
@@ -32,6 +36,7 @@ const { siteTitle, siteTagline, siteLogo } = resolveStarterSiteIdentity(
 	settingsResult.data,
 );
 const titleIncludesSiteName =
+	rawTitle ||
 	title === siteTitle ||
 	title.endsWith(` | ${siteTitle}`) ||
 	title.endsWith(` — ${siteTitle}`);
@@ -49,6 +54,7 @@ const pageCtx = createPublicPageContext({
 	canonical,
 	image,
 	content,
+	articleMeta,
 	siteName: siteTitle,
 });
 ---
@@ -90,6 +96,17 @@ const pageCtx = createPublicPageContext({
 			main>ul>li img,main>ul>li picture{width:100%;height:190px;object-fit:cover;border-radius:0}
 			main>ul>li h2{font-size:18px;color:var(--heritage);margin:0;padding:14px 16px 0;line-height:1.3}
 			main>ul>li p{color:var(--muted);font-size:14px;padding:8px 16px 16px;margin:0}
+			article .updated{color:var(--muted);font-size:14px;margin-left:6px}
+			article .updated time{margin:0}
+			article .terms{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px}
+			article .terms a{font-size:13px;font-weight:600;text-decoration:none;padding:4px 10px;border:1px solid var(--line);border-radius:999px;background:#fff}
+			.related{margin-top:40px;padding-top:24px;border-top:1px solid var(--line)}
+			.related h2{font-size:20px;color:var(--heritage);margin:0 0 12px}
+			.related ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+			.related li{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 16px}
+			.related a{display:block;color:var(--heritage);font-weight:600;text-decoration:none;line-height:1.4}
+			.related a:hover{text-decoration:underline}
+			.related time{display:block;color:var(--muted);font-size:13px;margin-top:2px}
 			.site-foot{background:var(--heritage-deep);color:#c3d0e2;text-align:center;padding:24px;font-size:13px;margin-top:10px}
 			.site-foot a{color:#fff;text-decoration:none}
 		</style>
@@ -124,7 +141,7 @@ const pageCtx = createPublicPageContext({
 						</a>
 					))
 				}
-				<LiveSearch placeholder="Search..." collections={["posts", "pages"]} />
+				<LiveSearch placeholder="Cari artikel" collections={["posts", "pages"]} />
 			</nav>
 		</header>
 
@@ -134,6 +151,11 @@ const pageCtx = createPublicPageContext({
 
 		<EmDashBodyEnd page={pageCtx} />
 		<footer class="site-foot">Copyright &copy; 2026 Arenka Logistics | <a href="/privasi">Kebijakan Privasi</a> &middot; <a href="/ketentuan">Ketentuan Layanan</a></footer>
+		<script is:inline>
+			// LiveSearch ships fixed English status texts; show them in Indonesian.
+			document.querySelectorAll(".emdash-live-search-loading").forEach((el) => { el.textContent = "Mencari…"; });
+			document.querySelectorAll(".emdash-live-search-no-results").forEach((el) => { el.textContent = "Tidak ada hasil"; });
+		</script>
 		<script src="/assets/js/cookie-notice.js" defer></script>
 	</body>
 </html>

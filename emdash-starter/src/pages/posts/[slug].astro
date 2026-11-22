@@ -1,11 +1,12 @@
 ---
 import {
+	getEmDashCollection,
 	getEmDashEntry,
 	getSeoMeta,
 	decodeSlug,
 	getSiteSettings,
 } from "emdash";
-import { Image, PortableText, WidgetArea } from "emdash/ui";
+import { Image, PortableText } from "emdash/ui";
 import Base from "../../layouts/Base.astro";
 import { resolveStarterSiteIdentity } from "../../utils/site-identity";
 
@@ -35,10 +36,36 @@ const seo = getSeoMeta(post, {
 const tags = post.data.terms?.tag ?? [];
 const categories = post.data.terms?.category ?? [];
 
-// --- Structured data (SEO/GEO) ---
 const siteUrl = Astro.url.origin;
 const pageUrl = siteUrl + Astro.url.pathname.replace(/\/$/, "");
 const authorName = "Tim Arenka";
+
+// Document title: keep it short enough for search results. Long article titles
+// stand alone; the site name is only appended when it fits and is not already there.
+const rawSeo = ((post as any).seo ?? (post.data as any).seo ?? {}) as { title?: string | null };
+const pageTitle = (rawSeo.title || post.data.title || "").trim();
+const docTitle =
+	/arenka/i.test(pageTitle) || pageTitle.length + siteTitle.length + 3 > 62
+		? pageTitle
+		: `${pageTitle} | ${siteTitle}`;
+
+// Preview image: the SEO image field can hold a bare media id, which the media
+// endpoint cannot serve (404). Only trust it when it points at an image file;
+// otherwise use the featured image, then the site-wide preview image.
+const IMAGE_FILE_RE = /\.(png|jpe?g|webp|gif|avif)(\?|$)/i;
+const featured = post.data.featured_image as
+	| { src?: string; meta?: { storageKey?: string } }
+	| undefined;
+const featuredUrl = featured?.meta?.storageKey
+	? `${siteUrl}/_emdash/api/media/file/${featured.meta.storageKey}`
+	: featured?.src
+		? new URL(featured.src, siteUrl).href
+		: null;
+const ogImage =
+	(seo.ogImage && IMAGE_FILE_RE.test(seo.ogImage) ? seo.ogImage : null) ||
+	featuredUrl ||
+	`${siteUrl}/assets/img/og-arenka.jpg`;
+
 const publishedIso = post.data.publishedAt
 	? post.data.publishedAt.toISOString()
 	: undefined;
@@ -47,52 +74,48 @@ const modifiedIso =
 	modifiedAt && typeof modifiedAt.toISOString === "function"
 		? modifiedAt.toISOString()
 		: publishedIso;
-const articleSchema = {
+const showUpdated =
+	publishedIso && modifiedIso && modifiedIso.slice(0, 10) !== publishedIso.slice(0, 10);
+const formatDate = (iso: string) =>
+	new Date(iso).toLocaleDateString("id-ID", { year: "numeric", month: "long", day: "numeric" });
+
+// BlogPosting JSON-LD comes from EmDashHead (it receives articleMeta via Base).
+// Only the breadcrumb is added here, so each page carries one BlogPosting.
+const breadcrumbSchema = {
 	"@context": "https://schema.org",
-	"@graph": [
-		{
-			"@type": "BlogPosting",
-			mainEntityOfPage: { "@type": "WebPage", "@id": pageUrl },
-			headline: post.data.title,
-			description: seo.description,
-			...(seo.ogImage ? { image: [seo.ogImage] } : {}),
-			...(publishedIso ? { datePublished: publishedIso } : {}),
-			...(modifiedIso ? { dateModified: modifiedIso } : {}),
-			inLanguage: "id-ID",
-			author: { "@type": "Organization", name: authorName, url: siteUrl },
-			publisher: {
-				"@type": "Organization",
-				name: siteTitle,
-				url: siteUrl,
-			},
-		},
-		{
-			"@type": "BreadcrumbList",
-			itemListElement: [
-				{ "@type": "ListItem", position: 1, name: "Beranda", item: siteUrl + "/" },
-				{ "@type": "ListItem", position: 2, name: "Artikel", item: siteUrl + "/posts" },
-				{ "@type": "ListItem", position: 3, name: post.data.title, item: pageUrl },
-			],
-		},
+	"@type": "BreadcrumbList",
+	itemListElement: [
+		{ "@type": "ListItem", position: 1, name: "Beranda", item: siteUrl + "/" },
+		{ "@type": "ListItem", position: 2, name: "Artikel", item: siteUrl + "/posts" },
+		{ "@type": "ListItem", position: 3, name: post.data.title, item: pageUrl },
 	],
 };
+
+// Related articles in Indonesian (replaces the starter's English sidebar widgets).
+const { entries: latest } = await getEmDashCollection("posts", {
+	orderBy: { published_at: "desc" },
+	limit: 5,
+});
+const related = latest.filter((p) => p.id !== post.id).slice(0, 4);
 ---
 
 <Base
-	title={seo.title}
+	title={docTitle}
+	rawTitle
 	pageTitle={seo.ogTitle}
 	description={seo.description}
 	canonical={seo.canonical}
-	image={seo.ogImage}
+	image={ogImage}
 	pageType="article"
+	articleMeta={{ publishedTime: publishedIso, modifiedTime: modifiedIso }}
 	content={{ collection: "posts", id: post.data.id, slug }}
 >
-	<script type="application/ld+json" is:inline set:html={JSON.stringify(articleSchema)} />
+	<script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumbSchema)} />
 	<article>
 		{
 			post.data.featured_image && (
 				<div {...post.edit.featured_image}>
-					<Image image={post.data.featured_image} />
+					<Image image={post.data.featured_image} priority />
 				</div>
 			)
 		}
@@ -100,14 +123,15 @@ const articleSchema = {
 		<h1 {...post.edit.title}>{post.data.title}</h1>
 
 		{
-			post.data.publishedAt && (
-				<time datetime={post.data.publishedAt.toISOString()}>
-					{post.data.publishedAt.toLocaleDateString("id-ID", {
-						year: "numeric",
-						month: "long",
-						day: "numeric",
-					})}
-				</time>
+			publishedIso && (
+				<time datetime={publishedIso}>{formatDate(publishedIso)}</time>
+			)
+		}
+		{
+			showUpdated && modifiedIso && (
+				<span class="updated">
+					· Diperbarui <time datetime={modifiedIso}>{formatDate(modifiedIso)}</time>
+				</span>
 			)
 		}
 
@@ -115,7 +139,7 @@ const articleSchema = {
 
 		{
 			categories.length > 0 && (
-				<div>
+				<div class="terms">
 					{categories.map((c) => (
 						<a href={`/category/${c.slug}`}>{c.label}</a>
 					))}
@@ -127,7 +151,7 @@ const articleSchema = {
 
 		{
 			tags.length > 0 && (
-				<div>
+				<div class="terms">
 					{tags.map((t) => (
 						<a href={`/tag/${t.slug}`}>{t.label}</a>
 					))}
@@ -136,7 +160,23 @@ const articleSchema = {
 		}
 	</article>
 
-	<aside>
-		<WidgetArea name="sidebar" />
-	</aside>
+	{
+		related.length > 0 && (
+			<aside class="related" aria-labelledby="related-title">
+				<h2 id="related-title">Artikel lainnya</h2>
+				<ul>
+					{related.map((p) => (
+						<li>
+							<a href={`/posts/${p.id}`}>{p.data.title}</a>
+							{p.data.publishedAt && (
+								<time datetime={p.data.publishedAt.toISOString()}>
+									{formatDate(p.data.publishedAt.toISOString())}
+								</time>
+							)}
+						</li>
+					))}
+				</ul>
+			</aside>
+		)
+	}
 </Base>

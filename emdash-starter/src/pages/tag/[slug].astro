@@ -35,14 +35,15 @@ if (Astro.cache?.enabled) {
 ---
 
 <Base
-	title={`Posts tagged "${term.label}"`}
-	description={`Posts tagged ${term.label}`}
+	title={`Artikel bertag ${term.label}`}
+	description={`Artikel Arenka Logistics dengan tag ${term.label}.`}
+	canonical={`${Astro.url.origin}/tag/${term.slug}`}
 >
 	<h1>Tag: {term.label}</h1>
 
 	{
 		posts.length === 0 ? (
-			<p>No posts with this tag yet.</p>
+			<p>Belum ada artikel dengan tag ini.</p>
 		) : (
 			<ul>
 				{posts.map((post) => (
@@ -60,11 +61,11 @@ if (Astro.cache?.enabled) {
 		)
 	}
 	<nav aria-label="Pagination">
-		{cursor && <a href={`/tag/${term.slug}`}>First page</a>}
+		{cursor && <a href={`/tag/${term.slug}`}>Halaman pertama</a>}
 		{
 			nextCursor && (
 				<a href={`/tag/${term.slug}?cursor=${encodeURIComponent(nextCursor)}`}>
-					Next page
+					Halaman berikutnya
 				</a>
 			)
 		}
