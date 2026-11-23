@@ -153,6 +153,14 @@ const breadcrumbSchema = {
   <script type="application/ld+json" is:inline set:html={JSON.stringify(howToSchema)} />
   <script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumbSchema)} />
 
+  <style is:inline>
+    .diagram-tall { display: none; }
+    @media screen and (max-width: 640px) {
+      .diagram-wide { display: none; }
+      .diagram-tall { display: block; }
+    }
+  </style>
+
   <nav class="crumbs" aria-label="Breadcrumb">
     <a href="/">Beranda</a> <span aria-hidden="true">/</span>
     <a href="/posts">Artikel</a> <span aria-hidden="true">/</span>
@@ -875,18 +883,6 @@ const breadcrumbSchema = {
 		font-size: 14px;
 		margin-top: 8px;
 		line-height: 1.55;
-	}
-
-	.diagram-tall {
-		display: none;
-	}
-	@media (max-width: 640px) {
-		.diagram-wide {
-			display: none;
-		}
-		.diagram-tall {
-			display: block;
-		}
 	}
 
 	.table-wrap {
