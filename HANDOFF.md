@@ -84,3 +84,27 @@ Target fingerprint: `6801293a482d45cc936fde5d9128a429eaf87b2ef959c59339a019fa857
 - Node 22.23.4 dikunci lewat `emdash-starter/.node-version` (default build image adalah Node 24).
 - Secret runtime (`EMDASH_ENCRYPTION_KEY`, `AUTH_SECRET`, `GOOGLE_CLIENT_*`) tersimpan di Worker dan tidak tersentuh oleh deploy.
 - `pnpm run deploy` dari mesin pemilik tetap bisa dipakai sebagai cadangan.
+
+## Artikel SEO/GEO/AEO pertama (2026-11-23)
+
+- Halaman baru `emdash-starter/src/pages/posts/cara-mencari-supplier-tangan-pertama-1688.astro`
+  → `/posts/cara-mencari-supplier-tangan-pertama-1688`.
+- **Kenapa route statis, bukan entri CMS:** isi artikel EmDash tersimpan di D1, bukan di repo, jadi commit
+  tidak bisa membuat entri CMS. Artikel ini butuh kontrol penuh atas JSON-LD, ilustrasi SVG inline dan CTA,
+  sehingga dibuat sebagai route Astro sendiri. Route statis menang atas `posts/[slug].astro`.
+  Konsekuensi: artikel ini **tidak muncul** di daftar `/posts` (daftar itu membaca koleksi EmDash) dan tidak
+  bisa disunting dari admin. Kalau nanti dipindah ke CMS, hapus file route ini supaya tidak bentrok.
+- Target kata kunci: "cara mencari supplier tangan pertama 1688", "pabrik China langsung", `源头工厂`.
+- CTA mengarah ke `wa.me/6285216002219` dengan teks pembuka yang diminta pemilik.
+- Schema: satu `BlogPosting` (dari EmDashHead lewat `pageType="article"` + `articleMeta`, sama seperti
+  `posts/[slug].astro`) plus `FAQPage`, `HowTo` dan `BreadcrumbList` yang ditambahkan di halaman.
+  Jangan menambah `BlogPosting` kedua di sini.
+- Ilustrasi: 6 SVG inline (3 diagram × versi lebar dan versi vertikal, ganti di 640 px lewat
+  `.diagram-wide` / `.diagram-tall`). Tanpa request HTTP tambahan, tanpa CLS karena `width`/`height` ada.
+- `src/pages/sitemap-static.xml.ts` menambahkan URL artikel.
+- `src/pages/robots.txt.ts` kini menyebut 22 crawler secara eksplisit (Googlebot, GPTBot, PerplexityBot,
+  ClaudeBot, OAI-SearchBot, Google-Extended dan lain-lain), semuanya `Allow: /` dengan `/_emdash/` tertutup.
+- Semua angka dalam artikel punya sumber eksternal (BPS, Alibaba Group, wiki 1688, People's Daily,
+  DDTCNews, Supplyia). Tidak ada statistik Arenka yang dikarang.
+- Diverifikasi: `pnpm run build` lolos, `/posts/cara-mencari-supplier-tangan-pertama-1688` HTTP 200,
+  keempat blok JSON-LD valid, keenam SVG lolos parser XML.

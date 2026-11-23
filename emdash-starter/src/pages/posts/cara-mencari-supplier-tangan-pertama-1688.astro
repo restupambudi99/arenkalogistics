@@ -1,0 +1,1029 @@
+---
+import Base from "../../layouts/Base.astro";
+
+// Artikel SEO/GEO/AEO. Halaman statis (route sendiri) karena isi artikel CMS
+// tersimpan di database EmDash, sementara artikel ini perlu kontrol penuh atas
+// JSON-LD, ilustrasi SVG inline dan CTA WhatsApp.
+const siteUrl = "https://arenkalogistics.com";
+const path = "/posts/cara-mencari-supplier-tangan-pertama-1688";
+const pageUrl = siteUrl + path;
+
+const title = "Cara Mencari Supplier Tangan Pertama di 1688 dan Pabrik China";
+const description =
+  "Panduan verifikasi supplier tangan pertama di 1688: baca label pabrik, cek izin usaha di sistem resmi pemerintah China, dan bedakan pabrik dari trading company.";
+const published = "2026-11-23";
+const modified = "2026-11-23";
+const author = "Tim Arenka";
+const ogImage = siteUrl + "/assets/img/og-arenka.jpg";
+
+const waNumber = "6285216002219";
+const waGreeting =
+  "Saya berminat cara mencari supplier 1688 langsung dan mencari supplier tangan pertama tanpa perantara";
+const waLink = `https://wa.me/${waNumber}?text=${encodeURIComponent(waGreeting)}`;
+
+const faq = [
+  {
+    q: "Apa itu supplier tangan pertama di 1688?",
+    a: "Supplier tangan pertama adalah pabrik yang memproduksi sendiri barangnya, bukan pedagang yang mengambil dari pabrik lain. Di 1688 istilahnya 源头工厂 (yuantou gongchang, pabrik sumber). Tandanya bisa diverifikasi: izin usaha memuat kata 生产 (produksi) atau 制造 (manufaktur), ada label verifikasi pabrik dari platform, dan pihak supplier mampu menunjukkan lini produksinya lewat video langsung. Menurut data platform 1688, pabrik yang lolos sertifikasi sumber punya tingkat sengketa 67% lebih rendah dibanding supplier tanpa sertifikasi.",
+  },
+  {
+    q: "Bagaimana cara membedakan pabrik dan trading company di 1688?",
+    a: "Mulai dari nama perusahaan. Nama yang memuat 厂 (pabrik), 制造 (manufaktur), atau 实业 (industri) cenderung dekat ke produksi. Nama yang memuat 贸易有限公司 (trading co), 电子商务 (e-commerce), atau 百货商行 (toko serba ada) umumnya perantara. Lalu cocokkan dengan izin usaha di sistem resmi pemerintah China (gsxt.gov.cn): kolom 经营范围 (ruang lingkup usaha) pabrik asli memuat kata produksi atau manufaktur, bukan hanya penjualan grosir.",
+  },
+  {
+    q: "Apakah harga di 1688 selalu lebih murah daripada Alibaba.com?",
+    a: "Umumnya ya, karena 1688 adalah pasar grosir domestik China, sementara Alibaba.com adalah pasar ekspor dengan lapisan biaya tambahan. Alibaba Group menyebut 1688 sebagai sumber produk bagi e-commerce China. Tapi harga rendah di 1688 tidak otomatis berarti harga pabrik: perantara juga berjualan di 1688, dan margin mereka sudah menempel di harga yang Anda lihat.",
+  },
+  {
+    q: "Berapa MOQ supplier tangan pertama di 1688?",
+    a: "Bervariasi per kategori. Banyak listing 1688 bisa dibeli 1 sampai 2 unit untuk sampel, tapi harga pabrik biasanya baru keluar di kuantitas tertentu. Pabrik asli hampir selalu punya MOQ. Klaim pabrik langsung tanpa MOQ justru patut dicurigai, karena itu pola khas pedagang yang menyetok barang orang lain.",
+  },
+  {
+    q: "Apa risiko terbesar membeli langsung dari pabrik China tanpa perantara?",
+    a: "Tiga risiko utama. Pertama, salah identitas: yang Anda kira pabrik ternyata pedagang, sehingga tidak ada kendali atas kualitas produksi. Kedua, pembayaran: pabrik domestik China hanya menerima pembayaran dalam Yuan melalui rekening perusahaan, dan transfer ke rekening pribadi adalah pola penipuan paling umum. Ketiga, kepabeanan: barang yang masuk daftar Larangan dan Pembatasan (LARTAS) bisa tertahan di Bea dan Cukai jika izinnya tidak lengkap.",
+  },
+  {
+    q: "Apakah barang dari 1688 kena bea masuk di Indonesia?",
+    a: "Ya, bea masuk, PPN dan PPh impor mengikuti kode HS barang. Besaran tarif dan status Larangan dan Pembatasan (LARTAS) untuk setiap kode HS bisa dicek sendiri di portal Indonesia National Single Window (insw.go.id). Cek kode HS sebelum memesan, bukan setelah barang berangkat.",
+  },
+  {
+    q: "Apakah perlu bisa bahasa Mandarin untuk cari supplier di 1688?",
+    a: "Untuk mencari, tidak wajib. Tapi kata kunci Mandarin menentukan hasil pencarian, karena mesin pencari 1688 mengindeks judul produk berbahasa Mandarin. Untuk negosiasi harga pabrik dan membaca izin usaha, kemampuan Mandarin berpengaruh besar pada harga akhir yang Anda dapat.",
+  },
+];
+
+// Catatan: BlogPosting JSON-LD diterbitkan EmDashHead dari pageType="article"
+// plus articleMeta, sama seperti posts/[slug].astro. Halaman ini hanya menambah
+// FAQPage, HowTo dan BreadcrumbList agar tidak ada BlogPosting ganda.
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faq.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+
+const howToSchema = {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  name: "Cara memverifikasi supplier tangan pertama di 1688",
+  description:
+    "Tujuh langkah memastikan supplier 1688 adalah pabrik asli, bukan pedagang perantara.",
+  inLanguage: "id-ID",
+  totalTime: "PT45M",
+  estimatedCost: { "@type": "MonetaryAmount", currency: "IDR", value: "0" },
+  supply: [
+    { "@type": "HowToSupply", name: "Akun 1688 aktif" },
+    { "@type": "HowToSupply", name: "Kata kunci produk dalam bahasa Mandarin" },
+  ],
+  tool: [
+    { "@type": "HowToTool", name: "Sistem Publikasi Informasi Kredit Perusahaan Nasional China (gsxt.gov.cn)" },
+    { "@type": "HowToTool", name: "Portal INSW (insw.go.id)" },
+  ],
+  step: [
+    {
+      "@type": "HowToStep",
+      name: "Cari dengan kata kunci Mandarin yang tepat",
+      text: "Terjemahkan nama produk ke istilah industri Mandarin, lalu tambahkan kata 工厂 atau 生产厂家 agar hasil pencarian mengarah ke pabrik, bukan ke toko grosir.",
+      url: pageUrl + "#langkah-1",
+    },
+    {
+      "@type": "HowToStep",
+      name: "Saring dengan filter pabrik di 1688",
+      text: "Aktifkan filter 源头工厂 atau 实力商家 pada panel pencarian untuk menyisakan supplier yang sudah lolos verifikasi platform.",
+      url: pageUrl + "#langkah-2",
+    },
+    {
+      "@type": "HowToStep",
+      name: "Baca nama badan hukum perusahaan",
+      text: "Nama yang memuat 厂, 制造 atau 实业 mengarah ke produksi. Nama yang memuat 贸易有限公司, 电子商务 atau 百货商行 mengarah ke perantara.",
+      url: pageUrl + "#langkah-3",
+    },
+    {
+      "@type": "HowToStep",
+      name: "Cocokkan izin usaha di sistem resmi pemerintah China",
+      text: "Masukkan nama perusahaan ke gsxt.gov.cn dan periksa kolom 经营范围. Pabrik asli memuat kata 生产 atau 制造, bukan hanya 销售 atau 批发.",
+      url: pageUrl + "#langkah-4",
+    },
+    {
+      "@type": "HowToStep",
+      name: "Minta video lini produksi secara langsung",
+      text: "Minta panggilan video yang menunjukkan mesin berjalan, stasiun kendali mutu, gudang bahan baku, dan izin usaha yang diarahkan ke kamera dalam satu sesi tanpa jeda.",
+      url: pageUrl + "#langkah-5",
+    },
+    {
+      "@type": "HowToStep",
+      name: "Uji konsistensi harga pada beberapa kuantitas",
+      text: "Minta penawaran untuk tiga tingkat kuantitas. Pabrik dapat menjelaskan struktur biaya bahan dan tenaga kerja; perantara hanya menurunkan margin.",
+      url: pageUrl + "#langkah-6",
+    },
+    {
+      "@type": "HowToStep",
+      name: "Pesan sampel dan cek kode HS sebelum order massal",
+      text: "Uji sampel fisik terhadap spesifikasi, lalu cek status LARTAS dan tarif bea masuk kode HS barang di portal INSW sebelum memesan dalam jumlah besar.",
+      url: pageUrl + "#langkah-7",
+    },
+  ],
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Beranda", item: siteUrl + "/" },
+    { "@type": "ListItem", position: 2, name: "Artikel", item: siteUrl + "/posts" },
+    { "@type": "ListItem", position: 3, name: title, item: pageUrl },
+  ],
+};
+---
+
+<Base
+  title={title}
+  rawTitle
+  pageTitle={title}
+  description={description}
+  canonical={pageUrl}
+  image={ogImage}
+  pageType="article"
+  articleMeta={{ publishedTime: published, modifiedTime: modified, author }}
+>
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(faqSchema)} />
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(howToSchema)} />
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumbSchema)} />
+
+  <nav class="crumbs" aria-label="Breadcrumb">
+    <a href="/">Beranda</a> <span aria-hidden="true">/</span>
+    <a href="/posts">Artikel</a> <span aria-hidden="true">/</span>
+    <span>Supplier tangan pertama 1688</span>
+  </nav>
+
+  <article>
+    <h1>Cara Mencari Supplier Tangan Pertama di 1688 dan Pabrik China Langsung</h1>
+
+    <p class="meta">
+      <time datetime="2026-11-23">23 November 2026</time>
+      <span aria-hidden="true">·</span> Oleh Tim Arenka
+      <span aria-hidden="true">·</span> 11 menit baca
+    </p>
+
+    <div class="answer">
+      <h2 class="answer-label" id="jawaban-singkat">Jawaban singkat</h2>
+      <p>
+        <strong>Supplier tangan pertama di 1688 dikenali dari tiga bukti yang bisa diverifikasi,
+        bukan dari klaim penjual.</strong> Pertama, izin usaha perusahaan memuat kata
+        <b lang="zh">生产</b> (produksi) atau <b lang="zh">制造</b> (manufaktur) saat dicek di
+        sistem resmi pemerintah China, gsxt.gov.cn. Kedua, toko memiliki label verifikasi pabrik
+        dari platform, seperti <b lang="zh">源头工厂</b> atau <b lang="zh">超级工厂</b>. Ketiga,
+        supplier mampu menunjukkan lini produksinya lewat panggilan video langsung tanpa jeda.
+        Pedagang perantara akan gagal pada minimal satu dari tiga bukti itu. Menurut data platform
+        1688, pabrik yang lolos sertifikasi sumber punya tingkat sengketa
+        <strong>67% lebih rendah</strong> dibanding supplier tanpa sertifikasi.
+      </p>
+    </div>
+
+    <h2 id="mengapa-penting">Mengapa supplier tangan pertama menentukan margin Anda</h2>
+
+    <p>
+      Pasar Indonesia kini bergantung pada barang China dalam skala yang belum pernah sebesar ini.
+      Badan Pusat Statistik mencatat total impor Indonesia sepanjang 2025 mencapai
+      <strong>US$241,86 miliar</strong>, dan impor nonmigas dari China sendiri menembus
+      <strong>US$86,99 miliar</strong> atau <strong>41,60%</strong> dari seluruh impor nonmigas,
+      naik dari 36,29% pada 2024. Nilainya melonjak <strong>21,4%</strong> dalam satu tahun, sementara
+      defisit perdagangan nonmigas Indonesia dengan China membengkak ke
+      <strong>US$22,17 miliar</strong>.
+    </p>
+
+    <p>
+      Artinya persaingan di dalam negeri tidak lagi soal siapa yang bisa mengimpor, tetapi siapa yang
+      mengimpor dengan harga paling dekat ke pabrik. Setiap lapisan perantara menempelkan marginnya
+      pada harga yang Anda lihat di layar. Dua pedagang di antara Anda dan pabrik berarti dua margin
+      yang Anda bayar, dan Anda tidak pernah melihat angka aslinya.
+    </p>
+
+    <figure>
+      <svg
+        class="diagram-wide"
+        viewBox="0 0 800 330"
+        width="800"
+        height="330"
+        role="img"
+        aria-labelledby="svg1-title svg1-desc"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <title id="svg1-title">Perbandingan rantai pasok lewat perantara dan langsung ke pabrik</title>
+        <desc id="svg1-desc">
+          Diagram dua jalur. Jalur atas: pabrik ke perantara pertama ke perantara kedua ke pembeli,
+          masing-masing menambah margin. Jalur bawah: pabrik langsung ke pembeli, tanpa margin perantara.
+        </desc>
+        <rect width="800" height="330" fill="#ffffff" />
+
+        <text x="24" y="34" font-size="15" font-weight="700" fill="#5a6b86" font-family="system-ui, Arial, sans-serif">LEWAT PERANTARA</text>
+        <line x1="24" y1="44" x2="776" y2="44" stroke="#d4deeb" stroke-width="1" />
+
+        <rect x="24" y="62" width="150" height="60" rx="10" fill="#002e62" />
+        <text x="99" y="88" font-size="14" font-weight="700" fill="#ffffff" text-anchor="middle" font-family="system-ui, Arial, sans-serif">Pabrik</text>
+        <text x="99" y="106" font-size="12" fill="#d0f600" text-anchor="middle" font-family="system-ui, Arial, sans-serif">harga asli</text>
+
+        <path d="M182 92 H218" stroke="#5a6b86" stroke-width="2" />
+        <path d="M212 86 L222 92 L212 98 Z" fill="#5a6b86" />
+        <text x="200" y="78" font-size="11" font-weight="700" fill="#5a6b86" text-anchor="middle" font-family="system-ui, Arial, sans-serif">+margin</text>
+
+        <rect x="226" y="62" width="150" height="60" rx="10" fill="#eef3f9" stroke="#d4deeb" />
+        <text x="301" y="88" font-size="14" font-weight="700" fill="#17294a" text-anchor="middle" font-family="system-ui, Arial, sans-serif">Perantara 1</text>
+        <text x="301" y="106" font-size="12" fill="#5a6b86" text-anchor="middle" font-family="system-ui, Arial, sans-serif">trading company</text>
+
+        <path d="M384 92 H420" stroke="#5a6b86" stroke-width="2" />
+        <path d="M414 86 L424 92 L414 98 Z" fill="#5a6b86" />
+        <text x="402" y="78" font-size="11" font-weight="700" fill="#5a6b86" text-anchor="middle" font-family="system-ui, Arial, sans-serif">+margin</text>
+
+        <rect x="428" y="62" width="150" height="60" rx="10" fill="#eef3f9" stroke="#d4deeb" />
+        <text x="503" y="88" font-size="14" font-weight="700" fill="#17294a" text-anchor="middle" font-family="system-ui, Arial, sans-serif">Perantara 2</text>
+        <text x="503" y="106" font-size="12" fill="#5a6b86" text-anchor="middle" font-family="system-ui, Arial, sans-serif">toko grosir</text>
+
+        <path d="M586 92 H622" stroke="#5a6b86" stroke-width="2" />
+        <path d="M616 86 L626 92 L616 98 Z" fill="#5a6b86" />
+
+        <rect x="630" y="62" width="146" height="60" rx="10" fill="#ffffff" stroke="#002e62" stroke-width="2" />
+        <text x="703" y="88" font-size="14" font-weight="700" fill="#002e62" text-anchor="middle" font-family="system-ui, Arial, sans-serif">Anda</text>
+        <text x="703" y="106" font-size="12" fill="#5a6b86" text-anchor="middle" font-family="system-ui, Arial, sans-serif">harga akhir</text>
+
+        <text x="24" y="196" font-size="15" font-weight="700" fill="#002e62" font-family="system-ui, Arial, sans-serif">TANGAN PERTAMA</text>
+        <line x1="24" y1="206" x2="776" y2="206" stroke="#d0f600" stroke-width="3" />
+
+        <rect x="24" y="224" width="150" height="60" rx="10" fill="#002e62" />
+        <text x="99" y="250" font-size="14" font-weight="700" fill="#ffffff" text-anchor="middle" font-family="system-ui, Arial, sans-serif">Pabrik</text>
+        <text x="99" y="268" font-size="12" fill="#d0f600" text-anchor="middle" font-family="system-ui, Arial, sans-serif">harga asli</text>
+
+        <path d="M182 254 H622" stroke="#002e62" stroke-width="3" />
+        <path d="M614 246 L626 254 L614 262 Z" fill="#002e62" />
+        <rect x="330" y="232" width="146" height="26" rx="13" fill="#d0f600" />
+        <text x="403" y="250" font-size="12" font-weight="800" fill="#002e62" text-anchor="middle" font-family="system-ui, Arial, sans-serif">tanpa perantara</text>
+
+        <rect x="630" y="224" width="146" height="60" rx="10" fill="#ffffff" stroke="#002e62" stroke-width="2" />
+        <text x="703" y="250" font-size="14" font-weight="700" fill="#002e62" text-anchor="middle" font-family="system-ui, Arial, sans-serif">Anda</text>
+        <text x="703" y="268" font-size="12" fill="#5a6b86" text-anchor="middle" font-family="system-ui, Arial, sans-serif">harga pabrik</text>
+
+        <text x="400" y="314" font-size="12" fill="#5a6b86" text-anchor="middle" font-family="system-ui, Arial, sans-serif">Arenka Logistics — setiap lapisan perantara menambah margin pada harga yang Anda lihat</text>
+      </svg>
+      <svg
+        class="diagram-tall"
+        viewBox="0 0 380 500"
+        width="380"
+        height="500"
+        role="img"
+        aria-labelledby="svg1m-title svg1m-desc"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <title id="svg1m-title">Perbandingan rantai pasok lewat perantara dan langsung ke pabrik</title>
+        <desc id="svg1m-desc">Dua jalur tersusun vertikal. Jalur pertama melewati dua perantara yang masing-masing menambah margin. Jalur kedua langsung dari pabrik ke pembeli.</desc>
+        <rect width="380" height="500" fill="#ffffff" />
+        <text x="20" y="24" font-size="14" font-weight="700" fill="#5a6b86" font-family="system-ui, Arial, sans-serif">LEWAT PERANTARA</text>
+        <line x1="20" y1="34" x2="360" y2="34" stroke="#d4deeb" stroke-width="1" />
+        <rect x="20" y="48" width="340" height="56" rx="10" fill="#002e62" />
+        <text x="40" y="72" font-size="15" font-weight="700" fill="#ffffff" font-family="system-ui, Arial, sans-serif">Pabrik</text>
+        <text x="40" y="91" font-size="12" fill="#d0f600" font-family="system-ui, Arial, sans-serif">harga asli</text>
+        <rect x="20" y="124" width="340" height="56" rx="10" fill="#eef3f9" stroke="#d4deeb" stroke-width="2" />
+        <text x="40" y="148" font-size="15" font-weight="700" fill="#17294a" font-family="system-ui, Arial, sans-serif">Perantara 1</text>
+        <text x="40" y="167" font-size="12" fill="#5a6b86" font-family="system-ui, Arial, sans-serif">trading company</text>
+        <rect x="20" y="200" width="340" height="56" rx="10" fill="#eef3f9" stroke="#d4deeb" stroke-width="2" />
+        <text x="40" y="224" font-size="15" font-weight="700" fill="#17294a" font-family="system-ui, Arial, sans-serif">Perantara 2</text>
+        <text x="40" y="243" font-size="12" fill="#5a6b86" font-family="system-ui, Arial, sans-serif">toko grosir</text>
+        <path d="M190 104 V118" stroke="#5a6b86" stroke-width="2" />
+        <path d="M184 114 L190 123 L196 114 Z" fill="#5a6b86" />
+        <text x="206" y="120" font-size="11" font-weight="700" fill="#5a6b86" font-family="system-ui, Arial, sans-serif">+margin</text>
+        <path d="M190 180 V194" stroke="#5a6b86" stroke-width="2" />
+        <path d="M184 190 L190 199 L196 190 Z" fill="#5a6b86" />
+        <text x="206" y="196" font-size="11" font-weight="700" fill="#5a6b86" font-family="system-ui, Arial, sans-serif">+margin</text>
+        <path d="M190 256 V270" stroke="#5a6b86" stroke-width="2" />
+        <path d="M184 266 L190 275 L196 266 Z" fill="#5a6b86" />
+        <rect x="20" y="276" width="340" height="56" rx="10" fill="#ffffff" stroke="#002e62" stroke-width="2" />
+        <text x="40" y="300" font-size="15" font-weight="700" fill="#002e62" font-family="system-ui, Arial, sans-serif">Anda</text>
+        <text x="40" y="319" font-size="12" fill="#5a6b86" font-family="system-ui, Arial, sans-serif">harga akhir</text>
+        <text x="20" y="372" font-size="14" font-weight="700" fill="#002e62" font-family="system-ui, Arial, sans-serif">TANGAN PERTAMA</text>
+        <line x1="20" y1="382" x2="360" y2="382" stroke="#d0f600" stroke-width="3" />
+        <rect x="20" y="396" width="160" height="56" rx="10" fill="#002e62" />
+        <text x="100" y="420" font-size="15" font-weight="700" fill="#ffffff" text-anchor="middle" font-family="system-ui, Arial, sans-serif">Pabrik</text>
+        <text x="100" y="439" font-size="12" fill="#d0f600" text-anchor="middle" font-family="system-ui, Arial, sans-serif">harga asli</text>
+        <path d="M188 424 H268" stroke="#002e62" stroke-width="3" />
+        <path d="M262 417 L272 424 L262 431 Z" fill="#002e62" />
+        <rect x="200" y="396" width="160" height="56" rx="10" fill="#ffffff" stroke="#002e62" stroke-width="2" />
+        <text x="290" y="420" font-size="15" font-weight="700" fill="#002e62" text-anchor="middle" font-family="system-ui, Arial, sans-serif">Anda</text>
+        <text x="290" y="439" font-size="12" fill="#5a6b86" text-anchor="middle" font-family="system-ui, Arial, sans-serif">harga pabrik</text>
+        <rect x="156" y="462" width="156" height="24" rx="12" fill="#d0f600" />
+        <text x="234" y="479" font-size="11" font-weight="800" fill="#002e62" text-anchor="middle" font-family="system-ui, Arial, sans-serif">tanpa perantara</text>
+        <text x="20" y="479" font-size="11" fill="#5a6b86" font-family="system-ui, Arial, sans-serif">Arenka Logistics</text>
+      </svg>
+      <figcaption>
+        Setiap perantara di tengah rantai pasok menambahkan marginnya sendiri. Harga yang tampil di
+        halaman produk sudah memuat margin itu.
+      </figcaption>
+    </figure>
+
+    <h2 id="apa-itu-yuantou">Apa itu 源头工厂 dan mengapa 1688 membuat definisinya</h2>
+
+    <p>
+      1688.com berdiri pada 1999 sebagai pasar grosir domestik terbesar di China. Alibaba Group
+      menyebutnya <q lang="en">product source for Chinese e-commerce</q>, dan mencatat platform ini
+      memiliki <strong>lebih dari 1 juta anggota berbayar</strong> pada tahun fiskal 2024. Per
+      Februari 2025, 1688 menyebut jumlah pembeli aktif tahunannya melewati
+      <strong>100 juta</strong>, dengan pembeli kelas bisnis menyumbang sekitar
+      <strong>90%</strong> nilai transaksi.
+    </p>
+
+    <p>
+      Masalahnya, istilah <b lang="zh">源头工厂</b> (yuantou gongchang, pabrik sumber) dulu hanya
+      klaim. Siapa pun bisa menyebut diri pabrik. 1688 kemudian mengubahnya menjadi status yang
+      harus dilewati lewat dua jalur verifikasi:
+    </p>
+
+    <ul>
+      <li>
+        <strong>Verifikasi lapangan</strong> (<b lang="zh">实地验厂</b>) — platform memeriksa alamat
+        pabrik, mesin, kapasitas produksi dan proses kendali mutu. Hasilnya label
+        <b lang="zh">超级工厂</b> (pabrik super) atau <b lang="zh">严选工厂</b> (pabrik terpilih).
+      </li>
+      <li>
+        <strong>Verifikasi digital</strong> (<b lang="zh">数字验厂</b>) — pemeriksaan izin usaha,
+        izin produksi dan sertifikat paten. Hasilnya penandaan
+        <b lang="zh">同源验厂</b>.
+      </li>
+    </ul>
+
+    <p>
+      1688 juga mensyaratkan pabrik dalam program seleksinya memiliki izin usaha yang memuat kata
+      <b lang="zh">生产</b> atau <b lang="zh">制造</b>, berstatus wajib pajak umum, dan memiliki
+      rekening perusahaan terverifikasi. Untuk purna jual, pabrik terverifikasi wajib merespons
+      keluhan dalam <strong>2 jam</strong>, menerbitkan laporan pemeriksaan dalam
+      <strong>48 jam</strong>, dan mengirim ulang atau mengembalikan dana dalam
+      <strong>72 jam</strong> bila kesalahan ada di pihak pabrik.
+    </p>
+
+    <h2 id="hierarki-supplier">Hierarki supplier 1688 yang perlu Anda baca</h2>
+
+    <p>
+      Lencana di halaman toko bukan dekorasi. Masing-masing punya syarat dan biaya berbeda, dan
+      posisinya dalam hierarki memberi gambaran seberapa dekat supplier itu ke produksi.
+    </p>
+
+    <figure>
+      <svg
+        class="diagram-wide"
+        viewBox="0 0 800 420"
+        width="800"
+        height="420"
+        role="img"
+        aria-labelledby="svg2-title svg2-desc"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <title id="svg2-title">Hierarki tingkat supplier di platform 1688</title>
+        <desc id="svg2-desc">
+          Piramida lima tingkat dari atas ke bawah: pabrik super, merchant kuat berlencana kepala
+          sapi, supplier emas, merchant biasa, dan toko baru.
+        </desc>
+        <rect width="800" height="420" fill="#ffffff" />
+
+        <rect x="230" y="30" width="340" height="62" rx="10" fill="#002e62" />
+        <text x="256" y="58" font-size="15" font-weight="800" fill="#d0f600" font-family="system-ui, Arial, sans-serif" lang="zh">超级工厂</text>
+        <text x="256" y="78" font-size="13" fill="#ffffff" font-family="system-ui, Arial, sans-serif">Pabrik super — lolos verifikasi lapangan</text>
+        <rect x="596" y="46" width="112" height="28" rx="14" fill="#d0f600" />
+        <text x="652" y="65" font-size="12" font-weight="800" fill="#002e62" text-anchor="middle" font-family="system-ui, Arial, sans-serif">paling aman</text>
+
+        <rect x="196" y="100" width="408" height="62" rx="10" fill="#0b4589" />
+        <text x="222" y="128" font-size="15" font-weight="800" fill="#d0f600" font-family="system-ui, Arial, sans-serif" lang="zh">实力商家</text>
+        <text x="222" y="148" font-size="13" fill="#ffffff" font-family="system-ui, Arial, sans-serif">Merchant kuat — lencana kepala sapi</text>
+
+        <rect x="162" y="170" width="476" height="62" rx="10" fill="#eef3f9" stroke="#d4deeb" />
+        <text x="188" y="198" font-size="15" font-weight="800" fill="#002e62" font-family="system-ui, Arial, sans-serif" lang="zh">金牌供应商</text>
+        <text x="188" y="218" font-size="13" fill="#5a6b86" font-family="system-ui, Arial, sans-serif">Supplier emas — verifikasi berbayar</text>
+
+        <rect x="128" y="240" width="544" height="62" rx="10" fill="#eef3f9" stroke="#d4deeb" />
+        <text x="154" y="268" font-size="15" font-weight="800" fill="#17294a" font-family="system-ui, Arial, sans-serif" lang="zh">普通商家</text>
+        <text x="154" y="288" font-size="13" fill="#5a6b86" font-family="system-ui, Arial, sans-serif">Merchant biasa — hanya verifikasi identitas dasar</text>
+
+        <rect x="94" y="310" width="612" height="62" rx="10" fill="#ffffff" stroke="#d4deeb" stroke-dasharray="5 4" />
+        <text x="120" y="338" font-size="15" font-weight="800" fill="#5a6b86" font-family="system-ui, Arial, sans-serif" lang="zh">新店铺</text>
+        <text x="120" y="358" font-size="13" fill="#5a6b86" font-family="system-ui, Arial, sans-serif">Toko baru — tanpa rekam jejak transaksi</text>
+        <rect x="574" y="326" width="112" height="28" rx="14" fill="#ffe8e8" />
+        <text x="630" y="345" font-size="12" font-weight="800" fill="#9b2222" text-anchor="middle" font-family="system-ui, Arial, sans-serif">paling berisiko</text>
+
+        <text x="400" y="400" font-size="12" fill="#5a6b86" text-anchor="middle" font-family="system-ui, Arial, sans-serif">Arenka Logistics — hierarki lencana supplier 1688</text>
+      </svg>
+      <svg
+        class="diagram-tall"
+        viewBox="0 0 380 430"
+        width="380"
+        height="430"
+        role="img"
+        aria-labelledby="svg2m-title svg2m-desc"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <title id="svg2m-title">Hierarki tingkat supplier di platform 1688</title>
+        <desc id="svg2m-desc">Lima tingkat supplier dari paling aman ke paling berisiko: pabrik super, merchant kuat, supplier emas, merchant biasa, toko baru.</desc>
+        <rect width="380" height="430" fill="#ffffff" />
+        <text x="20" y="22" font-size="12" font-weight="700" fill="#5a6b86" font-family="system-ui, Arial, sans-serif">PALING AMAN</text>
+        <rect x="20" y="34" width="340" height="68" rx="10" fill="#002e62" />
+        <text x="40" y="62" font-size="16" font-weight="800" fill="#d0f600" font-family="system-ui, Arial, sans-serif" lang="zh">超级工厂</text>
+        <text x="40" y="84" font-size="12" fill="#ffffff" font-family="system-ui, Arial, sans-serif">Pabrik super — verifikasi lapangan</text>
+        <rect x="20" y="110" width="340" height="68" rx="10" fill="#0b4589" />
+        <text x="40" y="138" font-size="16" font-weight="800" fill="#d0f600" font-family="system-ui, Arial, sans-serif" lang="zh">实力商家</text>
+        <text x="40" y="160" font-size="12" fill="#ffffff" font-family="system-ui, Arial, sans-serif">Merchant kuat — lencana kepala sapi</text>
+        <rect x="20" y="186" width="340" height="68" rx="10" fill="#eef3f9" stroke="#d4deeb" stroke-width="2" />
+        <text x="40" y="214" font-size="16" font-weight="800" fill="#002e62" font-family="system-ui, Arial, sans-serif" lang="zh">金牌供应商</text>
+        <text x="40" y="236" font-size="12" fill="#5a6b86" font-family="system-ui, Arial, sans-serif">Supplier emas — verifikasi berbayar</text>
+        <rect x="20" y="262" width="340" height="68" rx="10" fill="#eef3f9" stroke="#d4deeb" stroke-width="2" />
+        <text x="40" y="290" font-size="16" font-weight="800" fill="#17294a" font-family="system-ui, Arial, sans-serif" lang="zh">普通商家</text>
+        <text x="40" y="312" font-size="12" fill="#5a6b86" font-family="system-ui, Arial, sans-serif">Merchant biasa — identitas dasar</text>
+        <rect x="20" y="338" width="340" height="68" rx="10" fill="#ffffff" stroke="#d4deeb" stroke-width="2" />
+        <text x="40" y="366" font-size="16" font-weight="800" fill="#5a6b86" font-family="system-ui, Arial, sans-serif" lang="zh">新店铺</text>
+        <text x="40" y="388" font-size="12" fill="#5a6b86" font-family="system-ui, Arial, sans-serif">Toko baru — tanpa rekam jejak</text>
+        <text x="20" y="414" font-size="12" font-weight="700" fill="#9b2222" font-family="system-ui, Arial, sans-serif">PALING BERISIKO</text>
+        <text x="360" y="414" font-size="11" fill="#5a6b86" text-anchor="end" font-family="system-ui, Arial, sans-serif">Arenka Logistics</text>
+      </svg>
+      <figcaption>
+        Lencana tidak menjamin mutu produk, tapi menyaring risiko identitas. Lencana
+        <b lang="zh">实力商家</b> saja bisa menelan biaya sekitar 28.000 RMB per tahun, dan sekitar
+        58.000 RMB untuk kategori pakaian wanita.
+      </figcaption>
+    </figure>
+
+    <p>
+      Karena lencana itu berbayar, keberadaannya menandakan supplier bersedia menanggung biaya
+      kepatuhan. Itu sinyal, bukan garansi. Konsultan sourcing Supplyia memperkirakan tingkat
+      keandalan merchant kuat hanya sekitar <strong>50%</strong>, dan merchant dengan verifikasi
+      identitas dasar hanya <strong>10% sampai 20%</strong>. Verifikasi mandiri tetap wajib.
+    </p>
+
+    <h2 id="pabrik-vs-trading">Pabrik atau trading company? Baca tandanya di halaman toko</h2>
+
+    <div class="table-wrap">
+      <table>
+        <caption>Perbedaan yang terlihat tanpa perlu bertanya ke supplier</caption>
+        <thead>
+          <tr>
+            <th scope="col">Yang diperiksa</th>
+            <th scope="col">Pabrik tangan pertama</th>
+            <th scope="col">Perantara</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Nama badan hukum</td>
+            <td>Memuat <b lang="zh">厂</b>, <b lang="zh">制造</b>, <b lang="zh">实业</b></td>
+            <td>Memuat <b lang="zh">贸易有限公司</b>, <b lang="zh">电子商务</b>, <b lang="zh">百货商行</b></td>
+          </tr>
+          <tr>
+            <td>Ruang lingkup izin usaha</td>
+            <td><b lang="zh">生产</b> atau <b lang="zh">制造</b></td>
+            <td>Hanya <b lang="zh">销售</b> atau <b lang="zh">批发</b></td>
+          </tr>
+          <tr>
+            <td>Rentang kategori produk</td>
+            <td>Sempit, satu lini produksi</td>
+            <td>Lebar, banyak kategori tidak berhubungan</td>
+          </tr>
+          <tr>
+            <td>Minimum order</td>
+            <td>Ada MOQ jelas per kuantitas produksi</td>
+            <td>Satuan bebas, stok siap kirim</td>
+          </tr>
+          <tr>
+            <td>Foto produk</td>
+            <td>Foto lini produksi dan bahan baku sendiri</td>
+            <td>Foto studio generik, sering identik antar toko</td>
+          </tr>
+          <tr>
+            <td>Respons soal struktur biaya</td>
+            <td>Bisa merinci bahan, tenaga kerja, cetakan</td>
+            <td>Hanya menurunkan margin tanpa penjelasan</td>
+          </tr>
+          <tr>
+            <td>Kemampuan OEM/ODM</td>
+            <td>Bisa ubah cetakan, bahan, ukuran</td>
+            <td>Terbatas pada label dan kemasan</td>
+          </tr>
+          <tr>
+            <td>Pembayaran</td>
+            <td>Rekening perusahaan, Yuan, invoice resmi</td>
+            <td>Sering mengarahkan ke rekening pribadi</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Pola nama ini bukan aturan mutlak. Tidak semua perusahaan dengan akhiran
+      <b lang="zh">有限公司</b> adalah pabrik, dan sebagian pabrik asli tidak memakai kata
+      <b lang="zh">厂</b> dalam namanya. Tapi pola ini menyaring mayoritas kandidat dalam hitungan
+      menit, jauh lebih cepat daripada menanyai satu per satu.
+    </p>
+
+    <h2 id="tujuh-langkah">Tujuh langkah verifikasi supplier tangan pertama</h2>
+
+    <figure>
+      <svg
+        class="diagram-wide"
+        viewBox="0 0 800 300"
+        width="800"
+        height="300"
+        role="img"
+        aria-labelledby="svg3-title svg3-desc"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <title id="svg3-title">Alur tujuh langkah verifikasi supplier 1688</title>
+        <desc id="svg3-desc">
+          Tujuh langkah berurutan: kata kunci Mandarin, filter pabrik, nama badan hukum, cek izin
+          usaha, video lini produksi, uji struktur harga, lalu sampel dan cek kode HS.
+        </desc>
+        <rect width="800" height="300" fill="#ffffff" />
+        <line x1="60" y1="150" x2="740" y2="150" stroke="#d4deeb" stroke-width="4" />
+        <line x1="60" y1="150" x2="740" y2="150" stroke="#d0f600" stroke-width="4" stroke-dasharray="6 10" />
+
+        <circle cx="60" cy="150" r="26" fill="#002e62" />
+        <text x="60" y="157" font-size="15" font-weight="800" fill="#d0f600" text-anchor="middle" font-family="system-ui, Arial, sans-serif">1</text>
+        <text x="60" y="108" font-size="12" font-weight="700" fill="#002e62" text-anchor="middle" font-family="system-ui, Arial, sans-serif">Kata kunci</text>
+        <text x="60" y="124" font-size="12" font-weight="700" fill="#002e62" text-anchor="middle" font-family="system-ui, Arial, sans-serif">Mandarin</text>
+
+        <circle cx="173" cy="150" r="26" fill="#002e62" />
+        <text x="173" y="157" font-size="15" font-weight="800" fill="#d0f600" text-anchor="middle" font-family="system-ui, Arial, sans-serif">2</text>
+        <text x="173" y="200" font-size="12" font-weight="700" fill="#002e62" text-anchor="middle" font-family="system-ui, Arial, sans-serif">Filter pabrik</text>
+
+        <circle cx="286" cy="150" r="26" fill="#002e62" />
+        <text x="286" y="157" font-size="15" font-weight="800" fill="#d0f600" text-anchor="middle" font-family="system-ui, Arial, sans-serif">3</text>
+        <text x="286" y="108" font-size="12" font-weight="700" fill="#002e62" text-anchor="middle" font-family="system-ui, Arial, sans-serif">Nama badan</text>
+        <text x="286" y="124" font-size="12" font-weight="700" fill="#002e62" text-anchor="middle" font-family="system-ui, Arial, sans-serif">hukum</text>
+
+        <circle cx="400" cy="150" r="26" fill="#002e62" />
+        <text x="400" y="157" font-size="15" font-weight="800" fill="#d0f600" text-anchor="middle" font-family="system-ui, Arial, sans-serif">4</text>
+        <text x="400" y="200" font-size="12" font-weight="700" fill="#002e62" text-anchor="middle" font-family="system-ui, Arial, sans-serif">Cek izin usaha</text>
+        <text x="400" y="216" font-size="12" fill="#5a6b86" text-anchor="middle" font-family="system-ui, Arial, sans-serif">gsxt.gov.cn</text>
+
+        <circle cx="514" cy="150" r="26" fill="#002e62" />
+        <text x="514" y="157" font-size="15" font-weight="800" fill="#d0f600" text-anchor="middle" font-family="system-ui, Arial, sans-serif">5</text>
+        <text x="514" y="108" font-size="12" font-weight="700" fill="#002e62" text-anchor="middle" font-family="system-ui, Arial, sans-serif">Video lini</text>
+        <text x="514" y="124" font-size="12" font-weight="700" fill="#002e62" text-anchor="middle" font-family="system-ui, Arial, sans-serif">produksi</text>
+
+        <circle cx="627" cy="150" r="26" fill="#002e62" />
+        <text x="627" y="157" font-size="15" font-weight="800" fill="#d0f600" text-anchor="middle" font-family="system-ui, Arial, sans-serif">6</text>
+        <text x="627" y="200" font-size="12" font-weight="700" fill="#002e62" text-anchor="middle" font-family="system-ui, Arial, sans-serif">Uji struktur</text>
+        <text x="627" y="216" font-size="12" font-weight="700" fill="#002e62" text-anchor="middle" font-family="system-ui, Arial, sans-serif">harga</text>
+
+        <circle cx="740" cy="150" r="26" fill="#d0f600" stroke="#002e62" stroke-width="2" />
+        <text x="740" y="157" font-size="15" font-weight="800" fill="#002e62" text-anchor="middle" font-family="system-ui, Arial, sans-serif">7</text>
+        <text x="740" y="108" font-size="12" font-weight="700" fill="#002e62" text-anchor="middle" font-family="system-ui, Arial, sans-serif">Sampel dan</text>
+        <text x="740" y="124" font-size="12" font-weight="700" fill="#002e62" text-anchor="middle" font-family="system-ui, Arial, sans-serif">kode HS</text>
+
+        <text x="400" y="278" font-size="12" fill="#5a6b86" text-anchor="middle" font-family="system-ui, Arial, sans-serif">Arenka Logistics — alur verifikasi sebelum order massal</text>
+      </svg>
+      <svg
+        class="diagram-tall"
+        viewBox="0 0 380 560"
+        width="380"
+        height="560"
+        role="img"
+        aria-labelledby="svg3m-title svg3m-desc"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <title id="svg3m-title">Alur tujuh langkah verifikasi supplier 1688</title>
+        <desc id="svg3m-desc">Tujuh langkah berurutan dari kata kunci Mandarin sampai pemesanan sampel dan pengecekan kode HS.</desc>
+        <rect width="380" height="560" fill="#ffffff" />
+        <line x1="48" y1="40" x2="48" y2="496" stroke="#d4deeb" stroke-width="4" />
+        <line x1="48" y1="40" x2="48" y2="496" stroke="#d0f600" stroke-width="4" stroke-dasharray="6 10" />
+        <circle cx="48" cy="40" r="24" fill="#002e62" />
+        <text x="48" y="46" font-size="15" font-weight="800" fill="#d0f600" text-anchor="middle" font-family="system-ui, Arial, sans-serif">1</text>
+        <text x="86" y="38" font-size="15" font-weight="700" fill="#002e62" font-family="system-ui, Arial, sans-serif">Kata kunci Mandarin</text>
+        <text x="86" y="58" font-size="12" fill="#5a6b86" font-family="system-ui, Arial, sans-serif">tambahkan 工厂</text>
+        <circle cx="48" cy="116" r="24" fill="#002e62" />
+        <text x="48" y="122" font-size="15" font-weight="800" fill="#d0f600" text-anchor="middle" font-family="system-ui, Arial, sans-serif">2</text>
+        <text x="86" y="114" font-size="15" font-weight="700" fill="#002e62" font-family="system-ui, Arial, sans-serif">Filter pabrik</text>
+        <text x="86" y="134" font-size="12" fill="#5a6b86" font-family="system-ui, Arial, sans-serif">源头工厂</text>
+        <circle cx="48" cy="192" r="24" fill="#002e62" />
+        <text x="48" y="198" font-size="15" font-weight="800" fill="#d0f600" text-anchor="middle" font-family="system-ui, Arial, sans-serif">3</text>
+        <text x="86" y="190" font-size="15" font-weight="700" fill="#002e62" font-family="system-ui, Arial, sans-serif">Nama badan hukum</text>
+        <text x="86" y="210" font-size="12" fill="#5a6b86" font-family="system-ui, Arial, sans-serif">公司档案</text>
+        <circle cx="48" cy="268" r="24" fill="#002e62" />
+        <text x="48" y="274" font-size="15" font-weight="800" fill="#d0f600" text-anchor="middle" font-family="system-ui, Arial, sans-serif">4</text>
+        <text x="86" y="266" font-size="15" font-weight="700" fill="#002e62" font-family="system-ui, Arial, sans-serif">Cek izin usaha</text>
+        <text x="86" y="286" font-size="12" fill="#5a6b86" font-family="system-ui, Arial, sans-serif">gsxt.gov.cn</text>
+        <circle cx="48" cy="344" r="24" fill="#002e62" />
+        <text x="48" y="350" font-size="15" font-weight="800" fill="#d0f600" text-anchor="middle" font-family="system-ui, Arial, sans-serif">5</text>
+        <text x="86" y="342" font-size="15" font-weight="700" fill="#002e62" font-family="system-ui, Arial, sans-serif">Video lini produksi</text>
+        <text x="86" y="362" font-size="12" fill="#5a6b86" font-family="system-ui, Arial, sans-serif">panggilan langsung</text>
+        <circle cx="48" cy="420" r="24" fill="#002e62" />
+        <text x="48" y="426" font-size="15" font-weight="800" fill="#d0f600" text-anchor="middle" font-family="system-ui, Arial, sans-serif">6</text>
+        <text x="86" y="418" font-size="15" font-weight="700" fill="#002e62" font-family="system-ui, Arial, sans-serif">Uji struktur harga</text>
+        <text x="86" y="438" font-size="12" fill="#5a6b86" font-family="system-ui, Arial, sans-serif">tiga kuantitas</text>
+        <circle cx="48" cy="496" r="24" fill="#d0f600" stroke="#002e62" stroke-width="2" />
+        <text x="48" y="502" font-size="15" font-weight="800" fill="#002e62" text-anchor="middle" font-family="system-ui, Arial, sans-serif">7</text>
+        <text x="86" y="494" font-size="15" font-weight="700" fill="#002e62" font-family="system-ui, Arial, sans-serif">Sampel dan kode HS</text>
+        <text x="86" y="514" font-size="12" fill="#5a6b86" font-family="system-ui, Arial, sans-serif">insw.go.id</text>
+        <text x="20" y="540" font-size="11" fill="#5a6b86" font-family="system-ui, Arial, sans-serif">Arenka Logistics — alur verifikasi sebelum order massal</text>
+      </svg>
+      <figcaption>Urutannya penting: verifikasi identitas lebih dulu, baru negosiasi harga.</figcaption>
+    </figure>
+
+    <h3 id="langkah-1">1. Cari dengan kata kunci Mandarin, bukan Inggris</h3>
+    <p>
+      Mesin pencari 1688 mengindeks judul produk berbahasa Mandarin. Pencarian dalam bahasa Inggris
+      atau Indonesia hanya menjangkau sebagian kecil katalog. Terjemahkan nama produk ke istilah
+      industri yang dipakai pedagang China, lalu tambahkan <b lang="zh">工厂</b> (pabrik) atau
+      <b lang="zh">生产厂家</b> (produsen) di belakangnya. Satu kata kunci yang salah bisa membuat
+      Anda hanya melihat toko grosir sepanjang hari.
+    </p>
+
+    <h3 id="langkah-2">2. Nyalakan filter pabrik di panel pencarian</h3>
+    <p>
+      Pada hasil pencarian, aktifkan filter <b lang="zh">源头工厂</b> atau
+      <b lang="zh">实力商家</b>. Langkah ini memangkas daftar kandidat secara drastis dan menyisakan
+      supplier yang sudah melewati verifikasi platform. Mulailah dari daftar pendek ini, bukan dari
+      hasil pencarian mentah.
+    </p>
+
+    <h3 id="langkah-3">3. Baca nama badan hukum, bukan nama toko</h3>
+    <p>
+      Nama toko bisa dikarang. Nama badan hukum tidak. Buka tab profil perusahaan
+      (<b lang="zh">公司档案</b>) dan catat nama resmi, tahun pendirian, modal terdaftar, dan alamat.
+      Cocokkan dengan pola nama pada tabel di atas.
+    </p>
+
+    <h3 id="langkah-4">4. Cek izin usaha di sistem resmi pemerintah China</h3>
+    <p>
+      Ini langkah yang paling sering dilewatkan, padahal gratis. Pemerintah China menyediakan
+      Sistem Publikasi Informasi Kredit Perusahaan Nasional di
+      <a href="https://www.gsxt.gov.cn/" target="_blank" rel="noopener noreferrer">gsxt.gov.cn</a>.
+      Masukkan nama perusahaan, lalu periksa kolom <b lang="zh">经营范围</b> (ruang lingkup usaha).
+      Pabrik asli memuat kata <b lang="zh">生产</b> atau <b lang="zh">制造</b>. Jika isinya hanya
+      <b lang="zh">销售</b> (penjualan) atau <b lang="zh">批发</b> (grosir), Anda sedang bicara dengan
+      pedagang.
+    </p>
+    <p>
+      Skala basis data ini membuatnya layak dipercaya. Laporan Harian Rakyat pada Desember 2023
+      menyebut sistem tersebut telah menghimpun <strong>182 juta entitas usaha</strong> dengan
+      <strong>5,83 miliar</strong> catatan informasi sampai akhir Oktober 2023, dan diakses
+      rata-rata <strong>130 juta kali per hari</strong>.
+    </p>
+
+    <h3 id="langkah-5">5. Minta panggilan video lini produksi, bukan rekaman</h3>
+    <p>
+      Rekaman video bisa dipinjam dari pabrik lain. Panggilan video langsung tidak bisa. Minta
+      supplier menunjukkan empat hal dalam satu sesi tanpa jeda: mesin yang sedang berjalan,
+      stasiun kendali mutu, gudang bahan baku, dan izin usaha yang diarahkan ke kamera. Perantara
+      biasanya menolak, menunda, atau hanya mengirim foto.
+    </p>
+
+    <h3 id="langkah-6">6. Uji struktur harga pada tiga tingkat kuantitas</h3>
+    <p>
+      Minta penawaran untuk tiga kuantitas berbeda, misalnya 100, 500 dan 2.000 unit. Pabrik akan
+      menjelaskan kenapa harga turun: biaya cetakan tersebar lebih luas, pembelian bahan baku lebih
+      besar, waktu setel mesin lebih efisien. Perantara hanya menurunkan angka tanpa alasan
+      produksi. Pertanyaan soal struktur biaya adalah penyaring yang paling sulit dipalsukan.
+    </p>
+
+    <h3 id="langkah-7">7. Pesan sampel, lalu cek kode HS sebelum order massal</h3>
+    <p>
+      Uji sampel fisik terhadap spesifikasi: bahan, dimensi, fungsi, kemasan dan label. Setelah itu,
+      cek kode HS barang Anda di portal
+      <a href="https://insw.go.id/" target="_blank" rel="noopener noreferrer">Indonesia National Single Window</a>
+      untuk mengetahui tarif bea masuk, PPN, PPh impor, dan status Larangan dan Pembatasan (LARTAS).
+      Jumlah pos tarif yang diawasi tidak sedikit: DDTCNews mencatat usulan LARTAS mencakup sekitar
+      2.000 kode HS dari Kementerian Perdagangan, sekitar 500 kode dari Kementerian Kelautan dan
+      Perikanan, dan 102 kode dari Kementerian Kesehatan. Barang yang tertahan di Bea dan Cukai
+      karena izin tidak lengkap akan menghapus seluruh penghematan harga pabrik Anda.
+    </p>
+
+    <h2 id="tanda-bahaya">Lima tanda bahaya yang sebaiknya langsung Anda tinggalkan</h2>
+    <ol>
+      <li>
+        <strong>Permintaan transfer ke rekening pribadi.</strong> Pabrik resmi China bertransaksi
+        lewat rekening perusahaan. Permintaan ke Alipay atau WeChat pribadi adalah pola penipuan
+        paling umum.
+      </li>
+      <li>
+        <strong>Klaim pabrik langsung tanpa MOQ.</strong> Produksi punya biaya setel mesin. Pabrik
+        tanpa MOQ hampir selalu berarti pedagang yang menyetok barang orang lain.
+      </li>
+      <li>
+        <strong>Harga 50% di bawah rata-rata pasar.</strong> Bandingkan minimal lima supplier untuk
+        mengetahui rentang wajar. Angka di luar rentang itu biasanya menandakan spesifikasi berbeda.
+      </li>
+      <li>
+        <strong>Label <b lang="zh">外贸尾单</b> (sisa stok ekspor).</strong> Barang jenis ini sering
+        merupakan produk cacat atau tiruan, tanpa jaminan mutu dan tanpa kemungkinan pengulangan
+        order.
+      </li>
+      <li>
+        <strong>Klaim sertifikasi tanpa dokumen.</strong> Minta salinan sertifikat SNI, BPOM, atau
+        standar lain yang Anda butuhkan, lalu verifikasi nomornya ke lembaga penerbit.
+      </li>
+    </ol>
+
+    <h2 id="setelah-ketemu">Setelah supplier ketemu: tiga hal yang masih bisa menggagalkan order</h2>
+    <p>
+      Menemukan pabrik hanya separuh pekerjaan. Tiga hambatan berikut muncul setelahnya, dan
+      ketiganya terjadi di luar halaman 1688.
+    </p>
+    <p>
+      <strong>Pembayaran dalam Yuan.</strong> Pabrik domestik China tidak menerima rupiah dan
+      umumnya tidak menerima kartu kredit asing. Pembayaran harus masuk ke rekening perusahaan
+      dalam Yuan, dengan invoice resmi sebagai bukti.
+    </p>
+    <p>
+      <strong>Konsolidasi dan pemeriksaan gudang.</strong> Jika Anda memesan dari beberapa pabrik,
+      barang perlu dikumpulkan di satu gudang di China, ditimbang ulang, dan diperiksa sebelum
+      dikirim. Tanpa tahap ini, selisih berat dan barang rusak baru ketahuan setelah tiba di
+      Indonesia, saat posisi tawar Anda sudah hilang.
+    </p>
+    <p>
+      <strong>Kepabeanan dan pengiriman akhir.</strong> Pilihan laut (LCL atau FCL) dan udara punya
+      konsekuensi biaya dan waktu yang berbeda, dan keduanya butuh pengurusan dokumen impor yang
+      benar sampai barang berada di alamat Anda.
+    </p>
+
+    <div class="cta">
+      <h2 id="konsultasi">Butuh bantuan mencari supplier tangan pertama?</h2>
+      <p>
+        Arenka Logistics punya gudang di China dan menangani pencarian supplier, negosiasi harga dan
+        spesifikasi dengan pabrik, pemeriksaan barang di gudang, pengurusan kepabeanan, sampai
+        pengiriman ke alamat Anda. Kalau Anda ingin langsung ke pabrik tanpa perantara, ceritakan
+        produknya dulu.
+      </p>
+      <a class="cta-btn" href={waLink} target="_blank" rel="noopener noreferrer">
+        Konsultasi via WhatsApp
+      </a>
+      <p class="cta-note">
+        Atau hitung dulu volume kirimannya di <a href="/kalkulator-cbm">kalkulator CBM</a> kami.
+      </p>
+    </div>
+
+    <h2 id="faq">Pertanyaan yang sering diajukan</h2>
+    <div class="faq">
+      {faq.map((f) => (
+        <details>
+          <summary>{f.q}</summary>
+          <p>{f.a}</p>
+        </details>
+      ))}
+    </div>
+
+    <h2 id="penutup">Intinya</h2>
+    <p>
+      Harga pabrik bukan hasil negosiasi yang pandai, tapi hasil verifikasi yang benar. Tiga bukti
+      yang menentukan: izin usaha yang memuat kata produksi di gsxt.gov.cn, label verifikasi pabrik
+      dari 1688, dan kemampuan menunjukkan lini produksi secara langsung. Lakukan ketiganya sebelum
+      bicara harga, bukan sesudahnya. Dengan pangsa impor nonmigas China di Indonesia sudah mencapai
+      41,60%, selisih harga satu lapis perantara cukup untuk menentukan apakah produk Anda masih
+      bisa bersaing.
+    </p>
+
+    <h2 id="sumber">Sumber</h2>
+    <ol class="sources">
+      <li>
+        Badan Pusat Statistik, data impor Januari–Desember 2025, dikutip
+        <a href="https://ekonomi.bisnis.com/read/20260202/9/1949401/ri-semakin-tergantung-china-pangsa-impor-tembus-41" target="_blank" rel="noopener noreferrer">Bisnis.com (2 Februari 2026)</a>.
+      </li>
+      <li>
+        <a href="https://www.alibabagroup.com/about-alibaba-businesses-1747428301552484352" target="_blank" rel="noopener noreferrer">Alibaba Group, profil bisnis 1688.com</a>.
+      </li>
+      <li>
+        <a href="https://www.1688.com/wiki/zh/WKfh0c3y22nh1c" target="_blank" rel="noopener noreferrer">1688, lima komitmen pabrik sumber (源头工厂)</a>.
+      </li>
+      <li>
+        <a href="https://www.1688.com/wiki/zh/WKffthb3ho7b40" target="_blank" rel="noopener noreferrer">1688, mekanisme verifikasi pabrik dan pelaporan biaya</a>.
+      </li>
+      <li>
+        <a href="https://www.supplyia.com/how-to-identify-a-legit-supplier-on-1688/" target="_blank" rel="noopener noreferrer">Supplyia, panduan mengenali supplier sah di 1688</a>.
+      </li>
+      <li>
+        <a href="https://paper.people.com.cn/rmrbwap/html/2023-12/13/nw.D110000renmrb_20231213_1-17.htm" target="_blank" rel="noopener noreferrer">Harian Rakyat (People's Daily), 13 Desember 2023, tentang Sistem Publikasi Informasi Kredit Perusahaan Nasional</a>.
+      </li>
+      <li>
+        <a href="https://news.ddtc.co.id/literasi/tips-trik/1803134/cara-cek-barang-kena-lartas-atau-tidak" target="_blank" rel="noopener noreferrer">DDTCNews, cara mengecek barang terkena LARTAS</a>.
+      </li>
+      <li>
+        <a href="https://en.jiemian.com/article/10563314.html" target="_blank" rel="noopener noreferrer">Jiemian News, ekspansi lintas negara 1688</a>.
+      </li>
+    </ol>
+
+    <p class="disclaimer">
+      Angka regulasi, tarif dan kebijakan impor dapat berubah. Periksa kembali status kode HS barang
+      Anda di portal INSW sebelum memesan.
+    </p>
+  </article>
+</Base>
+
+<style>
+	.crumbs {
+		font-size: 13px;
+		color: var(--muted);
+		margin: 0 0 10px;
+	}
+	.crumbs a {
+		color: var(--muted);
+		text-decoration: none;
+	}
+	.crumbs a:hover {
+		color: var(--heritage);
+		text-decoration: underline;
+	}
+	.crumbs span {
+		margin: 0 2px;
+	}
+
+	.meta {
+		color: var(--muted);
+		font-size: 14px;
+		margin: 0 0 20px;
+		font-weight: 600;
+	}
+	.meta time {
+		margin: 0;
+	}
+
+	.answer {
+		background: #fff;
+		border: 1px solid var(--line);
+		border-left: 5px solid var(--lime);
+		border-radius: 14px;
+		padding: 18px 20px 4px;
+		margin: 0 0 28px;
+	}
+	.answer-label {
+		font-size: 13px !important;
+		letter-spacing: 1px;
+		text-transform: uppercase;
+		color: var(--muted) !important;
+		margin: 0 0 8px !important;
+	}
+	.answer p {
+		margin-bottom: 14px;
+	}
+
+	figure {
+		margin: 26px 0;
+	}
+	figure svg {
+		display: block;
+		width: 100%;
+		height: auto;
+		background: #fff;
+		border: 1px solid var(--line);
+		border-radius: 14px;
+	}
+	figcaption {
+		color: var(--muted);
+		font-size: 14px;
+		margin-top: 8px;
+		line-height: 1.55;
+	}
+
+	.diagram-tall {
+		display: none;
+	}
+	@media (max-width: 640px) {
+		.diagram-wide {
+			display: none;
+		}
+		.diagram-tall {
+			display: block;
+		}
+	}
+
+	.table-wrap {
+		overflow-x: auto;
+		-webkit-overflow-scrolling: touch;
+		margin: 22px 0;
+		border: 1px solid var(--line);
+		border-radius: 14px;
+		background: #fff;
+	}
+	table {
+		border-collapse: collapse;
+		width: 100%;
+		min-width: 560px;
+		font-size: 15px;
+	}
+	caption {
+		caption-side: top;
+		text-align: left;
+		padding: 14px 16px 10px;
+		color: var(--muted);
+		font-size: 14px;
+		font-weight: 600;
+	}
+	th,
+	td {
+		padding: 11px 16px;
+		text-align: left;
+		border-top: 1px solid var(--line);
+		vertical-align: top;
+	}
+	thead th {
+		background: var(--heritage);
+		color: #fff;
+		font-size: 14px;
+		border-top: 0;
+	}
+	tbody tr:nth-child(even) td {
+		background: #f7fafd;
+	}
+	td:first-child {
+		font-weight: 600;
+		color: var(--heritage);
+	}
+
+	.cta {
+		background: var(--heritage);
+		border-radius: 18px;
+		padding: 26px 24px;
+		margin: 34px 0;
+		color: #dce6f3;
+	}
+	.cta h2 {
+		color: #fff !important;
+		margin: 0 0 10px !important;
+		font-size: 22px !important;
+	}
+	.cta p {
+		color: #dce6f3;
+		font-size: 16px;
+	}
+	.cta-btn {
+		display: inline-block;
+		background: var(--lime);
+		color: var(--heritage) !important;
+		font-weight: 800;
+		font-size: 16px;
+		text-decoration: none;
+		padding: 14px 26px;
+		border-radius: 999px;
+		margin: 6px 0 10px;
+		min-height: 48px;
+		line-height: 20px;
+	}
+	.cta-btn:hover {
+		filter: brightness(0.94);
+	}
+	.cta-note {
+		font-size: 14px !important;
+		margin: 0 !important;
+	}
+	.cta-note a {
+		color: var(--lime) !important;
+	}
+
+	.faq details {
+		background: #fff;
+		border: 1px solid var(--line);
+		border-radius: 12px;
+		padding: 0 16px;
+		margin: 0 0 10px;
+	}
+	.faq summary {
+		cursor: pointer;
+		font-weight: 700;
+		color: var(--heritage);
+		padding: 14px 0;
+		font-size: 16px;
+		line-height: 1.45;
+	}
+	.faq summary::marker {
+		color: var(--lime);
+	}
+	.faq details p {
+		margin: 0 0 14px;
+		font-size: 16px;
+		color: var(--ink);
+	}
+
+	ol.sources {
+		font-size: 15px;
+		color: var(--muted);
+	}
+	ol.sources li {
+		font-size: 15px;
+		margin: 8px 0;
+	}
+
+	.disclaimer {
+		font-size: 14px !important;
+		color: var(--muted);
+		border-top: 1px solid var(--line);
+		padding-top: 14px;
+		margin-top: 26px;
+	}
+
+	q {
+		font-style: italic;
+	}
+
+	@media (max-width: 640px) {
+		.cta {
+			padding: 22px 18px;
+		}
+		.cta-btn {
+			display: block;
+			text-align: center;
+		}
+	}
+</style>
