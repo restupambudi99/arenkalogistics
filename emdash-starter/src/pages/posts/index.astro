@@ -24,11 +24,24 @@ if (Astro.cache?.enabled) Astro.cache.set(cacheHint);
 	canonical={`${Astro.url.origin}/posts`}
 >
 	<h1>Artikel Impor dan Logistik</h1>
+	<p class="intro">Panduan praktis untuk mencari supplier, menghitung biaya, dan menyiapkan impor dari China ke Indonesia.</p>
+
+	<article class="featured">
+		<a class="featured-image" href="/posts/cara-mencari-supplier-tangan-pertama-1688" aria-label="Baca Cara Mencari Supplier Tangan Pertama dari China lewat 1688">
+			<img src="/assets/img/artikel-1688-supplier-arenka.webp" alt="Tim pengadaan membahas spesifikasi barang dan penawaran supplier China" width="1200" height="675" loading="eager" decoding="async" />
+		</a>
+		<div class="featured-copy">
+			<p class="eyebrow">PANDUAN PENGADAAN</p>
+			<h2><a href="/posts/cara-mencari-supplier-tangan-pertama-1688">Cara Mencari Supplier Tangan Pertama dari China lewat 1688</a></h2>
+			<p>Langkah praktis untuk membandingkan kandidat, memeriksa profil usaha dan bukti produksi, meminta penawaran tertulis, serta menyiapkan pesanan sebelum membayar.</p>
+			<a class="read-link" href="/posts/cara-mencari-supplier-tangan-pertama-1688">Baca panduan <span aria-hidden="true">→</span></a>
+		</div>
+	</article>
 
 	{
-		posts.length === 0 ? (
-			<p>Artikel baru sedang disiapkan.</p>
-		) : (
+		posts.length > 0 && (
+			<>
+				<h2 class="more-title">Artikel lainnya</h2>
 			<ul>
 				{posts.map((post) => (
 					<li>
@@ -42,6 +55,7 @@ if (Astro.cache?.enabled) Astro.cache.set(cacheHint);
 					</li>
 				))}
 			</ul>
+			</>
 		)
 	}
 	<nav aria-label="Pagination">
@@ -55,3 +69,20 @@ if (Astro.cache?.enabled) Astro.cache.set(cacheHint);
 		}
 	</nav>
 </Base>
+
+<style>
+	.intro{max-width:62ch;margin:10px 0 30px;color:var(--muted);font-size:17px;line-height:1.65}
+	.featured{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);overflow:hidden;margin:28px 0 44px;border:1px solid var(--line);border-radius:18px;background:#fff;box-shadow:0 12px 32px rgba(0,27,58,.07)}
+	.featured-image{display:block;min-height:280px;background:var(--soft)}
+	.featured-image img{display:block;width:100%;height:100%;min-height:280px;object-fit:cover}
+	.featured-copy{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:15px;padding:clamp(22px,4vw,42px)}
+	.eyebrow{margin:0;color:var(--heritage-2);font-size:12px;font-weight:750;letter-spacing:.1em}
+	.featured h2{margin:0;font-size:clamp(22px,2.3vw,32px);line-height:1.2}
+	.featured h2 a{color:var(--heritage);text-decoration:none}
+	.featured-copy>p:not(.eyebrow){margin:0;color:var(--muted);line-height:1.7}
+	.read-link{display:inline-flex;align-items:center;gap:9px;margin-top:4px;color:var(--heritage);font-weight:750;text-decoration:none}
+	.read-link:hover{text-decoration:underline;text-underline-offset:4px}
+	.more-title{margin:0 0 18px;font-size:24px}
+	@media(max-width:700px){.intro{font-size:16px}.featured{grid-template-columns:1fr;margin:22px 0 34px}.featured-image,.featured-image img{min-height:0;aspect-ratio:16/9}.featured-copy{gap:12px;padding:22px}.featured h2{font-size:23px}}
+	@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
+</style>
