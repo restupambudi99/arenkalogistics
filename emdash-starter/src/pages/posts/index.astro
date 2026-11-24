@@ -2,6 +2,7 @@
 import { getEmDashCollection } from "emdash";
 import { Image } from "emdash/ui";
 import Base from "../../layouts/Base.astro";
+import { optimizedArticleImages } from "../../utils/article-images";
 
 const cursor = Astro.url.searchParams.get("cursor") || undefined;
 const {
@@ -47,7 +48,13 @@ if (Astro.cache?.enabled) Astro.cache.set(cacheHint);
 					<li>
 						<a href={`/posts/${post.id}`}>
 							{post.data.featured_image && (
-								<div {...post.edit.featured_image}><Image image={post.data.featured_image} /></div>
+									<div {...post.edit.featured_image}>
+										{optimizedArticleImages[post.id] ? (
+											<img src={optimizedArticleImages[post.id].src} alt={optimizedArticleImages[post.id].alt} width={optimizedArticleImages[post.id].width} height={optimizedArticleImages[post.id].height} loading="lazy" decoding="async" />
+										) : (
+											<Image image={post.data.featured_image} />
+										)}
+									</div>
 							)}
 							<h2 {...post.edit.title}>{post.data.title}</h2>
 						</a>

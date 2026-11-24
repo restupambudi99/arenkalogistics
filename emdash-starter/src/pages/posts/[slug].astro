@@ -9,6 +9,7 @@ import {
 import { Image, PortableText } from "emdash/ui";
 import Base from "../../layouts/Base.astro";
 import { resolveStarterSiteIdentity } from "../../utils/site-identity";
+import { optimizedArticleImages } from "../../utils/article-images";
 
 const slug = decodeSlug(Astro.params.slug);
 
@@ -39,6 +40,7 @@ const categories = post.data.terms?.category ?? [];
 const siteUrl = Astro.url.origin;
 const pageUrl = siteUrl + Astro.url.pathname.replace(/\/$/, "");
 const authorName = "Tim Arenka";
+const optimizedImage = optimizedArticleImages[slug];
 
 // Document title: keep it short enough for search results. Long article titles
 // stand alone; the site name is only appended when it fits and is not already there.
@@ -54,7 +56,7 @@ const docTitle =
 // otherwise use the featured image, then the site-wide preview image.
 const IMAGE_FILE_RE = /\.(png|jpe?g|webp|gif|avif)(\?|$)/i;
 const featured = post.data.featured_image as
-	| { src?: string; meta?: { storageKey?: string } }
+	| { src?: string; alt?: string; meta?: { storageKey?: string } }
 	| undefined;
 const featuredUrl = featured?.meta?.storageKey
 	? `${siteUrl}/_emdash/api/media/file/${featured.meta.storageKey}`
@@ -62,6 +64,7 @@ const featuredUrl = featured?.meta?.storageKey
 		? new URL(featured.src, siteUrl).href
 		: null;
 const ogImage =
+	(optimizedImage ? new URL(optimizedImage.src, siteUrl).href : null) ||
 	(seo.ogImage && IMAGE_FILE_RE.test(seo.ogImage) ? seo.ogImage : null) ||
 	featuredUrl ||
 	`${siteUrl}/assets/img/og-arenka.jpg`;
@@ -115,7 +118,11 @@ const related = latest.filter((p) => p.id !== post.id).slice(0, 4);
 		{
 			post.data.featured_image && (
 				<div {...post.edit.featured_image}>
-					<Image image={post.data.featured_image} priority />
+					{optimizedImage ? (
+						<img src={optimizedImage.src} alt={optimizedImage.alt} width={optimizedImage.width} height={optimizedImage.height} fetchpriority="high" decoding="async" />
+					) : (
+						<Image image={post.data.featured_image} priority />
+					)}
 				</div>
 			)
 		}
